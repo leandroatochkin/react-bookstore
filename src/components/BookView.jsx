@@ -1,11 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import Backdrop from './Backdrop'
+import QuantityPicker from './QuantityPicker'
 
 
 const BookView = ({book, setShoppingCart}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(true);
+    const [value, setValue] = useState(0);
+    const [pushingItem, setPushingItem] = useState({
+        id: book.id,
+        title: book.title,
+        price: book.price,
+        quantity: 1
+    })
+
+    useEffect(() => {
+        setPushingItem(prevItem => ({
+          ...prevItem,
+          quantity: value
+        }));
+      }, [value]);
+
 
     const modal = document.querySelector('.modal')
 
@@ -15,7 +31,9 @@ const BookView = ({book, setShoppingCart}) => {
     
     const handleBuyBtn = (book) =>{
         if(book){
-            setShoppingCart((prevItems) => [...prevItems, book]);
+
+            console.log(pushingItem)
+            setShoppingCart((prevItems) => [...prevItems, pushingItem]);
             setIsModalOpen(false)
         }
     }
@@ -67,6 +85,7 @@ const BookView = ({book, setShoppingCart}) => {
             <p><span style={{fontWeight: 'bolder'}}>Publishing year:</span> {book.publishedYear}</p>
             <p><span style={{fontWeight: 'bolder'}}>Price: </span> {book.price}</p>
             <div className='operation-btn-container'>
+            <QuantityPicker min={1} max={10} value={value} setValue={setValue}/>
             <motion.button 
             className='add-to-favs-btn'
             whileHover={{scale: 1.05}}

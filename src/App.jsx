@@ -11,10 +11,6 @@ function App() {
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 
-
-console.log(shoppingCart.map((item)=>{
-  console.log(item.price * 100)
-}))
   return (
     <StripeProvider>
     <Router>

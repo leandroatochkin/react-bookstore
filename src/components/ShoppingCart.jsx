@@ -20,7 +20,7 @@ const ShoppingCart = ({ shoppingCart }) => {
             items: shoppingCart.map(item =>({
               name: item.title,
               price: item.price,
-              quantity: 1
+              quantity: item.quantity
             }))
           }),
         });
