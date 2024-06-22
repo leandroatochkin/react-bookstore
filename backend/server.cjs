@@ -1,28 +1,41 @@
-// This test secret API key is a placeholder. Don't include personal details in requests with this key.
-// To see your test secret API key embedded in code samples, sign in to your Stripe account.
-// You can also find your test secret API key at https://dashboard.stripe.com/test/apikeys.
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const express = require('express');
 const app = express();
-app.use(express.static('public'));
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const YOUR_DOMAIN = 'http://localhost:4242';
+
+app.use(express.static('public'));
+app.use(express.json()); 
+
+app.use(cors());
+app.use(bodyParser.json());
+
+const YOUR_DOMAIN = process.env.FRONT_END_DOMAIN; 
 
 app.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: '{{PRICE_ID}}',
-        quantity: 1,
+  const { items } = req.body;
+  
+  const lineItems = items.map(item => ({
+    price_data: {
+      currency: 'usd',
+      product_data: {
+        name: item.name,
       },
-    ],
+      unit_amount: Math.round(item.price * 100), // Price in cents
+    },
+    quantity: item.quantity,
+  }));
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: lineItems,
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    success_url: YOUR_DOMAIN,
+    cancel_url: YOUR_DOMAIN,
   });
 
-  res.redirect(303, session.url);
+  res.json({ id: session.id });
 });
-
 app.listen(4242, () => console.log('Running on port 4242'));

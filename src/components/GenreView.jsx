@@ -4,20 +4,24 @@ import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BookView from './BookView';
 
-const GenreView = () => {
+const GenreView = ({setShoppingCart}) => {
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openBuyModal, setOpenBuyModal] = useState(false)
     const [selectedBook, setSelectedBook] = useState(null)
+    const [itemToBuy, setItemToBuy] = useState(null)
+
+    useEffect(()=>{
+        setShoppingCart(itemToBuy)
+      }, [itemToBuy])
 
     const {genre} = useParams()
 
     const handleOpenBuyModal = (book) =>{
         openBuyModal === false ? setOpenBuyModal(true) : setOpenBuyModal(false)
         setSelectedBook(book)
-        console.log(selectedBook)
       }
   
     useEffect(() => {
@@ -46,11 +50,6 @@ const GenreView = () => {
         }
       }, [data, genre]);
 
-      useEffect(()=>{
-        if (selectedBook) {
-            console.log(selectedBook);
-        }
-      },[selectedBook])
 
       useEffect(() => {
         // Toggle body scroll when modal is open/closed
@@ -71,11 +70,13 @@ const GenreView = () => {
       if (error) {
         return <div>Error: {error.message}</div>;
       }
+
+      
       
 
   return (
     <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
-        {openBuyModal && <BookView book={selectedBook}/>}
+        {openBuyModal && <BookView book={selectedBook} setItemToBuy={setItemToBuy}/>}
         {filteredData.map((book, index)=>(
         <motion.div 
         key={index} 

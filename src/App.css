@@ -68,9 +68,9 @@ gap: 10px;
 
 .book-card:hover{
   box-shadow:
-    0 0 30px 15px #fff,  /* inner white */
-    0 0 50px 30px #fa0, 
-    0 0 70px 45px #ff6a00; 
+    0 0 15px 7px #fff,  /* inner white */
+    0 0 25px 15px #fa0, 
+    0 0 35px 20px #ff6a00; 
 }
 
 .card-info-background{
@@ -97,6 +97,7 @@ cursor: pointer;
 .book-view{
   height: 60%;
   width: 60%;
+  max-width: 70%;
   background-color: white;
   color: var(--dark-text);
   border-radius: 32px;
@@ -113,15 +114,21 @@ cursor: pointer;
 }
 
 .modal-book-image{
-  width: 80%;
-  height: 100%;
+  width: 60%;
+  height: 100% !important;
   border-radius: 32px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .modal-book-info{
   display: flex;
   flex-direction: column;
   padding-left: 2%;
+}
+
+.book-modal-description{
+  text-wrap:wrap;
 }
 
 .operation-btn-container{

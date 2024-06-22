@@ -4,24 +4,29 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CategoriesView from './components/CategoriesView';
 import GenreView from './components/GenreView';
+import ShoppingCart from './components/ShoppingCart';
+import StripeProvider from './components/StripeProvider'
 
 function App() {
 const [genre, setGenre] = useState('')
+const [shoppingCart, setShoppingCart] = useState(null)
+console.log(shoppingCart)
 
 
   return (
+    <StripeProvider>
     <Router>
       <>  
       <Navbar />
       <Routes>
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
-      <Route path="/categories/:genre" element={<GenreView />} />
-
+      <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
+      <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart}/>}/>
       </Routes>
     </>
 
     </Router>
-    
+    </StripeProvider>
   )
 }
 

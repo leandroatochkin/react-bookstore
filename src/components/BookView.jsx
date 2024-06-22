@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Backdrop from './Backdrop'
 
 
-const BookView = ({book}) => {
+const BookView = ({book, setItemToBuy}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -12,7 +12,10 @@ const BookView = ({book}) => {
     const handleClose = () =>{
         setIsModalOpen(false);
     }
- 
+    
+    const handleBuyBtn = (book) =>{
+        setItemToBuy(book)
+    }
 
     if (!isModalOpen) {
         return null; // Return null to not render the modal if it's closed
@@ -56,7 +59,7 @@ const BookView = ({book}) => {
                 <h1 className='dialogue-title'>{book.title.length < 10 ? book.title : book.title.slice(0, 17) + '...' }</h1>
                 <button className='close-form-button' onClick={handleClose}>X </button>
             </div>
-            <p style={{maxWidth: '95%'}}>{book.description}</p>
+            <p className='book-modal-description'>{book.description}</p>
             <p style={{fontWeight: 'bolder'}}>{book.author}</p>
             <p><span style={{fontWeight: 'bolder'}}>Publishing year:</span> {book.publishedYear}</p>
             <p><span style={{fontWeight: 'bolder'}}>Price: </span> {book.price}</p>
@@ -70,6 +73,7 @@ const BookView = ({book}) => {
             className='add-to-cart-btn'
             whileHover={{scale: 1.05}}
             whileTap={{scale: 0.95}}
+            onClick={()=>handleBuyBtn(book)}
             >Add to cart</motion.button>
             </div>
             </div>

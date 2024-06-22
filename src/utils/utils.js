@@ -1,0 +1,1 @@
+export const API_endpoint = 'http://localhost:4242/create-checkout-session'
