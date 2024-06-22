@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Backdrop from './Backdrop'
 
 
-const BookView = ({book, setItemToBuy}) => {
+const BookView = ({book, setShoppingCart}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -14,7 +14,10 @@ const BookView = ({book, setItemToBuy}) => {
     }
     
     const handleBuyBtn = (book) =>{
-        setItemToBuy(book)
+        if(book){
+            setShoppingCart((prevItems) => [...prevItems, book]);
+            setIsModalOpen(false)
+        }
     }
 
     if (!isModalOpen) {

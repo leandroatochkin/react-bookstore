@@ -11,12 +11,7 @@ const GenreView = ({setShoppingCart}) => {
     const [error, setError] = useState(null);
     const [openBuyModal, setOpenBuyModal] = useState(false)
     const [selectedBook, setSelectedBook] = useState(null)
-    const [itemToBuy, setItemToBuy] = useState(null)
-
-    useEffect(()=>{
-        setShoppingCart(itemToBuy)
-      }, [itemToBuy])
-
+    
     const {genre} = useParams()
 
     const handleOpenBuyModal = (book) =>{
@@ -76,7 +71,7 @@ const GenreView = ({setShoppingCart}) => {
 
   return (
     <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
-        {openBuyModal && <BookView book={selectedBook} setItemToBuy={setItemToBuy}/>}
+        {openBuyModal && <BookView book={selectedBook} setShoppingCart={setShoppingCart}/>}
         {filteredData.map((book, index)=>(
         <motion.div 
         key={index} 

@@ -23,7 +23,7 @@ app.post('/create-checkout-session', async (req, res) => {
       product_data: {
         name: item.name,
       },
-      unit_amount: Math.round(item.price * 100), // Price in cents
+      unit_amount: parseInt((item.price * 100).toFixed(0)), // Price in cents
     },
     quantity: item.quantity,
   }));

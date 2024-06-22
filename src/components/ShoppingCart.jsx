@@ -4,8 +4,10 @@ import { API_endpoint } from '../utils/utils';
 import CheckoutButton from './CheckoutButton';
 
 const ShoppingCart = ({ shoppingCart }) => {
+
+  
+  
   const [sessionId, setSessionId] = useState('');
-  console.log(shoppingCart.title)
   useEffect(() => {
     const createCheckoutSession = async () => {
       try {
@@ -15,13 +17,11 @@ const ShoppingCart = ({ shoppingCart }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            items: [
-              {
-                name: shoppingCart.title,
-                price: shoppingCart.price,
-                quantity: 1 // You can adjust quantity as needed
-              },
-            ],
+            items: shoppingCart.map(item =>({
+              name: item.title,
+              price: item.price,
+              quantity: 1
+            }))
           }),
         });
 

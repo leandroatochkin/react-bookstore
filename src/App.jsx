@@ -9,10 +9,12 @@ import StripeProvider from './components/StripeProvider'
 
 function App() {
 const [genre, setGenre] = useState('')
-const [shoppingCart, setShoppingCart] = useState(null)
-console.log(shoppingCart)
+const [shoppingCart, setShoppingCart] = useState([])
 
 
+console.log(shoppingCart.map((item)=>{
+  console.log(item.price * 100)
+}))
   return (
     <StripeProvider>
     <Router>
