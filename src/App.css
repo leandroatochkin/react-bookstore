@@ -1,0 +1,140 @@
+#root{
+  --black-transparent: rgba(0,0,0,0.5);
+  --orange-gradient: linear-gradient(10deg, #fa0, #ff6a00);
+  --green-gradient: linear-gradient(15deg, #04ea00, #00d17d);
+  --dark-text: #212427
+}
+
+.navbar{
+  background-color: red;
+  width: 100%;
+  height: 10%;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 5  ;
+}
+
+.navbar > ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  list-style: none;
+}
+
+.categories-display{
+width: 100%;
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+gap: 10px;
+}
+
+.category-button{
+  background-color: antiquewhite;
+  color: black;
+  padding: 3px;
+  border-radius: 8px;
+  display: flex;
+  padding: 0;
+  width: 250px;
+  height: 70px;
+}
+
+.category-thumb{
+  background-color: red;
+  width: 30%;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+}
+
+.cards-container{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+}
+
+.book-card{
+  height: 450px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 16px;
+}
+
+.book-card:hover{
+  box-shadow:
+    0 0 30px 15px #fff,  /* inner white */
+    0 0 50px 30px #fa0, 
+    0 0 70px 45px #ff6a00; 
+}
+
+.card-info-background{
+background-color: var(--black-transparent);
+width: 95%;
+padding-left: 5%;
+cursor: pointer;
+}
+
+.backdrop{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--black-transparent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+  overflow: hidden;
+}
+
+.book-view{
+  height: 60%;
+  width: 60%;
+  background-color: white;
+  color: var(--dark-text);
+  border-radius: 32px;
+  display: flex;
+}
+
+.close-button-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-book-image{
+  width: 80%;
+  height: 100%;
+  border-radius: 32px;
+}
+
+.modal-book-info{
+  display: flex;
+  flex-direction: column;
+  padding-left: 2%;
+}
+
+.operation-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  gap: 10px;
+}
+
+.add-to-cart-btn{
+  background: var(--orange-gradient);
+}
+
+.add-to-favs-btn{
+  background: var(--green-gradient);
+}
