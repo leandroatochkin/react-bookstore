@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { DB_API_endpoint } from '../utils/utils';
 import BookView from './BookView';
 
 const GenreView = ({setShoppingCart}) => {
@@ -22,7 +23,7 @@ const GenreView = ({setShoppingCart}) => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/books`);
+          const response = await fetch(DB_API_endpoint);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
