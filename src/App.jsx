@@ -11,15 +11,21 @@ function App() {
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 
+const handleRemoveFromCart = (id) =>{
+  // implement remove from cart functionality
+  setShoppingCart(shoppingCart.filter((item) => item.id !== id))
+}
+
   return (
     <StripeProvider>
     <Router>
       <>  
       <Navbar />
       <Routes>
+      <Route path="/"/>
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
       <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
-      <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart}/>}/>
+      <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
       </Routes>
     </>
 

@@ -9,7 +9,7 @@ const handleBuy = async () => {
     if(error){console.log('Error redirecting to checkout: ', error)}
 }
   return (
-    <button role='link' onClick={handleBuy}>Checkout</button>
+    <button role='link' onClick={handleBuy} className='checkout-btn'>Checkout</button>
   )
 }
 

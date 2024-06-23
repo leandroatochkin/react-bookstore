@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { DB_API_endpoint } from '../utils/utils';
 import BookView from './BookView';
+import { CircularProgress } from '@mui/material';
 
 const GenreView = ({setShoppingCart}) => {
     const [data, setData] = useState(null);
@@ -60,11 +61,13 @@ const GenreView = ({setShoppingCart}) => {
       }, [openBuyModal]);
 
       if (loading) {
-        return <div>Loading...</div>;
+        return <div className='loader-container'>
+          <CircularProgress />
+        </div>
       }
   
       if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div className='loader-container'>Error: {error.message}</div>;
       }
 
       

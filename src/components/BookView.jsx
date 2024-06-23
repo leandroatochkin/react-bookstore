@@ -7,11 +7,12 @@ import QuantityPicker from './QuantityPicker'
 const BookView = ({book, setShoppingCart}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(true);
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
     const [pushingItem, setPushingItem] = useState({
         id: book.id,
         title: book.title,
         price: book.price,
+        cover: book.coverImageUrl,
         quantity: 1
     })
 
