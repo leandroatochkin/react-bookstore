@@ -70,6 +70,10 @@ const GenreView = ({setShoppingCart}) => {
         return <div className='loader-container'>Error: {error.message}</div>;
       }
 
+      if(filteredData.length === 0){
+        return <div className='loader-container'><div className='no-books-found'>No books found... Yet.</div></div>;
+      }
+
       
       
 
