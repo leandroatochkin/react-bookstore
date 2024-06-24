@@ -25,4 +25,5 @@ dist-ssr
 
 .env
 
-utils.js
+# Specific file
+src/utils/utils.js
