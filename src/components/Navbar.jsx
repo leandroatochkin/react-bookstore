@@ -1,14 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, googleLogout } from '@react-oauth/google'
 
-const Navbar = () => {
+const Navbar = ({isLoggedIn, setIsLoggedIn}) => {
   const responseMessage = (response) => {
     console.log(response);
+    setIsLoggedIn(true)
 };
 const errorMessage = (error) => {
     console.log(error);
 };
+
+const handleLogOut = () =>{
+  setIsLoggedIn(false)
+  googleLogout();
+  console.log(isLoggedIn)
+}
 
   return (
     <div className='navbar'>
@@ -21,7 +28,19 @@ const errorMessage = (error) => {
             <li className='navbar-button'>
             <Link to="/shopping-cart">Shopping Cart</Link>
             </li>
-            <li className='navbar-button'><GoogleLogin onSuccess={responseMessage} onError={errorMessage}/></li>
+            <li className='navbar-button'>
+            <Link to="/user-profile">Profile</Link>
+            </li>
+            {isLoggedIn ? (
+          <li className="navbar-button">
+            <button onClick={handleLogOut}>LOGOUT</button>
+          </li>
+        ) : (
+          <li className="navbar-button">
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+          </li>
+        )}
+
         </ul>
     </div>
   )

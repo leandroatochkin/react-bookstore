@@ -6,8 +6,11 @@ import CategoriesView from './components/CategoriesView';
 import GenreView from './components/GenreView';
 import ShoppingCart from './components/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
+import UserProfile from './components/UserProfile';
+
 
 function App() {
+const [isLoggedIn, setIsLoggedIn] = useState(false)
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 
@@ -20,12 +23,13 @@ const handleRemoveFromCart = (id) =>{
     <StripeProvider>
     <Router>
       <>  
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <Routes>
       <Route path="/"/>
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
       <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
+      <Route path='/user-profile' element={<UserProfile />} />
       </Routes>
     </>
 
