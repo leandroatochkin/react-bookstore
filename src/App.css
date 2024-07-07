@@ -94,7 +94,14 @@ gap: 10px;
 }
 
 .category-thumb{
-  background-color: red;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(0,0,0, 0.2)
+  );
+  background-size: 10px 10px;
   width: 30%;
   height: 100%;
   border-radius: 8px 0 0 8px;
@@ -327,4 +334,131 @@ cursor: pointer;
   background-size: cover;
   height: 100vh;
   width: 100vw;
+}
+
+/*-----------------------PROFILE-------------------------*/
+
+.user-card{
+  height: 20%;
+  width: 100%;
+  padding: 2%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(0,0,0, 0.2)
+  );
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+}
+
+.user-card > img {
+  border-radius: 16px;
+}
+
+.tabs{
+  margin-top: 0;
+}
+
+.tabs li { 
+  float: left; 
+  position: relative; 
+}
+
+.tabs span { 
+  /* Make them block level
+     and only as wide as they need */
+  float: left; 
+  padding: 10px 40px; 
+  text-decoration: none;
+  
+  /* Default colors */ 
+  color: black;
+  background: #ddc385; 
+  
+  /* Only round the top corners */
+  -webkit-border-bottom-left-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px; 
+}
+
+.tabs .active {
+  /* Highest, active tab is on top */
+  z-index: 3;
+}
+
+.tabs .active span { 
+  /* Colors when tab is active */
+  background: white; 
+  color: black; 
+}
+
+.tabs li:before, .tabs li:after, 
+.tabs li span:before, .tabs li span:after {
+  /* All pseudo elements are 
+     abs. positioned and on bottom */
+  position: absolute;
+  bottom: 0;
+}
+
+.tabs li:last-child:after,   .tabs li:last-child span:after,
+.tabs li:first-child:before, .tabs li:first-child span:before,
+.tabs .active:after,   .tabs .active:before, 
+.tabs .active span:after, .tabs .active span:before {
+  content: "";
+}
+
+.tabs .active:before, .tabs .active:after {
+  background: white; 
+  
+  /* Squares below circles */
+  z-index: 1;
+}
+
+.tabs li:before, .tabs li:after {
+  background: #ddc385;
+  width: 10px;
+  height: 10px;
+}
+.tabs li:before {
+  left: -10px;      
+}
+.tabs li:after { 
+  right: -10px;
+}
+
+.tabs li a:after, .tabs li span:before {
+  width: 20px; 
+  height: 20px;
+  /* Circles are circular */
+  -webkit-border-radius: 10px;
+  -moz-border-radius:    10px;
+  border-radius:         10px;
+  background: #222;
+  
+  /* Circles over squares */
+  z-index: 2;
+}
+
+.tabs .active a:after, .tabs .active span:before {
+  background: #ddc385;
+}
+
+.tabs li:first-child.active span:before,
+.tabs li:last-child.active span:after {
+  background: #222;
+}
+
+.tabs li span:before {
+  left: -20px;
+}
+.tabs li span:after {
+  right: -20px;
 }

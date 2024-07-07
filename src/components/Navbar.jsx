@@ -19,7 +19,7 @@ const handleLogOut = () =>{
 
   return (
     <div className='navbar'>
-        <h1>book store</h1>
+        <Link to="/"><h1>book store</h1></Link>
         <ul>
             <li className='navbar-button'>
             <Link to="/categories">Categories</Link>

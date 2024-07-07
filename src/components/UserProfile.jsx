@@ -21,10 +21,17 @@ const UserProfile = ({ response }) => {
   return (
     <div>
       {profile ? (
-        <div>
+        <div className='user-island'>
+          <div className='user-card'>
           <img src={profile.picture} alt="User Profile" />
-          <h2>{profile.name}</h2>
+          <h2>Hi!, {profile.name}</h2>
           <button onClick={handleLogOut}>Log Out</button>
+        </div>
+        <ul className='tabs group'>
+          <li className='active'><span>one</span></li>
+          <li><span>two</span></li>
+          <li><span>three</span></li>
+        </ul>
         </div>
       ) : (
         <p>Loading...</p>
