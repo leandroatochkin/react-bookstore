@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
 
-const Navbar = ({isLoggedIn, setIsLoggedIn}) => {
+const Navbar = ({isLoggedIn, setIsLoggedIn, setResponse}) => {
   const responseMessage = (response) => {
-    console.log(response);
+    setResponse(response);
     setIsLoggedIn(true)
 };
 const errorMessage = (error) => {
@@ -37,7 +37,11 @@ const handleLogOut = () =>{
           </li>
         ) : (
           <li className="navbar-button">
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+            <GoogleLogin 
+            onSuccess={responseMessage} 
+            onError={errorMessage} 
+            scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+            />
           </li>
         )}
 

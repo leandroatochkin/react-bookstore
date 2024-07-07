@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -7,13 +7,16 @@ import GenreView from './components/GenreView';
 import ShoppingCart from './components/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
 import UserProfile from './components/UserProfile';
+import Home from './components/Home';
 
 
 function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false)
+const [response, setResponse] = useState(null)
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 
+console.log(response)
 const handleRemoveFromCart = (id) =>{
   // implement remove from cart functionality
   setShoppingCart(shoppingCart.filter((item) => item.id !== id))
@@ -23,13 +26,13 @@ const handleRemoveFromCart = (id) =>{
     <StripeProvider>
     <Router>
       <>  
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse}/>
       <Routes>
-      <Route path="/"/>
+      <Route path="/" element={<Home />}/>
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
       <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
-      <Route path='/user-profile' element={<UserProfile />} />
+      <Route path='/user-profile' element={<UserProfile response={response}/>} />
       </Routes>
     </>
 

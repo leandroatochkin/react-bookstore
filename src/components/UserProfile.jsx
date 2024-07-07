@@ -1,62 +1,36 @@
-import React, {useEffect, useState} from 'react'
-import { googleLogout, useGoogleLogin } from '@react-oauth/google'
+import React, { useEffect, useState } from 'react';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
-const UserProfile = () => {
-    // const [ user, setUser ] = useState([]);
-    // const [ profile, setProfile ] = useState([]);
+const UserProfile = ({ response }) => {
+  const [profile, setProfile] = useState(null);
 
-    // const login = useGoogleLogin({
-    //     onSuccess: (codeResponse) => setUser(codeResponse),
-    //     onError: (error) => console.log('Login Failed:', error)
-    // });
+  useEffect(() => {
+      if (response && response.credential) {
+        const info = jwtDecode(response.credential)
+        setProfile(info)
+      }
+    
+  }, [response]);
 
-    // useEffect(
-    //     () => {
-    //         if (user) {
-    //                 fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-    //                     headers: {
-    //                         Authorization: `Bearer ${user.access_token}`,
-    //                         Accept: 'application/json'
-    //                     }
-    //                 })  
-    //                 .then((res) => {
-    //                     setProfile(res.data);
-    //                 })
-    //                 .catch((err) => console.log(err));
-    //         }
-    //     },
-    //     [ user ]
-    // );
-
-    // const handleLogOut = () => {
-    //     googleLogout();
-    //     setProfile(null);
-    // };
-
+  const handleLogOut = () => {
+    googleLogout();
+    setProfile(null);
+  };
 
   return (
     <div>
-            {/* <h2>React Google Login</h2>
-            <br />
-            <br />
-            <button onClick={handleLogOut}>Log out</button>
-            {profile ? (
-                <div>
-                    <img src={profile.picture} alt="user image" />
-                    <h3>User Logged in</h3>
-                    <p>Name: {profile.name}</p>
-                    <p>Email Address: {profile.email}</p>
-                    <br />
-                    <br />
-                    
-                </div>
-            ) : (
-                <button onClick={() => login()}>Sign in with Google 🚀 </button>
-                
-            )} */}
+      {profile ? (
+        <div>
+          <img src={profile.picture} alt="User Profile" />
+          <h2>{profile.name}</h2>
+          <button onClick={handleLogOut}>Log Out</button>
         </div>
-    );
-  
-}
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+};
 
-export default UserProfile
+export default UserProfile;
