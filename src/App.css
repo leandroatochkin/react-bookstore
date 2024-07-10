@@ -55,7 +55,7 @@
 
 .navbar > ul > li{
   height: 70%;
-  width: 10%;
+  width: auto;
   padding: 1%;
   border-radius: 16px;
   display: flex;
@@ -71,6 +71,12 @@
     rgba(255, 255, 255, 0.3)
   );
   border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-login{
+  display: flex;
+  flex-direction: row;
+  width: auto;
 }
 
 .categories-display{

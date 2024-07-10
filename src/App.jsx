@@ -8,6 +8,7 @@ import ShoppingCart from './components/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
 import UserProfile from './components/profile/UserProfile';
 import Home from './components/Home';
+import NewAccount from './components/new_account/NewAccount';
 
 
 function App() {
@@ -33,6 +34,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
       <Route path='/user-profile' element={<UserProfile response={response}/>} />
+      <Route path='/create-account' element={<NewAccount />} />
       </Routes>
     </>
 

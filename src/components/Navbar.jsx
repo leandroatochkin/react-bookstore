@@ -36,12 +36,13 @@ const handleLogOut = () =>{
             <button onClick={handleLogOut}>LOGOUT</button>
           </li>
         ) : (
-          <li className="navbar-button">
+          <li className="navbar-login">
             <GoogleLogin 
             onSuccess={responseMessage} 
             onError={errorMessage} 
             scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
             />
+            <h3>or <Link to="/create-account">Create Account</Link></h3>
           </li>
         )}
 

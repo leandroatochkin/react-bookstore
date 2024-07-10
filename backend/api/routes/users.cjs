@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {getDb} = require('../db.cjs');
 
-router.get('/users_database', async (req, res) => {
+router.get('/user_database', async (req, res) => {
     const db = await getDb();
 
     if (!db) {
@@ -12,7 +12,7 @@ router.get('/users_database', async (req, res) => {
     }
 
     try {
-      const events = await db.collection('users_database').find().toArray();
+      const users = await db.collection('user_database').find().toArray();
       res.json(events);
     } catch (error) {
       console.error("Failed to fetch data from MongoDB", error);
