@@ -6,7 +6,7 @@ import CategoriesView from './components/CategoriesView';
 import GenreView from './components/GenreView';
 import ShoppingCart from './components/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
-import UserProfile from './components/UserProfile';
+import UserProfile from './components/profile/UserProfile';
 import Home from './components/Home';
 
 
