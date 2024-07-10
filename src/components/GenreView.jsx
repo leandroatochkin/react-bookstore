@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { DB_API_endpoint } from '../utils/utils';
+import { DB_books_endpoint } from '../utils/utils';
 import BookView from './BookView';
 import { CircularProgress } from '@mui/material';
 
@@ -24,7 +24,7 @@ const GenreView = ({setShoppingCart}) => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(DB_API_endpoint);
+          const response = await fetch(DB_books_endpoint);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }

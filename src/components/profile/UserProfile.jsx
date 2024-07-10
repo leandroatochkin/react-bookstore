@@ -46,7 +46,8 @@ const UserProfile = ({ response }) => {
           </div>   
           </div>
           <div className={styles.rightSide}>
-              {view && view === 'events' ? <Events /> : null}
+              {view && view === 'events' ? <Events profile={profile}/> : null}
+
 
           </div>
         </>

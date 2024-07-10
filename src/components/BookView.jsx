@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
-import Backdrop from './Backdrop'
+import Backdrop from '../utils/Backdrop'
 import QuantityPicker from './QuantityPicker'
 
 
