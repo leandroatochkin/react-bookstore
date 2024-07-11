@@ -23,8 +23,8 @@ router.post('/register', async (req, res) => {
             res.status(400).send('Username or email already exists');
             return;
           }
-        // const hashPass = await argon.hash(password)
-        const newUser = {username, password, email, name, phone, address, city, country, terms, purchases, settings}
+        const hashPass = await argon.hash(password)
+        const newUser = {username, password: hashPass, email, name, phone, address, city, country, terms, purchases, settings}
         await db.collection('user_database').insertOne(newUser)
         res.status(201).json('User registered successfully');
 

@@ -46,10 +46,9 @@
     width: 60%;
 }
 
-.form{}
+
 
 .formGroup{
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     width: 70%;
