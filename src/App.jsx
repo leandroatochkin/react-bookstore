@@ -17,8 +17,11 @@ const [isLoggedIn, setIsLoggedIn] = useState(false)
 const [response, setResponse] = useState(null)
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
+const [profileData, setProfileData] = useState({})
 
-console.log(response)
+useEffect(()=>{
+  console.log(profileData)
+}, [profileData])
 const handleRemoveFromCart = (id) =>{
   // implement remove from cart functionality
   setShoppingCart(shoppingCart.filter((item) => item.id !== id))
@@ -36,7 +39,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
       <Route path='/user-profile' element={<UserProfile response={response}/>} />
       <Route path='/create-account' element={<NewAccount />} />
-      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse}/>} />
+      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData}/>} />
       </Routes>
     </>
 
