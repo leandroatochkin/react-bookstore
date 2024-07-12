@@ -1,0 +1,42 @@
+#root{
+    --black-transparent: rgba(0,0,0,0.5);
+    --orange-gradient: linear-gradient(10deg, #fa0, #ff6a00);
+    --green-gradient: linear-gradient(15deg, #04ea00, #00d17d);
+    --dark-text: #212427;
+  }
+
+.TOSContainer{
+    height: auto;
+    width: 40%;
+    max-width: 70%;
+    padding: 1%;
+    background-color: white;
+    color: var(--dark-text);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+.TOSText{
+    max-height: 70%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.acceptButton{
+    background: var(--orange-gradient);
+    border: none
+}
+
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.denyButton{
+    background-color: darkslategrey;
+    border: none
+}

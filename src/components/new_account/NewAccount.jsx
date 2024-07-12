@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import style from './newaccount.module.css';
-import { isPasswordOk, isUsernameOk, DB_register_endpoint } from '../../utils/utils.js';
+import { isPasswordOk, isUsernameOk, DB_register_endpoint, _TOS } from '../../utils/utils.js';
 import SimpleMessage from '../../utils/SimpleMessage.jsx';
 
 
@@ -116,7 +116,7 @@ const NewAccount = () => {
             </form>
           </div>
           <div className={style.termsContainer}>
-            <p>Sint magna ipsum ullamco tempor ipsum nostrud cillum reprehenderit id nisi non in eu. Mollit elit incididunt aliquip aliquip aliqua consectetur anim sit duis. Consequat aliquip ad minim fugiat veniam ea et. Velit culpa cillum in commodo cillum id consectetur proident minim ut. Laboris ipsum ipsum officia minim incididunt nostrud non nostrud commodo sint esse. Nulla officia laborum deserunt quis in Lorem cillum qui aliquip aute adipisicing. Nisi ipsum eu ad quis irure adipisicing id excepteur ullamco officia. Velit pariatur aliquip amet fugiat laborum ipsum sint ut consequat officia in dolor. Consectetur sit laboris minim pariatur amet aute est. Esse aliqua Lorem dolore ut sint qui nisi nulla est. Magna non occaecat velit quis labore ex dolor consectetur duis tempor sunt reprehenderit enim. Sunt duis occaecat quis et tempor occaecat irure do nostrud. Labore voluptate anim ut cupidatat reprehenderit sit cillum anim do veniam nostrud commodo irure aute. Pariatur sit anim magna incididunt proident exercitation labore fugiat do id mollit. Esse do exercitation nostrud nisi velit est quis mollit aliqua aute Lorem dolore. Ea veniam duis dolor occaecat. Elit nostrud officia minim nostrud veniam occaecat cupidatat aliqua deserunt cillum tempor.</p>
+            <p>{_TOS}</p>
             <input type="checkbox" name="terms" id="terms" onChange={handleInputChange} />
             <label htmlFor="terms">I agree to the terms and conditions</label>
           </div>

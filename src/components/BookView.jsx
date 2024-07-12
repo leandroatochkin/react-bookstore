@@ -32,8 +32,6 @@ const BookView = ({book, setShoppingCart}) => {
     
     const handleBuyBtn = (book) =>{
         if(book){
-
-            console.log(pushingItem)
             setShoppingCart((prevItems) => [...prevItems, pushingItem]);
             setIsModalOpen(false)
         }
