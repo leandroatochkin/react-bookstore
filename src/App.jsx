@@ -18,8 +18,7 @@ const [response, setResponse] = useState(null)
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 const [profileData, setProfileData] = useState({})
-const [newUserData, setNewUserData] = useState({
-});
+const [newUserData, setNewUserData] = useState({});
 
 useEffect(()=>{
   console.log(profileData)
@@ -42,7 +41,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
       <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
-      <Route path='/user-profile' element={<UserProfile response={response}/>} />
+      <Route path='/user-profile' element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn}/>} />
       <Route path='/create-account' element={<NewAccount />} />
       <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
       </Routes>

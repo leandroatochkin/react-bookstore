@@ -93,14 +93,15 @@ const handleLogOut = () =>{
             <Link to="/shopping-cart">Shopping Cart</Link>
             </li>
             <li className='navbar-button'>
-            <Link to="/user-profile">Profile</Link>
+            {isLoggedIn ? <Link to="/user-profile">Profile</Link> : <Link to="/login">Login</Link>}
+
             </li>
             {isLoggedIn ? (
           <li className="navbar-button">
             <button onClick={handleLogOut}>LOGOUT</button>
           </li>
         ) : (
-          <li className="navbar-login">
+          <li className="navbar-login" style={{colorScheme: 'light'}}>
             <GoogleLogin 
             onSuccess={responseMessage} 
             onError={errorMessage} 

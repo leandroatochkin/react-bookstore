@@ -115,6 +115,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
                    user: data.user
                 }))
                 setIsLoggedIn(true)
+                navigate('/')
             })
     } catch(e){
         console.log(e)
@@ -136,11 +137,13 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
             </fieldset>
             <div><button className={style.button} onClick={handleLogin}>login</button></div>
             <h3>or</h3>
+            <div style={{colorScheme: 'light'}}>
             <GoogleLogin 
             onSuccess={responseMessage} 
             onError={errorMessage} 
             scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
             />
+            </div>
         </div>
     </div>
   )

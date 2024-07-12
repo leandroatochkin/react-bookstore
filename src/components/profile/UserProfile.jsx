@@ -1,55 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
-import styles from './userProfile.module.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { googleLogout } from '@react-oauth/google';
+import styles from './userProfile.module.css';
 import { CircularProgress } from '@mui/material';
 import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 
-const UserProfile = ({ response }) => {
-  const [profile, setProfile] = useState(null);
-  const [view, setView] = useState('')
+const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
+  const [view, setView] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-      if (response && response.credential) {
-        const info = jwtDecode(response.credential)
-        console.log(info)
-        setProfile(info)
-      }
-    
-  }, [response]);
-
-
+    if (!profileData || !profileData.user) {
+      navigate('/')
+    }
+  }, [profileData, navigate]);
 
   const handleLogOut = () => {
     googleLogout();
-    setProfile(null);
+    setProfileData(null);
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
   return (
     <div className={styles.userContainer}>
-      {profile ? (
+      {profileData && profileData.user ? (
         <>
           <div className={styles.leftSide}>
-          <div className={styles.userCard}>
-              <img src={profile.picture} alt="User Profile"  className={styles.userImg}/>
-              <h2>Hi!, {profile.name}</h2>
-              <button onClick={handleLogOut}>Log Out</button>  
-          </div>
-          <div>
-          <VerticalMenu 
-            elements={[
-              {name: "Events", value: 'events'},
-              {name: "My Purchases", value: 'purchases'},
-              {name: "Settings", value: 'settings'}]}
-            setView={setView}
+            <div className={styles.userCard}>
+              <img src={profileData.user.picture} alt="User Profile" className={styles.userImg} />
+              <h2>Hi!, {profileData.user.name}</h2>
+              <button onClick={handleLogOut}>Log Out</button>
+            </div>
+            <div>
+              <VerticalMenu
+                elements={[
+                  { name: "Events", value: 'events' },
+                  { name: "My Purchases", value: 'purchases' },
+                  { name: "Settings", value: 'settings' }
+                ]}
+                setView={setView}
               />
-          </div>   
+            </div>
           </div>
           <div className={styles.rightSide}>
-              {view && view === 'events' ? <Events profile={profile}/> : null}
-
-
+            {view && view === 'events' ? <Events profile={profileData.user} /> : null}
           </div>
         </>
       ) : (
