@@ -22,6 +22,9 @@ const [profileData, setProfileData] = useState({})
 useEffect(()=>{
   console.log(profileData)
 }, [profileData])
+
+
+
 const handleRemoveFromCart = (id) =>{
   // implement remove from cart functionality
   setShoppingCart(shoppingCart.filter((item) => item.id !== id))

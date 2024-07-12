@@ -1,23 +1,92 @@
 import React, {useState, useEffect} from 'react'
 import style from './login.module.css'
 import { GoogleLogin } from '@react-oauth/google'
-import { DB_login_endpoint } from '../../utils/utils'
+import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '../../utils/utils'
+import { jwtDecode } from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData}) => {
+    const [newUserData, setNewUserData] = useState({
+      });
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     })
 
-    useEffect(()=>{
-        console.log(loginData)
-    }, [loginData])
+    const navigate = useNavigate()
 
-    const responseMessage = (response) => {
+
+    const responseMessage = async (response) => {
         setResponse(response);
         setIsLoggedIn(true)
+        const tokenData = jwtDecode(response.credential)
+        const userData = {
+            id: '',
+            username: tokenData.name,
+            password: tokenData.jti,
+            email: tokenData.email,
+            name: tokenData.name,
+            phone: '',
+            address: '',
+            city: '',
+            country: '',
+            picture: tokenData.picture,
+            terms: null,
+            purchases: [],
+            settings: []
+            }
+
+        setNewUserData(userData);
+            // Check if user exists
+    fetch(`${DB_checkUser_endpoint}/${tokenData.email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.exists) {
+            // User exists, log them in
+            setProfileData(prevData => ({
+              ...prevData,
+              user: data.user
+            }));
+            setIsLoggedIn(true);
+            navigate('/');
+          } else {
+            // User does not exist, register them
+            fetch(DB_register_endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(userData)
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log('User created successfully!');
+                setProfileData(prevData => ({
+                  ...prevData,
+                  user: data.user
+                }));
+                setIsLoggedIn(true);
+                navigate('/')
+              })
+              .catch(error => {
+                console.error('Error adding user:', error.message);
+              });
+          }
+        })
+        .catch(error => {
+          console.error('Error checking user existence:', error.message);
+        });
     };
+
     const errorMessage = (error) => {
         console.log(error);
     };
@@ -47,6 +116,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData}) => {
                     ...prevData,
                    user: data.user
                 }))
+                setIsLoggedIn(true)
             })
     } catch(e){
         console.log(e)

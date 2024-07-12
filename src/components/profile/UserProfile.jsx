@@ -13,6 +13,7 @@ const UserProfile = ({ response }) => {
   useEffect(() => {
       if (response && response.credential) {
         const info = jwtDecode(response.credential)
+        console.log(info)
         setProfile(info)
       }
     

@@ -20,4 +20,20 @@ router.get('/user_database', async (req, res) => {
     }
   });
 
-  module.exports = router
+  router.get('/user', async (req, res) => {
+    const db = getDb();
+    const { email } = req.query;
+  
+    try {
+      const user = await db.collection('user_database').findOne({ email });
+      if (user) {
+        return res.status(200).json({ exists: true, user });
+      }
+      res.status(200).json({ exists: false });
+    } catch (error) {
+      console.error('Error checking user existence', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  module.exports = router;
