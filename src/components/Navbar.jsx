@@ -12,8 +12,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (terms && newUserData) {
-      // Register the new user when terms are accepted
+    if (!terms || !newUserData) return
+    const registerUser = async () => {
       fetch(DB_register_endpoint, {
         method: 'POST',
         headers: {
@@ -37,8 +37,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
         .catch(error => {
           console.error('Error adding user:', error.message);
         });
+      }
+      registerUser()
     }
-  }, [terms, newUserData]);
+    , [terms, newUserData]);
 
   const deny_acceptFunction = (accept_deny) => {
     setOpenModal(false);
