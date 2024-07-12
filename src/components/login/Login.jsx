@@ -6,9 +6,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 
 
-const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData}) => {
-    const [newUserData, setNewUserData] = useState({
-      });
+const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData}) => {
 
     const [loginData, setLoginData] = useState({
         email: '',

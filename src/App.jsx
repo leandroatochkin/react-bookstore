@@ -18,6 +18,8 @@ const [response, setResponse] = useState(null)
 const [genre, setGenre] = useState('')
 const [shoppingCart, setShoppingCart] = useState([])
 const [profileData, setProfileData] = useState({})
+const [newUserData, setNewUserData] = useState({
+});
 
 useEffect(()=>{
   console.log(profileData)
@@ -34,7 +36,7 @@ const handleRemoveFromCart = (id) =>{
     <StripeProvider>
     <Router>
       <>  
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse}/>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>
       <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
@@ -42,7 +44,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart}/>}/>
       <Route path='/user-profile' element={<UserProfile response={response}/>} />
       <Route path='/create-account' element={<NewAccount />} />
-      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData}/>} />
+      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
       </Routes>
     </>
 

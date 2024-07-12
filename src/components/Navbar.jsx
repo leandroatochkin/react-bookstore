@@ -1,11 +1,75 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
+import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/utils'
 
-const Navbar = ({isLoggedIn, setIsLoggedIn, setResponse}) => {
-  const responseMessage = (response) => {
+const Navbar = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData}) => {
+  const responseMessage = async (response) => {
     setResponse(response);
     setIsLoggedIn(true)
+    const tokenData = jwtDecode(response.credential)
+    const userData = {
+        id: '',
+        username: tokenData.name,
+        password: tokenData.jti,
+        email: tokenData.email,
+        name: tokenData.name,
+        phone: '',
+        address: '',
+        city: '',
+        country: '',
+        picture: tokenData.picture,
+        terms: null,
+        purchases: [],
+        settings: []
+        }
+
+    setNewUserData(userData);
+        // Check if user exists
+fetch(`${DB_checkUser_endpoint}/${tokenData.email}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.exists) {
+        // User exists, log them in
+        setProfileData(prevData => ({
+          ...prevData,
+          user: data.user
+        }));
+        setIsLoggedIn(true);
+      } else {
+        // User does not exist, register them
+        fetch(DB_register_endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(userData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('User created successfully!');
+            setProfileData(prevData => ({
+              ...prevData,
+              user: data.user
+            }));
+            setIsLoggedIn(true);
+          })
+          .catch(error => {
+            console.error('Error adding user:', error.message);
+          });
+      }
+    })
+    .catch(error => {
+      console.error('Error checking user existence:', error.message);
+    });
 };
 const errorMessage = (error) => {
     console.log(error);
