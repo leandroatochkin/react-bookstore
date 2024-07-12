@@ -5,6 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/utils';
 import TOSmodal from '../utils/TOSmodal';
 
+
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData }) => {
   const [openModal, setOpenModal] = useState(false);
   const [terms, setTerms] = useState(false);

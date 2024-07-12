@@ -4,6 +4,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '../../utils/utils'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
+import TOSmodal from '../../utils/TOSmodal'
 
 
 const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData}) => {
@@ -12,6 +13,46 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
         email: '',
         password: ''
     })
+    const [openModal, setOpenModal] = useState(false);
+    const [terms, setTerms] = useState(false);
+    const [newUserData, setNewUserDataState] = useState(null);
+
+    useEffect(() => {
+      if (!terms || !newUserData) return
+      const registerUser = async () => {
+        fetch(DB_register_endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            ...newUserData,
+            terms: true,
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            setProfileData(prevData => ({
+              ...prevData,
+              user: newUserData
+            }));
+            setIsLoggedIn(true);
+            navigate('/user-profile'); // Navigate to user profile after registration
+          })
+          .catch(error => {
+            console.error('Error adding user:', error.message);
+          });
+        }
+        registerUser()
+      }
+      , [terms, newUserData]);
+  
+
+    const deny_acceptFunction = (accept_deny) => {
+      setOpenModal(false);
+      setTerms(accept_deny);
+    };
 
     const navigate = useNavigate()
 
@@ -57,27 +98,29 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
             navigate('/');
           } else {
             // User does not exist, register them
-            fetch(DB_register_endpoint, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              body: JSON.stringify(userData)
-            })
-              .then(response => response.json())
-              .then(data => {
-                console.log('User created successfully!');
-                setProfileData(prevData => ({
-                  ...prevData,
-                  user: data.user
-                }));
-                setIsLoggedIn(true);
-                navigate('/')
-              })
-              .catch(error => {
-                console.error('Error adding user:', error.message);
-              });
+            // fetch(DB_register_endpoint, {
+            //   method: 'POST',
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //     'Accept': 'application/json'
+            //   },
+            //   body: JSON.stringify(userData)
+            // })
+            //   .then(response => response.json())
+            //   .then(data => {
+            //     console.log('User created successfully!');
+            //     setProfileData(prevData => ({
+            //       ...prevData,
+            //       user: data.user
+            //     }));
+            //     setIsLoggedIn(true);
+            //     navigate('/')
+            //   })
+            //   .catch(error => {
+            //     console.error('Error adding user:', error.message);
+            //   });
+            setNewUserDataState(userData); // Set new user data state for use in useEffect
+          setOpenModal(true);
           }
         })
         .catch(error => {
@@ -145,6 +188,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
             />
             </div>
         </div>
+        {openModal && <TOSmodal deny_acceptFunction={deny_acceptFunction} />}
     </div>
   )
 }
