@@ -4,6 +4,7 @@ import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
 import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/utils';
 import TOSmodal from '../utils/TOSmodal';
+import SimpleMessage from '../utils/SimpleMessage'
 
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData }) => {
@@ -117,10 +118,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
         </li>
         <li className='navbar-button'>Favorites</li>
         <li className='navbar-button'>
-          <Link to="/shopping-cart">Shopping Cart</Link>
+          {isLoggedIn ? <Link to="/shopping-cart">Shopping Cart</Link> : <Link to="/login">Shopping Cart</Link>}
         </li>
         <li className='navbar-button'>
-          {isLoggedIn ? <Link to="/user-profile">Profile</Link> : <Link to="/login">Login</Link>}
+          {isLoggedIn ? <Link to="/user-profile">Profile</Link> : <Link to="/login">Profile</Link>}
         </li>
         {isLoggedIn ? (
           <li className="navbar-button">
