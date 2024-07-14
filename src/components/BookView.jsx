@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import Backdrop from '../utils/Backdrop'
 import QuantityPicker from './QuantityPicker'
+import { dropIn } from '../utils/utils'
 
 
-const BookView = ({book, setShoppingCart}) => {
+const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {
     
-    const [isModalOpen, setIsModalOpen] = useState(true);
     const [value, setValue] = useState(1);
     const [pushingItem, setPushingItem] = useState({
         id: book.id,
@@ -27,41 +27,16 @@ const BookView = ({book, setShoppingCart}) => {
     const modal = document.querySelector('.modal')
 
     const handleClose = () =>{
-        setIsModalOpen(false);
+        setOpenBuyModal(false);
     }
     
     const handleBuyBtn = (book) =>{
         if(book){
             setShoppingCart((prevItems) => [...prevItems, pushingItem]);
-            setIsModalOpen(false)
+            setOpenBuyModal(false)
         }
     }
 
-    if (!isModalOpen) {
-        return null; // Return null to not render the modal if it's closed
-    }
-
-    const dropIn = {
-        hidden: {
-            y: '-100vh',
-            opacity: 0
-        },
-        visible: {
-            y: '0',
-            opacity: 1,
-            trasition: {
-                duration: 0.1,
-                type: 'spring',
-                damping: 25,
-                stifness: 500
-            }
-
-        },
-        exit: {
-            y: '100vh',
-            opacity: 0
-        }
-    }
 
   return (
     <Backdrop>

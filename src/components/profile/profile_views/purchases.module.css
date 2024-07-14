@@ -1,0 +1,68 @@
+#root{
+    --black-transparent: rgba(0,0,0,0.5);
+    --orange-gradient: linear-gradient(10deg, #fa0, #ff6a00);
+    --green-gradient: linear-gradient(15deg, #04ea00, #00d17d);
+    --dark-text: #212427;
+    --glass-style: {
+        background-color: transparent;
+        backdrop-filter: blur(20px);
+        background-image: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.3),
+            rgba(0,0,0, 0.2)
+            );
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        padding: 1%;
+    };
+  }
+
+.purchasesContainer{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.purchasesList{
+    position: absolute;
+    top: 15%;
+    width: 59%;
+    max-height: 79%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(0,0,0, 0.2)
+    );
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 1%;
+}
+
+.purchaseDate{
+    font-weight: bolder;
+}
+
+.buttonsContainer{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.acceptButton{
+    background: linear-gradient(15deg, #04ea00, #00d17d);
+    border: none;
+}
+
+.separator{
+    width: 90%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 auto;
+}

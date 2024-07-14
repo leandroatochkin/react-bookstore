@@ -1,22 +1,54 @@
-// src/ShoppingCart.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { API_endpoint, DB_updatePurchases_endpoint } from '../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
 import { CircularProgress } from '@mui/material';
+import { debounce } from '../utils/utils';
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   const [sessionId, setSessionId] = useState('');
 
-  useEffect(()=>{
-    console.log(profileData.user.id)
-  }, [profileData])
+  const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
+    try {
+      console.log('Updating purchases in database...');
+      const response = await fetch(DB_updatePurchases_endpoint, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          id: userId,
+          update: items.map(item => ({
+            name: item.title,
+            price: item.price,
+            quantity: item.quantity,
+            timestamp: new Date().toISOString()
+          }))
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Update response:', data);
+    } catch (error) {
+      console.error("Error updating user's purchases:", error);
+    }
+  }, 500), []);
+
+  useEffect(() => {
+    console.log(profileData.user.id);
+  }, [profileData]);
 
   useEffect(() => {
     if (!isLoggedIn || shoppingCart.length === 0) return;
 
     const createCheckoutSession = async () => {
       try {
+        console.log('Creating checkout session...');
         const response = await fetch(API_endpoint, {
           method: 'POST',
           headers: {
@@ -36,52 +68,18 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
         }
 
         const data = await response.json();
+        console.log('Checkout session created:', data);
         setSessionId(data.id);
 
-        // Log the session ID and response data
-        console.log('Session ID:', data.id);
-        console.log('Response data:', data);
-
         // Update the user's purchases in the database
-        await updatePurchasesInDatabase();
+        updatePurchasesInDatabase(shoppingCart, profileData.user.id);
       } catch (error) {
         console.error('Error fetching the session ID:', error);
       }
     };
 
-    const updatePurchasesInDatabase = async () => {
-      try {
-        const response = await fetch(DB_updatePurchases_endpoint, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            id: profileData.user.id,
-            update: shoppingCart.map(item => ({
-              name: item.title,
-              price: item.price,
-              quantity: item.quantity,
-              timestamp: new Date().toISOString()
-            }))
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // Log the response data
-        const data = await response.json();
-        console.log('Update response:', data);
-      } catch (error) {
-        console.error("Error updating user's purchases:", error);
-      }
-    };
-
     createCheckoutSession();
-  }, [shoppingCart, isLoggedIn, profileData]);
+  }, [shoppingCart, isLoggedIn, profileData, updatePurchasesInDatabase]);
 
   return (
     <div className='shopping-cart-display'>

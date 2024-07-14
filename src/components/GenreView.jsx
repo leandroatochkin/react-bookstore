@@ -79,7 +79,7 @@ const GenreView = ({setShoppingCart}) => {
 
   return (
     <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
-        {openBuyModal && <BookView book={selectedBook} setShoppingCart={setShoppingCart}/>}
+        {openBuyModal && <BookView book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
         {filteredData.map((book, index)=>(
         <motion.div 
         key={index} 
