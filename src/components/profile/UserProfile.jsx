@@ -6,6 +6,7 @@ import { CircularProgress } from '@mui/material';
 import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
+import Settings from './profile_views/Settings';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
   const [view, setView] = useState('');
@@ -49,6 +50,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
           <div className={styles.rightSide}>
             {view && view === 'events' ? <Events profile={profileData.user} /> : null}
             {view && view === 'purchases' ? <Purchases profile={profileData.user} /> : null}
+            {view && view === 'settings' ? <Settings profile={profileData.user} /> : null}
           </div>
         </>
       ) : (
