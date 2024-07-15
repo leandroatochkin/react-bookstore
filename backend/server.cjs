@@ -11,6 +11,7 @@ const registerRoute = require('./api/routes/register.cjs')
 const loginRoute = require('./api/routes/login.cjs')
 const checkUserRoute = require('./api/routes/checkUser.cjs')
 const updateUserPurchases = require('./api/routes/updateUserPurchases.cjs')
+const updateUserRoute = require('./api/routes/updateUser.cjs')
 
 app.use(express.json()); 
 app.use(express.static('public'));
@@ -61,6 +62,7 @@ app.use('/api/register', registerRoute)
 app.use('/api/login', loginRoute)
 app.use('/api/check_user', checkUserRoute)
 app.use('/api/purchases', updateUserPurchases)
+app.use('/api/user', updateUserRoute)
 
 
 

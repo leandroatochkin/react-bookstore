@@ -20,14 +20,26 @@ const [shoppingCart, setShoppingCart] = useState([])
 const [profileData, setProfileData] = useState({})
 const [newUserData, setNewUserData] = useState({});
 
+
+
 useEffect(()=>{
   console.log(profileData)
 }, [profileData])
 
-useEffect(()=>{
-  console.log(shoppingCart)
-}, [shoppingCart])
+useEffect(() => {
+  // Retrieve user from local storage on app initialization
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    setIsLoggedIn(true)
+    const parsedUser = JSON.parse(storedUser)
 
+    setProfileData(prevData => ({
+      ...prevData,
+      user: parsedUser
+    }));
+    
+  }
+}, []);
 
 
 const handleRemoveFromCart = (id) =>{

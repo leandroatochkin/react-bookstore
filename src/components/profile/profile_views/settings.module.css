@@ -45,6 +45,14 @@
     padding: 1%;
 }
 
+.titleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px
+}
+
+
 .purchaseDate{
     font-weight: bolder;
 }

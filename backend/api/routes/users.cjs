@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {getDb} = require('../db.cjs');
+const User = require('../models/userModel.cjs');
 
 router.get('/user_database', async (req, res) => {
     const db = await getDb();
@@ -35,5 +36,6 @@ router.get('/user_database', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
   
   module.exports = router;

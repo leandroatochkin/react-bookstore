@@ -23,6 +23,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
     googleLogout();
     setProfileData(null);
     setIsLoggedIn(false);
+    localStorage.removeItem('user');
     navigate('/');
   };
 

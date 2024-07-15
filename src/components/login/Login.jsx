@@ -5,6 +5,7 @@ import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import TOSmodal from '../../utils/TOSmodal'
+import { saveUser } from '../../utils/utils'
 
 
 const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData}) => {
@@ -38,7 +39,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
               user: newUserData
             }));
             setIsLoggedIn(true);
-            navigate('/user-profile'); // Navigate to user profile after registration
+            saveUser(newUserData, navigate) // Navigate to user profile after registration
           })
           .catch(error => {
             console.error('Error adding user:', error.message);

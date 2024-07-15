@@ -5,6 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/utils';
 import TOSmodal from '../utils/TOSmodal';
 import SimpleMessage from '../utils/SimpleMessage'
+import { saveUser } from '../utils/utils';
 
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData }) => {
@@ -34,7 +35,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
             user: newUserData
           }));
           setIsLoggedIn(true);
-          navigate('/user-profile'); // Navigate to user profile after registration
+          saveUser(navigate, newUserData); // Navigate to user profile after registration
         })
         .catch(error => {
           console.error('Error adding user:', error.message);
@@ -53,7 +54,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
     setResponse(response);
     const tokenData = jwtDecode(response.credential);
     const userData = {
-      id: '',
+      _id: tokenData._id,
       username: tokenData.name,
       password: tokenData.jti,
       email: tokenData.email,
@@ -86,6 +87,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
             ...prevData,
             user: data.user
           }));
+          saveUser(navigate, data.user)
           setIsLoggedIn(true);
         } else {
           // User does not exist, show terms modal for registration
@@ -103,9 +105,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
   };
 
   const handleLogOut = () => {
+    localStorage.removeItem('user');
     setIsLoggedIn(false);
     googleLogout();
     setProfileData(null);
+    localStorage.removeItem('user');
     navigate('/'); // Navigate to home after logout
   };
 
