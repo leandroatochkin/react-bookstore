@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
 import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/utils';
 
-const Settings = ({ user, setIsLoggedIn }) => {
+const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     name: user.name,
@@ -26,8 +26,7 @@ const Settings = ({ user, setIsLoggedIn }) => {
         updatedData[key] = formData[key];
       }
     }
-    console.log(updatedData)
-    console.log(user)
+
 
     fetch(`${DB_updateUser_endpoint}/${user._id}`, {
       method: 'PUT',
@@ -51,7 +50,11 @@ const Settings = ({ user, setIsLoggedIn }) => {
       .catch(error => {
         console.error('Error updating user:', error.message);
       });
-    setEditMode(false);
+      setEditMode(false);
+
+    updateProfileData(updatedData)
+    
+    navigate('/')
   };
 
   const handleInputChange = (e) => {
@@ -105,6 +108,7 @@ const Settings = ({ user, setIsLoggedIn }) => {
         <div className={style.personalInfo}>
           <h3>Personal Information</h3>
           <div className={style.dataDisplay}>
+            <div className={editMode ? style.dataLinesOpen : style.dataLinesClosed}>
             <div className={style.editLine}>
               {editMode ? (
                 <input
@@ -114,9 +118,9 @@ const Settings = ({ user, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Name: {user.name}</p>
+                <p className={style.title}><strong>Name:</strong> {user.name}</p>
               )}
-              <button onClick={() => setEditMode(!editMode)}>
+              <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
@@ -129,13 +133,13 @@ const Settings = ({ user, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Username: {user.username}</p>
+                <p className={style.title}><strong>Username:</strong> {user.username}</p>
               )}
-              <button onClick={() => setEditMode(!editMode)}>
+              <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
-            <div className={style.editLine}>
+            <div className={editMode ? style.editCountry : style.editLine}>
               {editMode ? (
                 <>
                   <input
@@ -159,14 +163,15 @@ const Settings = ({ user, setIsLoggedIn }) => {
                 </>
               ) : (
                 <p className={style.title}>
-                  Address: {user.address}, {user.city}, {user.country}
+                  <strong>Address:</strong>  {user.address}, {user.city}, {user.country}
                 </p>
               )}
-              <button onClick={() => setEditMode(!editMode)}>
+              <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
-            <div className={style.editLine}>
+            </div>
+            <div className={style.pictureLine}>
               {editMode ? (
                 <input
                   name="picture"
@@ -175,7 +180,10 @@ const Settings = ({ user, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Picture: <img src={user.picture} alt="profile" /></p>
+                <p className={style.pictureP}>
+                  <strong>Picture:</strong> 
+                  <img src={user.picture} alt="profile" className={style.previewPicture}/>
+                </p>
               )}
               <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Change'}

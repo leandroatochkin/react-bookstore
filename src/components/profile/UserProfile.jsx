@@ -56,6 +56,17 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
     navigate('/');
   };
 
+  const updateProfileData = (updatedData) => {
+    setProfileData((prevProfileData) => ({
+      ...prevProfileData,
+      user: { ...prevProfileData.user, ...updatedData }
+    }));
+    localStorage.setItem('user', JSON.stringify({
+      ...profileData,
+      user: { ...profileData.user, ...updatedData }
+    }));
+  };
+
   return (
     <div className={styles.userContainer}>
       {profileData ? (
@@ -80,7 +91,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
           <div className={styles.rightSide}>
             {view === 'events' && <Events profile={profileData.user} />}
             {view === 'purchases' && <Purchases profile={profileData.user} />}
-            {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} />}
+            {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
           </div>
         </>
       ) : (
