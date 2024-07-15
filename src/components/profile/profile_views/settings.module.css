@@ -52,7 +52,9 @@
     gap: 20px
 }
 
-
+.editLine{
+    display: flex;
+}
 .purchaseDate{
     font-weight: bolder;
 }

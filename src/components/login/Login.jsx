@@ -98,29 +98,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
             setIsLoggedIn(true);
             navigate('/');
           } else {
-            // User does not exist, register them
-            // fetch(DB_register_endpoint, {
-            //   method: 'POST',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //     'Accept': 'application/json'
-            //   },
-            //   body: JSON.stringify(userData)
-            // })
-            //   .then(response => response.json())
-            //   .then(data => {
-            //     console.log('User created successfully!');
-            //     setProfileData(prevData => ({
-            //       ...prevData,
-            //       user: data.user
-            //     }));
-            //     setIsLoggedIn(true);
-            //     navigate('/')
-            //   })
-            //   .catch(error => {
-            //     console.error('Error adding user:', error.message);
-            //   });
-            setNewUserDataState(userData); // Set new user data state for use in useEffect
+          setNewUserDataState(userData); // Set new user data state for use in useEffect
           setOpenModal(true);
           }
         })

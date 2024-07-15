@@ -14,6 +14,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
   const [newUserData, setNewUserDataState] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(()=>{console.log(newUserData)},[newUserData])
+
   useEffect(() => {
     if (!terms || !newUserData) return
     const registerUser = async () => {
@@ -68,7 +70,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
       purchases: [],
       settings: []
     };
-
+    
     setNewUserData(userData);
 
     // Check if user exists

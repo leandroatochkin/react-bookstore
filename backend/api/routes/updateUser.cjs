@@ -1,45 +1,49 @@
 const express = require('express');
 const router = express.Router();
 const { getDb } = require('../db.cjs');
+const { ObjectId } = require('bson');
 
+// Ensure the app uses express.json() middleware to parse JSON request bodies
+router.use(express.json());
 
 router.put('/user/:id', async (req, res) => {
   const db = getDb();
   const { id } = req.params;
   const { username, name, address, city, country, phone, picture } = req.body;
-  const { ObjectId } = require('bson'); // Import ObjectId from bson
+  const objectId = new ObjectId(id)
+  console.log(objectId)
 
   try {
-    const existingUser = await db.collection('user_database').findOne({
-       username 
-    });
 
-    if (existingUser) {
-      res.status(400).send('Username already exists');
-      return;
+
+    // Only update fields that are provided
+    const updateFields = {};
+    if (username && username !== user.username) {
+      const existingUser = await db.collection('user_database').findOne({ username });
+      if (existingUser) {
+        return res.status(400).send({ message: 'Username already exists' });
+      }
+      updateFields.username = username;
     }
-    const objectId = new ObjectId(id); // Convert the id to ObjectId
+
+    if (name) updateFields.name = name;
+    if (address) updateFields.address = address;
+    if (city) updateFields.city = city;
+    if (country) updateFields.country = country;
+    if (phone) updateFields.phone = phone;
+    if (picture) updateFields.picture = picture;
+
     const updatedUser = await db.collection('user_database').findOneAndUpdate(
-      { _id: objectId }, // Query object to find the user by ID
-      {
-        $set: {
-          username, 
-          name,
-          address,
-          city,
-          country,
-          phone,
-          picture,
-        }
-      },
-      { returnDocument: 'after' } // Return the updated document
+      { _id: objectId },
+      { $set: updateFields },
+      { returnDocument: 'after' }
     );
 
-    if (!updatedUser) { // Check if the user was found and updated
+    if (!updatedUser) {
       return res.status(404).send({ message: 'User not found' });
     }
 
-    res.send(updatedUser); // Send the updated user document
+    res.send(updatedUser);
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).send({ message: 'Error updating user', error: error.message });

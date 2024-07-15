@@ -14,52 +14,69 @@ const Settings = ({ profile, setIsLoggedIn }) => {
     picture: profile.picture
   });
 
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const handleUpdateUser = async () => {
-    fetch(`${DB_updateUser_endpoint}/${profile._id}`,{
+  const handleUpdateUser = async () => {
+    const updatedData = {};
+    for (const key in formData) {
+      if (formData[key] !== profile[key]) {
+        updatedData[key] = formData[key];
+      }
+    }
+
+    fetch(`${DB_updateUser_endpoint}/${profile._id}`, {
       method: 'PUT',
-      headers:{
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(updatedData)
     })
-    .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-          console.error('Error updating user:', error.message);
-        });
-        setEditMode(false);
-}
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        const updatedProfile = { ...profile, ...updatedData };
+        localStorage.setItem('user', JSON.stringify(updatedProfile));
+      })
+      .catch(error => {
+        console.error('Error updating user:', error.message);
+      });
+    setEditMode(false);
+  };
 
-const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value
     });
-}
+  };
 
-const handleDeleteUser = () =>{
-  fetch(`${DB_deleteUser_endpoint}/${profile._id}`,{
-    method: 'DELETE',
+  const handleDeleteUser = () => {
+    fetch(`${DB_deleteUser_endpoint}/${profile._id}`, {
+      method: 'DELETE',
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
       })
       .catch(error => {
         console.error('Error deleting user:', error.message);
-        });
-    localStorage.removeItem('user')
-    setIsLoggedIn(false)
-    navigate('/')
-}
-
-
+      });
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   const handleCancel = () => {
     setFormData({
@@ -67,7 +84,8 @@ const handleDeleteUser = () =>{
       username: profile.username,
       address: profile.address,
       city: profile.city,
-      country: profile.country
+      country: profile.country,
+      picture: profile.picture
     });
     setEditMode(false);
   };
@@ -82,7 +100,7 @@ const handleDeleteUser = () =>{
         <div className={style.personalInfo}>
           <h3>Personal Information</h3>
           <div className={style.dataDisplay}>
-            <div>
+            <div className={style.editLine}>
               {editMode ? (
                 <input
                   name="name"
@@ -97,7 +115,7 @@ const handleDeleteUser = () =>{
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
-            <div>
+            <div className={style.editLine}>
               {editMode ? (
                 <input
                   name="username"
@@ -112,7 +130,7 @@ const handleDeleteUser = () =>{
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
-            <div>
+            <div className={style.editLine}>
               {editMode ? (
                 <>
                   <input
@@ -141,6 +159,21 @@ const handleDeleteUser = () =>{
               )}
               <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
+              </button>
+            </div>
+            <div className={style.editLine}>
+              {editMode ? (
+                <input
+                  name="picture"
+                  placeholder="Picture Link"
+                  value={formData.picture}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                <p className={style.title}>Picture: <img src={profile.picture} alt="profile" /></p>
+              )}
+              <button onClick={() => setEditMode(!editMode)}>
+                {editMode ? 'Cancel' : 'Change'}
               </button>
             </div>
           </div>
