@@ -7,15 +7,44 @@ import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
 import Settings from './profile_views/Settings';
+import { DB_checkUser_endpoint } from '../../utils/utils';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
   const [view, setView] = useState('');
-
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!profileData || !profileData.user) {
-      navigate('/')
+    if (profileData && profileData.email) {
+      fetch(`${DB_checkUser_endpoint}/${profileData.email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.user);
+  
+          setProfileData(prevData => ({
+            ...prevData,
+            user: data.user
+          }));
+          
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, [profileData]);
+
+  useEffect(()=>{
+    console.log(profileData)
+  },[profileData])
+
+  useEffect(() => {
+    if (!profileData) {
+      navigate('/');
     }
   }, [profileData, navigate]);
 
@@ -29,7 +58,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
 
   return (
     <div className={styles.userContainer}>
-      {profileData && profileData.user ? (
+      {profileData ? (
         <>
           <div className={styles.leftSide}>
             <div className={styles.userCard}>
@@ -49,9 +78,9 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
             </div>
           </div>
           <div className={styles.rightSide}>
-            {view && view === 'events' ? <Events profile={profileData.user} /> : null}
-            {view && view === 'purchases' ? <Purchases profile={profileData.user} /> : null}
-            {view && view === 'settings' ? <Settings profile={profileData.user} setIsLoggedIn={setIsLoggedIn}/> : null}
+            {view === 'events' && <Events profile={profileData.user} />}
+            {view === 'purchases' && <Purchases profile={profileData.user} />}
+            {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} />}
           </div>
         </>
       ) : (

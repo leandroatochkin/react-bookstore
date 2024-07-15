@@ -59,7 +59,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart} isLoggedIn={isLoggedIn} profileData={profileData}/>}/>
       <Route path='/user-profile' element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn}/>} />
       <Route path='/create-account' element={<NewAccount />} />
-      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
+      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} profileData={profileData} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
       </Routes>
     </>
 

@@ -3,28 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
 import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/utils';
 
-const Settings = ({ profile, setIsLoggedIn }) => {
+const Settings = ({ user, setIsLoggedIn }) => {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
-    name: profile.name,
-    username: profile.username,
-    address: profile.address,
-    city: profile.city,
-    country: profile.country,
-    picture: profile.picture
+    name: user.name,
+    username: user.username,
+    address: user.address,
+    city: user.city,
+    country: user.country,
+    picture: user.picture
   });
+
+
 
   const navigate = useNavigate();
 
   const handleUpdateUser = async () => {
+    if(!user) return;
     const updatedData = {};
     for (const key in formData) {
-      if (formData[key] !== profile[key]) {
+      if (formData[key] !== user[key]) {
         updatedData[key] = formData[key];
       }
     }
+    console.log(updatedData)
+    console.log(user)
 
-    fetch(`${DB_updateUser_endpoint}/${profile._id}`, {
+    fetch(`${DB_updateUser_endpoint}/${user._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +45,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
       })
       .then(data => {
         console.log(data);
-        const updatedProfile = { ...profile, ...updatedData };
+        const updatedProfile = { ...user, ...updatedData };
         localStorage.setItem('user', JSON.stringify(updatedProfile));
       })
       .catch(error => {
@@ -58,7 +63,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
   };
 
   const handleDeleteUser = () => {
-    fetch(`${DB_deleteUser_endpoint}/${profile._id}`, {
+    fetch(`${DB_deleteUser_endpoint}/${user._id}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -80,12 +85,12 @@ const Settings = ({ profile, setIsLoggedIn }) => {
 
   const handleCancel = () => {
     setFormData({
-      name: profile.name,
-      username: profile.username,
-      address: profile.address,
-      city: profile.city,
-      country: profile.country,
-      picture: profile.picture
+      name: user.name,
+      username: user.username,
+      address: user.address,
+      city: user.city,
+      country: user.country,
+      picture: user.picture
     });
     setEditMode(false);
   };
@@ -109,7 +114,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Name: {profile.name}</p>
+                <p className={style.title}>Name: {user.name}</p>
               )}
               <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
@@ -124,7 +129,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Username: {profile.username}</p>
+                <p className={style.title}>Username: {user.username}</p>
               )}
               <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
@@ -154,7 +159,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
                 </>
               ) : (
                 <p className={style.title}>
-                  Address: {profile.address}, {profile.city}, {profile.country}
+                  Address: {user.address}, {user.city}, {user.country}
                 </p>
               )}
               <button onClick={() => setEditMode(!editMode)}>
@@ -170,7 +175,7 @@ const Settings = ({ profile, setIsLoggedIn }) => {
                   onChange={handleInputChange}
                 />
               ) : (
-                <p className={style.title}>Picture: <img src={profile.picture} alt="profile" /></p>
+                <p className={style.title}>Picture: <img src={user.picture} alt="profile" /></p>
               )}
               <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Change'}

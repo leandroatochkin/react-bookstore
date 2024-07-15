@@ -14,7 +14,7 @@ router.get('/user_database', async (req, res) => {
 
     try {
       const users = await db.collection('user_database').find().toArray();
-      res.json(events);
+      res.json(users);
     } catch (error) {
       console.error("Failed to fetch data from MongoDB", error);
       res.status(500).send("Internal Server Error");

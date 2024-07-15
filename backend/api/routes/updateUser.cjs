@@ -18,13 +18,13 @@ router.put('/user/:id', async (req, res) => {
 
     // Only update fields that are provided
     const updateFields = {};
-    if (username && username !== user.username) {
+    
       const existingUser = await db.collection('user_database').findOne({ username });
       if (existingUser) {
         return res.status(400).send({ message: 'Username already exists' });
       }
       updateFields.username = username;
-    }
+    
 
     if (name) updateFields.name = name;
     if (address) updateFields.address = address;
