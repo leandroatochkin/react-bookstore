@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
-import { DB_updateUser_endpoint } from '../../../utils/utils';
+import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/utils';
 
-const Settings = ({ profile, onUpdateProfile }) => {
+const Settings = ({ profile, setIsLoggedIn }) => {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     name: profile.name,
@@ -12,6 +13,8 @@ const Settings = ({ profile, onUpdateProfile }) => {
     country: profile.country,
     picture: profile.picture
   });
+
+const navigate = useNavigate()
 
 const handleUpdateUser = async () => {
     fetch(`${DB_updateUser_endpoint}/${profile._id}`,{
@@ -32,13 +35,29 @@ const handleUpdateUser = async () => {
         setEditMode(false);
 }
 
-  const handleInputChange = (e) => {
+const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value
     });
-  };
+}
+
+const handleDeleteUser = () =>{
+  fetch(`${DB_deleteUser_endpoint}/${profile._id}`,{
+    method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      })
+      .catch(error => {
+        console.error('Error deleting user:', error.message);
+        });
+    localStorage.removeItem('user')
+    setIsLoggedIn(false)
+    navigate('/')
+}
 
 
 
@@ -135,6 +154,8 @@ const handleUpdateUser = async () => {
         <div className={style.separator}></div>
         <div>
           <h3>Delete Account</h3>
+          <p>Are you sure you want to delete your account?</p>
+          <button onClick={handleDeleteUser}>Delete Account</button>
         </div>
       </div>
     </div>

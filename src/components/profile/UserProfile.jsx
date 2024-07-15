@@ -51,7 +51,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
           <div className={styles.rightSide}>
             {view && view === 'events' ? <Events profile={profileData.user} /> : null}
             {view && view === 'purchases' ? <Purchases profile={profileData.user} /> : null}
-            {view && view === 'settings' ? <Settings profile={profileData.user} /> : null}
+            {view && view === 'settings' ? <Settings profile={profileData.user} setIsLoggedIn={setIsLoggedIn}/> : null}
           </div>
         </>
       ) : (
