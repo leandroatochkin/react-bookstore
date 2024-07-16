@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import styles from './purchases.module.css';
-import { CircularProgress } from '@mui/material';
+import { Spinner } from '@nextui-org/spinner';
 import { motion } from 'framer-motion';
 import BookView from '../../BookView';
 
@@ -29,7 +29,7 @@ const Purchases = ({ profile, setShoppingCart }) => {
             </div>
           ))
         ) : (
-          <div><CircularProgress /></div>
+          <div><Spinner /></div>
         )}
       </div>
     </div>

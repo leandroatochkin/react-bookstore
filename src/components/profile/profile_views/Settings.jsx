@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
+import { Spinner } from '@nextui-org/spinner';
 import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/utils';
+
 
 const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
   const [editMode, setEditMode] = useState(false);
@@ -100,7 +102,8 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
 
   return (
     <div className={style.settingsContainer}>
-      <div className={style.settingsList}>
+      {user ? (
+        <div className={style.settingsList}>
         <div className={style.titleContainer}>
           <h2 className={style.title}>Settings</h2>
         </div>
@@ -173,12 +176,15 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
             </div>
             <div className={style.pictureLine}>
               {editMode ? (
+                <>
+                <img src={user.picture} alt="profile" className={style.previewPicture}/>
                 <input
                   name="picture"
                   placeholder="Picture Link"
                   value={formData.picture}
                   onChange={handleInputChange}
                 />
+                </>
               ) : (
                 <p className={style.pictureP}>
                   <strong>Picture:</strong> 
@@ -204,6 +210,9 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
           <button onClick={handleDeleteUser}>Delete Account</button>
         </div>
       </div>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

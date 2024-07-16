@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { DB_books_endpoint } from '../utils/utils';
 import BookView from './BookView';
-import { CircularProgress } from '@mui/material';
+import { Spinner } from '@nextui-org/spinner';
 
 const GenreView = ({setShoppingCart}) => {
     const [data, setData] = useState(null);
@@ -62,7 +62,7 @@ const GenreView = ({setShoppingCart}) => {
 
       if (loading) {
         return <div className='loader-container'>
-          <CircularProgress />
+          <Spinner />
         </div>
       }
   

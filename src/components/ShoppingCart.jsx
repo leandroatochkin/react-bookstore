@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { API_endpoint, DB_updatePurchases_endpoint } from '../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
-import { CircularProgress } from '@mui/material';
+import { Spinner } from '@nextui-org/spinner';
 import { debounce } from '../utils/utils';
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
@@ -119,7 +119,7 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
       ) : (
         ''
       )}
-      {sessionId ? <CheckoutButton sessionId={sessionId} /> : <div className='loader-container'><CircularProgress /></div>}
+      {sessionId ? <CheckoutButton sessionId={sessionId} /> : <div className='loader-container'><Spinner /></div>}
     </div>
   );
 };

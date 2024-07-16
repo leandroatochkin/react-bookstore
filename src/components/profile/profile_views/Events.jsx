@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { CircularProgress } from '@mui/material'
+import { Spinner } from '@nextui-org/spinner'
 import styles from './events.module.css'
 import { motion } from 'framer-motion'
 import { DB_events_endpoint } from '../../../utils/utils.js'
@@ -72,7 +72,7 @@ const handleAssist = async (eventId) => {
                     <div className={styles.separator}></div>
                     </div>
                     ))) : (
-                        <div><CircularProgress /></div>
+                        <div><Spinner /></div>
                     )
                     
                     }

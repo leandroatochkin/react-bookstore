@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 import styles from './userProfile.module.css';
-import { CircularProgress } from '@mui/material';
+import { Spinner } from '@nextui-org/spinner';
 import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
@@ -11,7 +11,6 @@ import { DB_checkUser_endpoint } from '../../utils/utils';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
   const [view, setView] = useState('');
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,25 +24,19 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
         .then(response => response.json())
         .then(data => {
           console.log(data.user);
-  
           setProfileData(prevData => ({
             ...prevData,
             user: data.user
           }));
-          
         })
         .catch(error => {
           console.error('Error fetching user data:', error);
         });
     }
-  }, [profileData]);
-
-  useEffect(()=>{
-    console.log(profileData)
-  },[profileData])
+  }, [profileData.email, setProfileData]);
 
   useEffect(() => {
-    if (!profileData) {
+    if (!profileData || !profileData.user) {
       navigate('/');
     }
   }, [profileData, navigate]);
@@ -69,7 +62,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
 
   return (
     <div className={styles.userContainer}>
-      {profileData ? (
+      {profileData && profileData.user ? (
         <>
           <div className={styles.leftSide}>
             <div className={styles.userCard}>
@@ -95,7 +88,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
           </div>
         </>
       ) : (
-        <p><CircularProgress /></p>
+        <p><Spinner /></p>
       )}
     </div>
   );
