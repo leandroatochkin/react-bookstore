@@ -27,3 +27,4 @@ dist-ssr
 
 # Specific file
 src/utils/utils.js
+src/utils/endpointIndex.js

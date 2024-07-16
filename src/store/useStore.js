@@ -1,10 +1,19 @@
 import {create} from 'zustand';
 
-const useStore = create((set)=>({
-    profileData: null,
-    setProfileData: (data) => set({ profileData: data }),
-    isLoggedIn: false,
-    setIsLoggedIn: (status) => set({ isLoggedIn: status }),
-}))
+const useStore = create((set) => ({
+  profileData: JSON.parse(localStorage.getItem('user')) || null,
+  isLoggedIn: false,
+  setProfileData: (data) =>{
+    console.log(data)
+    set(prevData => ({...prevData,
+        user: data.user,
+    }))
+    console.log('profiledata:', profileData)
+  },
+  setIsLoggedIn: (status) => {
+    console.log('Setting login status:', status);
+    set({ isLoggedIn: status });
+  },
+}));
 
-export default useStore
+export default useStore;

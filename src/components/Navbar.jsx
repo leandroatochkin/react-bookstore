@@ -9,6 +9,7 @@ import { saveUser } from '../utils/utils';
 
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData }) => {
+  
   const [openModal, setOpenModal] = useState(false);
   const [terms, setTerms] = useState(false);
   const [newUserData, setNewUserDataState] = useState(null);
