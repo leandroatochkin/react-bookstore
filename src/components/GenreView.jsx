@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { DB_books_endpoint } from '../utils/utils';
+import { DB_books_endpoint } from '../utils/endpointIndex';
 import BookView from './BookView';
 import { Spinner } from '@nextui-org/spinner';
 

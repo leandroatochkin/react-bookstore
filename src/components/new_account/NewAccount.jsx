@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import style from './newaccount.module.css';
-import { isPasswordOk, isUsernameOk, DB_register_endpoint, _TOS } from '../../utils/utils.js';
+import { DB_register_endpoint} from '../../utils/endpointIndex.js'
+import { isPasswordOk, isUsernameOk, _TOS } from '../../utils/utils.js';
 import SimpleMessage from '../../utils/SimpleMessage.jsx';
 
 

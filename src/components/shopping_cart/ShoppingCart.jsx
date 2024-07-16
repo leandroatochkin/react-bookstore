@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { API_endpoint, DB_updatePurchases_endpoint, debounce } from '../../utils/utils';
+import {API_endpoint, DB_updatePurchases_endpoint} from '../../utils/endpointIndex'
+import { debounce } from '../../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
 import { Spinner } from '@nextui-org/spinner';

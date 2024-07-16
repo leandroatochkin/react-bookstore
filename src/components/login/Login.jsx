@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import style from './login.module.css'
 import { GoogleLogin } from '@react-oauth/google'
-import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '../../utils/utils'
+import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '../../utils/endpointIndex'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import TOSmodal from '../../utils/TOSmodal'

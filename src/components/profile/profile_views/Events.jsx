@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Spinner } from '@nextui-org/spinner'
 import styles from './events.module.css'
 import { motion } from 'framer-motion'
-import { DB_events_endpoint } from '../../../utils/utils.js'
+import { DB_events_endpoint } from '../../../utils/endpointIndex.js'
 import SimpleMessage from '../../../utils/SimpleMessage.jsx'
 
 const Events = ({profile}) => {

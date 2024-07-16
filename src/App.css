@@ -277,12 +277,7 @@ cursor: pointer;
 
 /*------------------------HOME-------------------------*/
 
-.home-container{
-  background-image: url('./assets/wallpaper.jpg');
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-}
+
 
 /*-----------------------PROFILE-------------------------*/
 

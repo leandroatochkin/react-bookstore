@@ -7,7 +7,7 @@ import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
 import Settings from './profile_views/Settings';
-import { DB_checkUser_endpoint } from '../../utils/utils';
+import { DB_checkUser_endpoint } from '../../utils/endpointIndex';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
   const [view, setView] = useState('');

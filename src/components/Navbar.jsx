@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
-import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/utils';
+import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/endpointIndex';
 import TOSmodal from '../utils/TOSmodal';
 import SimpleMessage from '../utils/SimpleMessage'
 import { saveUser } from '../utils/utils';

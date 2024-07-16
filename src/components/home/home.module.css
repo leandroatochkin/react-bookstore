@@ -1,0 +1,39 @@
+.homeContainer{
+    background-image: url('../../assets/wallpaper.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+.footer{
+    height: 5%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    background-color: blue;   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about{
+    height: 50%;
+    width: 50%;
+    background-color: blue;
+    position: absolute;
+    bottom: 5%;
+    left: 1%;
+}
+
+.footerUL{
+    width: 10%;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+}

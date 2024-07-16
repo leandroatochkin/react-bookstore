@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
 import { Spinner } from '@nextui-org/spinner';
-import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/utils';
+import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/endpointIndex';
 
 
 const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {

@@ -7,7 +7,7 @@ import GenreView from './components/GenreView';
 import ShoppingCart from './components/shopping_cart/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
 import UserProfile from './components/profile/UserProfile';
-import Home from './components/Home';
+import Home from './components/home/Home';
 import NewAccount from './components/new_account/NewAccount';
 import Login from './components/login/Login';
 
