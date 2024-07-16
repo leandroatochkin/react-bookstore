@@ -10,14 +10,12 @@
 .leftSide{
   width: 35%;
   height: 100%;
-  background-color: forestgreen;
 }
 
 .rightSide{
   width: 65%;
   height: 100%;
   margin-right: 0%;
-  background-color: red; 
 }
 
 .userCard{
@@ -43,5 +41,10 @@
   
   .userImg {
     border-radius: 16px;
+    height: 150px;
+    width: 150px;
   }
   
+  .logoutBtn{
+    background: linear-gradient(10deg, #e70909, #eb6565);
+  }

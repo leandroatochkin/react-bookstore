@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { API_endpoint, DB_updatePurchases_endpoint } from '../utils/utils';
+import { API_endpoint, DB_updatePurchases_endpoint, debounce } from '../../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
 import { Spinner } from '@nextui-org/spinner';
-import { debounce } from '../utils/utils';
+import style from './shoppingcart.module.css'
+
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   const [sessionId, setSessionId] = useState('');
 
   const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
     try {
-      console.log('Updating purchases in database...');
+
       const response = await fetch(DB_updatePurchases_endpoint, {
         method: 'PUT',
         headers: {
@@ -82,17 +83,17 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   }, [shoppingCart, isLoggedIn, profileData, updatePurchasesInDatabase]);
 
   return (
-    <div className='shopping-cart-display'>
+    <div className={style.shoppingCartDisplay}>
       {shoppingCart.length > 0 ? (
         shoppingCart.map((item, i) => (
-          <div key={i} className='shopping-cart-card'>
-            <img src={item.cover} alt={item.title} />
-            <div className='shoppingcart-card-info'>
+          <div key={i} className={style.shoppingCartCard}>
+            <img src={item.cover} alt={item.title} className={style.shoppingCartCardImg}/>
+            <div className={style.shoppingCartCardInfo}>
               <h2>{item.title.length < 20 ? item.title : item.title.slice(0,19) + '...'}</h2>
               <p>Quantity: {item.quantity}</p>
-              <div className='shoppingcart-card-bottom-container'>
+              <div className={style.shoppingCartCardBottomContainer}>
                 <p>Price: ${item.price}</p>
-                <motion.button className='remove-from-cart' onClick={() => onRemove(item.id)}>
+                <motion.button className={style.removeFromCart} onClick={() => onRemove(item.id)}>
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="28" 

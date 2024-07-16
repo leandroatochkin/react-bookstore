@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { Link } from 'react-router-dom';
 import styles from './purchases.module.css';
 import { Spinner } from '@nextui-org/spinner';
 import { motion } from 'framer-motion';
@@ -12,7 +13,7 @@ const Purchases = ({ profile, setShoppingCart }) => {
   return (
     <div className={styles.purchasesContainer}>
       <div className={styles.purchasesList}>
-        {profile ? (
+        {profile.purchases.length > 0 ? (
           purchases.map((purchase, outerIndex) => (//Remember: purchases is an array of arrays that contains objects
             <div key={outerIndex}>
               {purchase.map((item, innerIndex) => (
@@ -29,7 +30,7 @@ const Purchases = ({ profile, setShoppingCart }) => {
             </div>
           ))
         ) : (
-          <div><Spinner /></div>
+          <div><h3>You have no purchases yet. Wanna give it a <Link to="/categories">try</Link>?</h3></div>
         )}
       </div>
     </div>

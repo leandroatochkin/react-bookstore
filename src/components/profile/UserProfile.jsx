@@ -68,7 +68,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
             <div className={styles.userCard}>
               <img src={profileData.user.picture} alt="User Profile" className={styles.userImg} />
               <h2>Hi!, {profileData.user.name}</h2>
-              <button onClick={handleLogOut}>Log Out</button>
+              <button onClick={handleLogOut} className={styles.logoutBtn}>Log Out</button>
             </div>
             <div>
               <VerticalMenu

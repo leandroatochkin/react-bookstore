@@ -4,7 +4,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CategoriesView from './components/CategoriesView';
 import GenreView from './components/GenreView';
-import ShoppingCart from './components/ShoppingCart';
+import ShoppingCart from './components/shopping_cart/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
 import UserProfile from './components/profile/UserProfile';
 import Home from './components/Home';

@@ -110,9 +110,10 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
         <div className={style.separator}></div>
         <div className={style.personalInfo}>
           <h3>Personal Information</h3>
-          <div className={style.dataDisplay}>
+          <div className={editMode ? style.dataDisplayOpen : style.dataDisplayClosed}>
+
             <div className={editMode ? style.dataLinesOpen : style.dataLinesClosed}>
-            <div className={style.editLine}>
+            <div className={ editMode ? style.editLineOpen : style.editLineClosed}>
               {editMode ? (
                 <input
                   name="name"
@@ -127,7 +128,7 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
                 {editMode ? 'Cancel' : 'Edit'}
               </button>
             </div>
-            <div className={style.editLine}>
+            <div className={ editMode ? style.editLineOpen : style.editLineClosed}>
               {editMode ? (
                 <input
                   name="username"
@@ -197,9 +198,9 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
             </div>
           </div>
           {editMode && (
-            <div>
-              <button onClick={handleUpdateUser}>Save</button>
-              <button onClick={handleCancel}>Cancel</button>
+            <div className={style.btnContainer}>
+              <button onClick={handleUpdateUser} className={style.saveBtn}>Save</button>
+              <button onClick={handleCancel} className={style.cancelBtn}>Cancel</button>
             </div>
           )}
         </div>

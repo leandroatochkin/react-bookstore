@@ -274,51 +274,6 @@ cursor: pointer;
 
 /*---------------------------SHOPPING CART--------------------------*/
 
-.shopping-cart-card{
-  background-color: white;
-  color: var(--dark-text);
-  margin: 2%;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 32px;
-}
-
-.shopping-cart-card > img {
-  height: 400px;
-  width: 280px;
-  border-radius: 32px 32px 0 0;
-}
-
-.shopping-cart-display{
-  margin-top: 10%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
-}
-
-.shoppingcart-card-info{
-  margin-left: 2%;
-}
-
-.shoppingcart-card-bottom-container{
-  display: flex;
-  justify-content: space-between;
-}
-
-.remove-from-cart{
-  color: var(--dark-text);
-  border-radius: 40%;
-  background-color: transparent;
-}
-
-.checkout-btn{
-  
-
-  height: 80px;
-  background: var(--orange-gradient);
-  right: 1%;
-  bottom: 1%;
-}
 
 /*------------------------HOME-------------------------*/
 
