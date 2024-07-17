@@ -123,7 +123,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
         <li className='navbar-button'>
           <Link to="/categories">Categories</Link>
         </li>
-        <li className='navbar-button'>Favorites</li>
         <li className='navbar-button'>
           {isLoggedIn ? <Link to="/shopping-cart">Shopping Cart</Link> : <Link to="/login">Shopping Cart</Link>}
         </li>

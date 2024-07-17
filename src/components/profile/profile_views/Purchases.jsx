@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './purchases.module.css';
 import { Spinner } from '@nextui-org/spinner';
 import { motion } from 'framer-motion';
-import BookView from '../../BookView';
+
 
 const Purchases = ({ profile, setShoppingCart }) => {
 

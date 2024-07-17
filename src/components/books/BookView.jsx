@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
-import Backdrop from '../utils/Backdrop'
-import QuantityPicker from './QuantityPicker'
-import { dropIn } from '../utils/utils'
+import Backdrop from '../../utils/Backdrop'
+import QuantityPicker from '../../utils/QuantityPicker'
+import { dropIn } from '../../utils/utils'
 
 
 const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {

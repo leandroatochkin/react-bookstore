@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CategoriesView from './components/CategoriesView';
-import GenreView from './components/GenreView';
+import CategoriesView from './components/books/CategoriesView';
+import GenreView from './components/books/GenreView';
 import ShoppingCart from './components/shopping_cart/ShoppingCart';
 import StripeProvider from './components/StripeProvider'
 import UserProfile from './components/profile/UserProfile';

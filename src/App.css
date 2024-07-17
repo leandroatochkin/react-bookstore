@@ -79,39 +79,7 @@
   width: auto;
 }
 
-.categories-display{
-width: 100vw;
-margin-left: 1%;
-margin-bottom: -5%;
-display: grid;
-grid-template-columns: repeat(6, 1fr);
-gap: 10px;
-}
 
-.category-button{
-  background-color: antiquewhite;
-  color: black;
-  padding: 3px;
-  border-radius: 8px;
-  display: flex;
-  padding: 0;
-  width: 250px;
-  height: 70px;
-}
-
-.category-thumb{
-  background-color: transparent;
-  backdrop-filter: blur(20px);
-  background-image: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.3),
-    rgba(0,0,0, 0.2)
-  );
-  background-size: 10px 10px;
-  width: 30%;
-  height: 100%;
-  border-radius: 8px 0 0 8px;
-}
 
 .cards-container{
   display: grid;

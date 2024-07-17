@@ -1,5 +1,5 @@
 .homeContainer{
-    background-image: url('../../assets/wallpaper.jpg');
+    background-image: url('../../assets/background.png');
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -9,6 +9,42 @@
     flex-direction: column;
   }
 
+
+
+.animationText{
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    font-size: 4em;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 100px 0 40px;
+    color: #F896D8;
+}
+
+.topUL{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%
+}
+
+.linkLI{
+    background-color: #EDF67D;
+    width: 200px;
+    height: 50px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
 .footer{
     height: 5%;
     width: 100%;
@@ -16,19 +52,34 @@
     margin: 0;
     position: fixed;
     bottom: 0;
-    background-color: blue;   
+    background-color: #1B4079;   
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.footerBtn{
+    cursor: pointer;
+}
+
 .about{
     height: 50%;
-    width: 50%;
-    background-color: blue;
+    width: 35%;
+    background-color: #1B4079;
     position: absolute;
     bottom: 5%;
     left: 1%;
+    padding: 2% 2% 0 2%;
+}
+
+.abtUL{
+    list-style: none;
+}
+
+.abtLI{
+    display: flex;
+    align-items: center;
+    gap: 1%;
 }
 
 .abtIcon{
