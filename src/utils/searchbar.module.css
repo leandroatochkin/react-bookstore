@@ -1,0 +1,44 @@
+.categoriesSearchbarContainer{
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    gap: 1%;
+}
+
+
+.categoriesSearchbar{
+    width: 30%;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.select{
+    height: 50px;
+    width: 100px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.categoriesSearchButton{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #724CF9;
+}
+
+.resultsContainer{
+    background-color: antiquewhite;
+    color: black;
+    width: 30%;
+ 
+}

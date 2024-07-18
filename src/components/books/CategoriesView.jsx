@@ -5,6 +5,8 @@ import { bookGenres } from '../../utils/utils';
 import { DB_searchBook_endpoint } from '../../utils/endpointIndex';
 import style from './categoriesview.module.css'
 import IconSearch from '../../utils/icons/SearchIcon';
+import SearchBar from '../../utils/SearchBar';
+
 
 
 
@@ -12,25 +14,20 @@ const CategoriesView = ({setGenre}) => {
     const[visibleGenres, setVisibleGenres] = useState(20)
     const[searchValue, setSearchValue] = useState('')
     const[searchKey, setSearchKey] = useState('title')
-    const[body, setBody] = useState({})
+    const[results, setResults] = useState([])
 
     useEffect(()=>{
-        setBody({
-            [searchKey]: searchValue
-        })
-        console.log(body)
-    },[searchValue,searchKey])
+        console.log(results)
+    },[results])
 
-const handleSearch = () =>{
+const handleSearch = async () =>{
     try{
-        fetch(`${DB_searchBook_endpoint}?${searchKey}=${searchValue}`, {
-
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'}
-            
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        const response = await fetch(`${DB_searchBook_endpoint}?${searchKey}=${searchValue}`)
+        if(!response.ok){
+            console.error('error')
+        }
+        const result = await response.json()
+        setResults(result)
         }catch(err){
             console.log(err)
     } 
@@ -46,19 +43,7 @@ const handleClick = (genre) =>{
 
   return (
     <div className={style.categoriesDisplay}>
-        <div className={style.categoriesSearchbarContainer}>
-            <input className={style.categoriesSearchbar} 
-            type="text" 
-            placeholder="Search for books" 
-            onChange={(e)=>setSearchValue(e.target.value)}
-            />
-            <select className={style.select} onChange={(e)=>setSearchKey(e.target.value)}>
-                <option value="author">author</option>
-                <option value="title">title</option>
-                <option value="genre">genre</option>   
-            </select>
-            <button className={style.categoriesSearchButton} onClick={handleSearch}><IconSearch height='30px' width='30px'/></button>
-        </div>
+        <SearchBar results={results} setSearchValue={setSearchValue} setSearchKey={setSearchKey} handleSearch={handleSearch}/>
         <div className={style.categoriesContainer}>
         {bookGenres.slice(0, visibleGenres).map((genre, index) => (
             <motion.div 
