@@ -5,27 +5,29 @@ import { bookGenres } from '../../utils/utils';
 import { DB_searchBook_endpoint } from '../../utils/endpointIndex';
 import style from './categoriesview.module.css'
 import IconSearch from '../../utils/icons/SearchIcon';
-import { Db } from 'mongodb';
+
 
 
 const CategoriesView = ({setGenre}) => {
     const[visibleGenres, setVisibleGenres] = useState(20)
     const[searchValue, setSearchValue] = useState('')
     const[searchKey, setSearchKey] = useState('title')
+    const[body, setBody] = useState({})
 
     useEffect(()=>{
-        const body = {
-            [searchKey]: searchValue,
-        }
-
+        setBody({
+            [searchKey]: searchValue
+        })
+        console.log(body)
     },[searchValue,searchKey])
 
 const handleSearch = () =>{
     try{
-        fetch(DB_searchBook_endpoint,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
+        fetch(`${DB_searchBook_endpoint}?${searchKey}=${searchValue}`, {
+
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+            
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -55,7 +57,7 @@ const handleClick = (genre) =>{
                 <option value="title">title</option>
                 <option value="genre">genre</option>   
             </select>
-            <button className={style.categoriesSearchButton}><IconSearch height='30px' width='30px'/></button>
+            <button className={style.categoriesSearchButton} onClick={handleSearch}><IconSearch height='30px' width='30px'/></button>
         </div>
         <div className={style.categoriesContainer}>
         {bookGenres.slice(0, visibleGenres).map((genre, index) => (
