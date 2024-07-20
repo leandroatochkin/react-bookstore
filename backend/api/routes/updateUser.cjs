@@ -11,7 +11,7 @@ router.put('/user/:id', async (req, res) => {
   const { id } = req.params;
   const { username, name, address, city, country, phone, picture } = req.body;
   const objectId = new ObjectId(id)
-  console.log(objectId)
+
 
   try {
 

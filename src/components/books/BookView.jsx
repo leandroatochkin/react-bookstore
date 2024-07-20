@@ -3,9 +3,11 @@ import { motion } from 'framer-motion'
 import Backdrop from '../../utils/Backdrop'
 import QuantityPicker from '../../utils/QuantityPicker'
 import { dropIn } from '../../utils/utils'
+import { DB_addToFavs_endpoint } from '../../utils/endpointIndex';
+import IconCheckCircle from '../../utils/icons/CheckIcon'
 
 
-const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {
+const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal}) => {
     
     const [value, setValue] = useState(1);
     const [pushingItem, setPushingItem] = useState({
@@ -15,6 +17,11 @@ const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {
         cover: book.coverImageUrl,
         quantity: 1
     })
+
+    const[favSent, setFavSent] = useState(false)
+
+    console.log(profileData.user._id)
+    console.log(book.id)
 
     useEffect(() => {
         setPushingItem(prevItem => ({
@@ -35,6 +42,25 @@ const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {
             setShoppingCart((prevItems) => [...prevItems, pushingItem]);
             setOpenBuyModal(false)
         }
+    }
+
+    const handleFavs = async () => {
+      if(!profileData) return
+      console.log(profileData)
+      setFavSent(!favSent)
+          fetch(DB_addToFavs_endpoint,{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              },
+            body: JSON.stringify({
+                user_id: profileData.user._id,
+                book_id: book.id
+                })
+          })
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(err=>console.log(err))
     }
 
 
@@ -69,9 +95,10 @@ const BookView = ({book, setShoppingCart, setOpenBuyModal}) => {
             <QuantityPicker min={1} max={10} value={value} setValue={setValue}/>
             <motion.button 
             className='add-to-favs-btn'
+            onClick={handleFavs}
             whileHover={{scale: 1.05}}
             whileTap={{scale: 0.95}}
-            >Favs</motion.button>
+            >{favSent ? <IconCheckCircle/> : 'Favs'}</motion.button>
             <motion.button 
             className='add-to-cart-btn'
             whileHover={{scale: 1.05}}

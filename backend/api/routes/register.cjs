@@ -7,7 +7,7 @@ const argon = require('argon2');
 router.post('/register', async (req, res) => {
     const db = await getDb();
 
-    const {username, password, email, name, phone, address, city, country, picture, terms, purchases, settings} = req.body
+    const {username, password, email, name, phone, address, city, country, picture, terms, purchases, settings, favs} = req.body
 
     if (!db) {
       console.error("Failed to get database instance");
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
             return;
           }
         const hashPass = await argon.hash(password)
-        const newUser = {username, password: hashPass, email, name, phone, address, city, country, terms, purchases, settings}
+        const newUser = {username, password: hashPass, email, name, phone, address, city, country, picture, terms, purchases, settings, favs}
         await db.collection('user_database').insertOne(newUser)
         res.status(201).json('User registered successfully');
 

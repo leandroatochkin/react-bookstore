@@ -2,6 +2,7 @@ import React from 'react'
 import style from './searchbar.module.css'
 import IconSearch from './icons/SearchIcon'
 
+
 const SearchBar = ({results, setSearchValue, setSearchKey, handleSearch}) => {
   return (
     <div className={style.categoriesSearchbarContainer}>

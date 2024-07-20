@@ -54,8 +54,8 @@ const handleRemoveFromCart = (id) =>{
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>
       <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/categories" element={<CategoriesView setGenre={setGenre}/>} />
-      <Route path="/categories/:genre" element={<GenreView setShoppingCart={setShoppingCart}/>} />
+      <Route path="/categories" element={<CategoriesView profileData={profileData} setGenre={setGenre}/>} />
+      <Route path="/categories/:genre" element={<GenreView profileData={profileData} setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart} isLoggedIn={isLoggedIn} profileData={profileData}/>}/>
       <Route path='/user-profile' element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn}/>} />
       <Route path='/create-account' element={<NewAccount />} />

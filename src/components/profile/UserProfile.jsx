@@ -8,6 +8,7 @@ import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
 import Settings from './profile_views/Settings';
 import { DB_checkUser_endpoint } from '../../utils/endpointIndex';
+import Favorites from './profile_views/Favorites';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
   const [view, setView] = useState('');
@@ -75,7 +76,8 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
                 elements={[
                   { name: "Events", value: 'events' },
                   { name: "My Purchases", value: 'purchases' },
-                  { name: "Settings", value: 'settings' }
+                  { name: "Settings", value: 'settings' },
+                  { name: "Favorites", value: 'favorites' }
                 ]}
                 setView={setView}
               />
@@ -85,6 +87,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
             {view === 'events' && <Events profile={profileData.user} />}
             {view === 'purchases' && <Purchases profile={profileData.user} />}
             {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
+            {view === 'favorites' && <Favorites user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
           </div>
         </>
       ) : (

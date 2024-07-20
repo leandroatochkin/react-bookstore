@@ -10,7 +10,7 @@ import SearchBar from '../../utils/SearchBar';
 
 
 
-const CategoriesView = ({setGenre}) => {
+const CategoriesView = ({profileData, setGenre}) => {
     const[visibleGenres, setVisibleGenres] = useState(20)
     const[searchValue, setSearchValue] = useState('')
     const[searchKey, setSearchKey] = useState('title')

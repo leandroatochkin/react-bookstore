@@ -6,7 +6,7 @@ import { DB_books_endpoint } from '../../utils/endpointIndex';
 import BookView from './BookView';
 import { Spinner } from '@nextui-org/spinner';
 
-const GenreView = ({setShoppingCart}) => {
+const GenreView = ({profileData, setShoppingCart}) => {
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(true);
@@ -79,7 +79,7 @@ const GenreView = ({setShoppingCart}) => {
 
   return (
     <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
-        {openBuyModal && <BookView book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
+        {openBuyModal && <BookView profileData={profileData} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
         {filteredData.map((book, index)=>(
         <motion.div 
         key={index} 

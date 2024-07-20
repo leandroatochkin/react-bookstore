@@ -9,7 +9,6 @@ import SimpleMessage from '../../utils/SimpleMessage.jsx';
 const NewAccount = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [newUserData, setNewUserData] = useState({
-    id: '',
     username: '',
     password: '',
     email: '',
@@ -20,6 +19,7 @@ const NewAccount = () => {
     country: 'Argentina',
     picture: '',
     terms: null,
+    favs: [],
     purchases: [],
     settings: []
   });

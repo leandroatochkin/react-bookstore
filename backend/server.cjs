@@ -14,6 +14,8 @@ const updateUserPurchases = require('./api/routes/updateUserPurchases.cjs')
 const updateUserRoute = require('./api/routes/updateUser.cjs')
 const deleteUserRoute = require('./api/routes/deleteUser.cjs')
 const searchBooks = require('./api/routes/searchBooks.cjs')
+const addToFavsRoute = require('./api/routes/addToFavs.cjs')
+const findUserFavs = require('./api/routes/findUserFavs.cjs')
 
 app.use(express.json()); 
 app.use(express.static('public'));
@@ -67,6 +69,8 @@ app.use('/api/purchases', updateUserPurchases)
 app.use('/api/user', updateUserRoute)
 app.use('/api/delete_user', deleteUserRoute)
 app.use('/api/search', searchBooks)
+app.use('/api/add_to_favs', addToFavsRoute)
+app.use('/api/find_user_favs', findUserFavs)
 
 
 

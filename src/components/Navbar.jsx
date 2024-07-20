@@ -57,7 +57,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
     setResponse(response);
     const tokenData = jwtDecode(response.credential);
     const userData = {
-      _id: tokenData._id,
       username: tokenData.name,
       password: tokenData.jti,
       email: tokenData.email,
@@ -69,7 +68,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
       picture: tokenData.picture,
       terms: null,
       purchases: [],
-      settings: []
+      settings: [],
+      favs: [],
     };
     
     setNewUserData(userData);
