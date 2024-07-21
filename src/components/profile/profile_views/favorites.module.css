@@ -46,6 +46,7 @@
 
 .bookContainer{
     display: flex;
+    align-items: center;
     gap: 2%;
 }
 
@@ -54,6 +55,18 @@
     width: 100px !important;
     border-radius: 16px;
     border: 1px solid red;
+}
+
+.bookInfoContainer{
+    width: 30%;
+}
+
+.button{
+    background: var(--orange-gradient);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .separator{

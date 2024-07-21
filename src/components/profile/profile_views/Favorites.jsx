@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from './favorites.module.css';
 import { DB_findUserFavs_endpoint } from '../../../utils/endpointIndex';
 import BookView from '../../books/BookView';
+import {motion} from 'framer-motion'
 
 const Favorites = ({ user, setShoppingCart }) => {
   const [books, setBooks] = useState([]);
@@ -63,7 +64,12 @@ const Favorites = ({ user, setShoppingCart }) => {
                 <h3>{book.title}</h3>
                 <p>{book.author}</p>
               </div>
-              <button onClick={()=>handleOpenBuyModal(book)}> buy</button>    
+              <motion.button
+               onClick={()=>handleOpenBuyModal(book)}
+               whileHover={{scale: 1.05}}
+               whileTap={{scale: 0.85}}
+               className={style.button}
+               > buy</motion.button>    
             </div>
           ))}
         </div>

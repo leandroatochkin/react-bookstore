@@ -5,6 +5,7 @@ import QuantityPicker from '../../utils/QuantityPicker'
 import { dropIn } from '../../utils/utils'
 import { DB_addToFavs_endpoint } from '../../utils/endpointIndex';
 import IconCheckCircle from '../../utils/icons/CheckIcon'
+import SimpleMessage from '../../utils/SimpleMessage'
 
 
 const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin}) => {
@@ -19,6 +20,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
     })
 
     const[favSent, setFavSent] = useState(false)
+    const [openMsg, setOpenMsg] = useState(false)
 
     console.log(profileData._id)
     console.log(book.id)
@@ -40,7 +42,8 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
     const handleBuyBtn = (book) =>{
         if(book){
             setShoppingCart((prevItems) => [...prevItems, pushingItem]);
-            setOpenBuyModal(false)
+            setOpenMsg(true)
+          
         }
     }
 
@@ -109,6 +112,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
             </div>
             </div>
         </motion.div>
+        {openMsg && <SimpleMessage message={'Item added to your shopping cart'} setFunction={setOpenBuyModal}/>}
         </Backdrop>
   )
 }
