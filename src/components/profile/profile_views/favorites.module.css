@@ -43,3 +43,22 @@
     border-radius: 16px;
     padding: 1%;
 }
+
+.bookContainer{
+    display: flex;
+    gap: 2%;
+}
+
+.bookImage{
+    height: 150px !important;
+    width: 100px !important;
+    border-radius: 16px;
+    border: 1px solid red;
+}
+
+.separator{
+    width: 90%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 2% auto;
+}

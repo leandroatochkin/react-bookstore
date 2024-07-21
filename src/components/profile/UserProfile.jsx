@@ -10,7 +10,7 @@ import Settings from './profile_views/Settings';
 import { DB_checkUser_endpoint } from '../../utils/endpointIndex';
 import Favorites from './profile_views/Favorites';
 
-const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
+const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCart }) => {
   const [view, setView] = useState('');
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn }) => {
             {view === 'events' && <Events profile={profileData.user} />}
             {view === 'purchases' && <Purchases profile={profileData.user} />}
             {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
-            {view === 'favorites' && <Favorites user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
+            {view === 'favorites' && <Favorites user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData} setShoppingCart={setShoppingCart}/>}
           </div>
         </>
       ) : (

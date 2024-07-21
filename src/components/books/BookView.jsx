@@ -7,7 +7,7 @@ import { DB_addToFavs_endpoint } from '../../utils/endpointIndex';
 import IconCheckCircle from '../../utils/icons/CheckIcon'
 
 
-const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal}) => {
+const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin}) => {
     
     const [value, setValue] = useState(1);
     const [pushingItem, setPushingItem] = useState({
@@ -20,7 +20,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal}) => {
 
     const[favSent, setFavSent] = useState(false)
 
-    console.log(profileData.user._id)
+    console.log(profileData._id)
     console.log(book.id)
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal}) => {
               'Content-Type': 'application/json',
               },
             body: JSON.stringify({
-                user_id: profileData.user._id,
+                user_id: profileData._id,
                 book_id: book.id
                 })
           })
@@ -98,6 +98,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal}) => {
             onClick={handleFavs}
             whileHover={{scale: 1.05}}
             whileTap={{scale: 0.95}}
+            style={origin === 'profile' ? {display: 'none'} : ''}
             >{favSent ? <IconCheckCircle/> : 'Favs'}</motion.button>
             <motion.button 
             className='add-to-cart-btn'

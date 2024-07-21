@@ -57,7 +57,7 @@ const handleRemoveFromCart = (id) =>{
       <Route path="/categories" element={<CategoriesView profileData={profileData} setGenre={setGenre}/>} />
       <Route path="/categories/:genre" element={<GenreView profileData={profileData} setShoppingCart={setShoppingCart}/>} />
       <Route path='/shopping-cart' element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart} isLoggedIn={isLoggedIn} profileData={profileData}/>}/>
-      <Route path='/user-profile' element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn}/>} />
+      <Route path='/user-profile' element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn} setShoppingCart={setShoppingCart}/>} />
       <Route path='/create-account' element={<NewAccount />} />
       <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} profileData={profileData} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
       </Routes>
