@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import Navbar from './components/Navbar'
+import { useEffect, useState, Suspense } from 'react'
+import Navbar from './components/navbar/Navbar'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CategoriesView from './components/books/CategoriesView';
@@ -10,6 +10,7 @@ import UserProfile from './components/profile/UserProfile';
 import Home from './components/home/Home';
 import NewAccount from './components/new_account/NewAccount';
 import Login from './components/login/Login';
+import { MoonLoader } from 'react-spinners';
 
 
 function App() {
@@ -26,8 +27,20 @@ useEffect(()=>{
   console.log(profileData)
 }, [profileData])
 
+const[loading, setLoading] = useState(false)
+
+
 useEffect(() => {
-  // Retrieve user from local storage on app initialization
+
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 2000); // 2 seconds delay
+
+  return () => clearTimeout(timer); // Clean up the timer on unmount
+}, []);
+
+useEffect(() => {
+
   const storedUser = localStorage.getItem('user');
   if (storedUser) {
     setIsLoggedIn(true)
@@ -48,7 +61,11 @@ const handleRemoveFromCart = (id) =>{
 }
 
   return (
-    <StripeProvider>
+    <>
+    {loading ? (
+      <MoonLoader/>
+    ) : (
+      <StripeProvider>
     <Router>
       <>  
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData}/>
@@ -62,9 +79,10 @@ const handleRemoveFromCart = (id) =>{
       <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} profileData={profileData} setProfileData={setProfileData} setNewUserData={setNewUserData}/>} />
       </Routes>
     </>
-
     </Router>
     </StripeProvider>
+    )}
+    </>
   )
 }
 

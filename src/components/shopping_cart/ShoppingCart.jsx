@@ -9,7 +9,7 @@ import style from './shoppingcart.module.css'
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   const [sessionId, setSessionId] = useState('');
-
+  console.log(profileData)
   const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
     try {
 
@@ -39,10 +39,10 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
     } catch (error) {
       console.error("Error updating user's purchases:", error);
     }
-  }, 500), []);
+  }, 100), []);
 
   useEffect(() => {
-    console.log(profileData.user.id);
+    console.log(profileData.user._id);
   }, [profileData]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
         setSessionId(data.id);
 
         // Update the user's purchases in the database
-        updatePurchasesInDatabase(shoppingCart, profileData.user.id);
+        updatePurchasesInDatabase(shoppingCart, profileData.user._id);
       } catch (error) {
         console.error('Error fetching the session ID:', error);
       }

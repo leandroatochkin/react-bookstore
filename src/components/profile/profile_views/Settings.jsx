@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
 import { Spinner } from '@nextui-org/spinner';
 import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/endpointIndex';
+import IconCancelSquared from '../../../utils/icons/CancelIcon';
 
 
 const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
@@ -125,7 +126,7 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
                 <p className={style.title}><strong>Name:</strong> {user.name}</p>
               )}
               <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
-                {editMode ? 'Cancel' : 'Edit'}
+                {editMode ? <IconCancelSquared /> : 'Edit'}
               </button>
             </div>
             <div className={ editMode ? style.editLineOpen : style.editLineClosed}>
@@ -140,12 +141,15 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
                 <p className={style.title}><strong>Username:</strong> {user.username}</p>
               )}
               <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
-                {editMode ? 'Cancel' : 'Edit'}
+                {editMode ? <IconCancelSquared /> : 'Edit'}
               </button>
             </div>
+
+
             <div className={editMode ? style.editCountry : style.editLine}>
               {editMode ? (
-                <>
+              
+                <div className={style.countryInputs}>
                   <input
                     name="address"
                     placeholder="Address"
@@ -164,16 +168,20 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
                     value={formData.country}
                     onChange={handleInputChange}
                   />
-                </>
+                </div>
               ) : (
                 <p className={style.title}>
                   <strong>Address:</strong>  {user.address}, {user.city}, {user.country}
                 </p>
               )}
+              <div className={style.contryBtn}>
               <button onClick={() => setEditMode(!editMode)} className={style.editBtn}>
-                {editMode ? 'Cancel' : 'Edit'}
+                {editMode ? <IconCancelSquared /> : 'Edit'}
               </button>
+              </div>
             </div>
+
+
             </div>
             <div className={style.pictureLine}>
               {editMode ? (

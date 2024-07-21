@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import style from './favorites.module.css';
 import { DB_findUserFavs_endpoint } from '../../../utils/endpointIndex';
 import BookView from '../../books/BookView';
 import {motion} from 'framer-motion'
+import { MoonLoader } from 'react-spinners';
 
 const Favorites = ({ user, setShoppingCart }) => {
   const [books, setBooks] = useState([]);
@@ -46,39 +47,41 @@ const Favorites = ({ user, setShoppingCart }) => {
 
 
   return (
-    <div className={style.favoritesContainer}>
+    <Suspense fallback={<MoonLoader />}>
+        <div className={style.favoritesContainer}>
         
-      {books.length > 0 ? (
-        <>
-       
-
-        <div className={style.favoritesList}>
-        <h2 className={style.title}>Favorites</h2>
-          <div className={style.separator}></div>
-          {books.map((book, index) => (
-            <div key={index} className={style.bookContainer}>
-              <div className={style.bookImageContainer}>
-                <img src={book.coverImageUrl} alt={book.title} className={style.bookImage} />
+        {books.length > 0 ? (
+          <>
+         
+  
+          <div className={style.favoritesList}>
+          <h2 className={style.title}>Favorites</h2>
+            <div className={style.separator}></div>
+            {books.map((book, index) => (
+              <div key={index} className={style.bookContainer}>
+                <div className={style.bookImageContainer}>
+                  <img src={book.coverImageUrl} alt={book.title} className={style.bookImage} />
+                </div>
+                <div className={style.bookInfoContainer}>
+                  <h3>{book.title}</h3>
+                  <p>{book.author}</p>
+                </div>
+                <motion.button
+                 onClick={()=>handleOpenBuyModal(book)}
+                 whileHover={{scale: 1.05}}
+                 whileTap={{scale: 0.85}}
+                 className={style.button}
+                 > buy</motion.button>    
               </div>
-              <div className={style.bookInfoContainer}>
-                <h3>{book.title}</h3>
-                <p>{book.author}</p>
-              </div>
-              <motion.button
-               onClick={()=>handleOpenBuyModal(book)}
-               whileHover={{scale: 1.05}}
-               whileTap={{scale: 0.85}}
-               className={style.button}
-               > buy</motion.button>    
-            </div>
-          ))}
-        </div>
-        </>
-      ) : (
-        <div>...Loading</div>
-      )}
-    {openBuyModal && <BookView profileData={user} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal} origin={'profile'}/>}
-    </div>
+            ))}
+          </div>
+          </>
+        ) : (
+          <MoonLoader />
+        )}
+      {openBuyModal && <BookView profileData={user} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal} origin={'profile'}/>}
+      </div>
+    </Suspense>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { DB_books_endpoint } from '../../utils/endpointIndex';
 import BookView from './BookView';
-import { Spinner } from '@nextui-org/spinner';
+import { MoonLoader } from 'react-spinners';
 
 const GenreView = ({profileData, setShoppingCart}) => {
     const [data, setData] = useState(null);
@@ -62,7 +62,7 @@ const GenreView = ({profileData, setShoppingCart}) => {
 
       if (loading) {
         return <div className='loader-container'>
-          <Spinner />
+          <MoonLoader/>
         </div>
       }
   
@@ -81,7 +81,8 @@ const GenreView = ({profileData, setShoppingCart}) => {
     <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
         {openBuyModal && <BookView profileData={profileData.user} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
         {filteredData.map((book, index)=>(
-        <motion.div 
+            
+          <motion.div 
         key={index} 
         className='book-card' 
         style={{backgroundImage: `url(${book.coverImageUrl})`, backgroundSize: 'cover'}}

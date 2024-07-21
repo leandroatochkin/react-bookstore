@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
-import { DB_checkUser_endpoint, DB_register_endpoint } from '../utils/endpointIndex';
-import TOSmodal from '../utils/TOSmodal';
-import SimpleMessage from '../utils/SimpleMessage'
-import { saveUser } from '../utils/utils';
+import { DB_checkUser_endpoint, DB_register_endpoint } from '../../utils/endpointIndex';
+import TOSmodal from '../../utils/TOSmodal';
+import SimpleMessage from '../../utils/SimpleMessage'
+import { saveUser } from '../../utils/utils';
+import style from './navbar.module.css'
+
 
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData }) => {
@@ -13,6 +15,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
   const [openModal, setOpenModal] = useState(false);
   const [terms, setTerms] = useState(false);
   const [newUserData, setNewUserDataState] = useState(null);
+  const [collapsed, setCollapsed] = useState(false)
   const navigate = useNavigate();
 
   useEffect(()=>{console.log(newUserData)},[newUserData])
@@ -117,24 +120,27 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
   };
 
   return (
-    <div className='navbar'>
-      <Link to="/"><h1>Book Store</h1></Link>
-      <ul>
-        <li className='navbar-button'>
+    <div className={collapsed ? style.navbarCollapsed : style.navbar}>
+      <div className={style.topContainer}>
+      <Link to="/"><h1>Book Store</h1></Link> 
+      <button className={style.collapseBtn} onClick={()=>setCollapsed(!collapsed)}>collapse</button>
+      </div>
+      <ul className={collapsed ? style.collapsedUl : style.ul}>
+        <li className={style.li}>
           <Link to="/categories">Categories</Link>
         </li>
-        <li className='navbar-button'>
+        <li className={style.li}>
           {isLoggedIn ? <Link to="/shopping-cart">Shopping Cart</Link> : <Link to="/login">Shopping Cart</Link>}
         </li>
-        <li className='navbar-button'>
+        <li className={style.li}>
           {isLoggedIn ? <Link to="/user-profile">Profile</Link> : <Link to="/login">Profile</Link>}
         </li>
         {isLoggedIn ? (
-          <li className="navbar-button">
+          <li className={style.li}>
             <button onClick={handleLogOut}>LOGOUT</button>
           </li>
         ) : (
-          <li className="navbar-login" style={{ colorScheme: 'light' }}>
+          <li className={style.navbarLogin} style={{ colorScheme: 'light' }}>
             <GoogleLogin
               onSuccess={responseMessage}
               onError={errorMessage}
@@ -143,7 +149,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNew
             <h3>or <Link to="/create-account">Create Account</Link></h3>
           </li>
         )}
+        
       </ul>
+      
       {openModal && <TOSmodal deny_acceptFunction={deny_acceptFunction} />}
     </div>
   );

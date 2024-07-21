@@ -37,14 +37,77 @@
     position: absolute;
     left: 1%;
     top: 15%;
-  }
+}
   
-  .userImg {
+.userImg {
     border-radius: 16px;
     height: 150px;
     width: 150px;
-  }
+}
   
-  .logoutBtn{
-    background: linear-gradient(10deg, #e70909, #eb6565);
+.logoutBtn{
+    background: var(--orange-gradient);
+}
+
+@media only screen and (max-width: 1024px) {
+  .userContainer {
+    flex-direction: column;
   }
+
+  .leftSide, .rightSide {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+  }
+
+  .userCard {
+    position: static;
+    width: 80%;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .userContainer {
+    height: auto;
+    padding: 20px;
+  }
+
+  .leftSide, .rightSide {
+    width: 100%;
+    height: auto;
+  }
+
+  .userCard {
+    width: 90%;
+    padding: 4%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .userContainer {
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .leftSide {
+    width: 100%;
+    height: 30%;
+  }
+
+  .rightSide {
+    width: 100vw;
+    height: 70%;
+    margin-right: 0;
+  }
+
+  .userCard {
+    width: 100%;
+    padding: 2%;
+    position: absolute;
+    top: 10%;
+  }
+}

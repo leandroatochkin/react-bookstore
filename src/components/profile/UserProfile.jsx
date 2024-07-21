@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 import styles from './userProfile.module.css';
@@ -9,9 +9,10 @@ import Purchases from './profile_views/Purchases';
 import Settings from './profile_views/Settings';
 import { DB_checkUser_endpoint } from '../../utils/endpointIndex';
 import Favorites from './profile_views/Favorites';
+import { MoonLoader } from 'react-spinners';
 
 const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCart }) => {
-  const [view, setView] = useState('');
+  const [view, setView] = useState('events');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,11 +67,13 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
       {profileData && profileData.user ? (
         <>
           <div className={styles.leftSide}>
+            <Suspense fallback={<MoonLoader />}>
             <div className={styles.userCard}>
               <img src={profileData.user.picture} alt="User Profile" className={styles.userImg} />
               <h2>Hi!, {profileData.user.name}</h2>
               <button onClick={handleLogOut} className={styles.logoutBtn}>Log Out</button>
             </div>
+            </Suspense>
             <div>
               <VerticalMenu
                 elements={[

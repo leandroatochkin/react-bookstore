@@ -1,0 +1,116 @@
+.navbar{
+    backdrop-filter: blur(20px);
+    background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(0,0,0, 0.2)
+    );
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    height: 10%;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    display: flex;
+    z-index: 5  ;
+    border: 1px solid red;
+  }
+  
+  .ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    list-style: none;
+  }
+  
+  .li{
+    height: 70%;
+    width: auto;
+    padding: 1%;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .li:hover{
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    background-image: linear-gradient(
+      120deg,
+      rgba(0,0,0, 0.2),
+      rgba(255, 255, 255, 0.3)
+    );
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .navbarLogin{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+  }
+  
+  .collapseBtn{
+    display: none;
+  }
+
+  @media only screen and (max-width: 640px){
+    .collapseBtn{
+        display: flex;
+      }
+
+    .topContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+
+      .navbarCollapsed{
+        height: 10%;
+        backdrop-filter: blur(20px);
+        background-image: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.3),
+          rgba(0,0,0, 0.2)
+        );
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        width: 100%;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 5 ;
+      }
+
+      .navbar{
+        backdrop-filter: blur(20px);
+        background-image: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.3),
+          rgba(0,0,0, 0.2)
+        );
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        width: 100%;
+        height: auto;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 5 ;
+      }
+
+      .collapsedUl{
+        display: none;
+      }
+
+      .ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 80%;
+        list-style: none;
+      }
+  }
+  

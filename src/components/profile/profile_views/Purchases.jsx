@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 
 const Purchases = ({ profile, setShoppingCart }) => {
 
-
   const purchases = profile ? profile.purchases : [];
 
   return (
