@@ -68,10 +68,13 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
         <>
           <div className={styles.leftSide}>
             <Suspense fallback={<MoonLoader />}>
+            <div className={styles.upperSpace}></div>
             <div className={styles.userCard}>
               <img src={profileData.user.picture} alt="User Profile" className={styles.userImg} />
+              <div className={styles.cardRight}>
               <h2>Hi!, {profileData.user.name}</h2>
               <button onClick={handleLogOut} className={styles.logoutBtn}>Log Out</button>
+              </div>
             </div>
             </Suspense>
             <div>

@@ -53,8 +53,10 @@ const handleAssist = async (eventId) => {
         <div className={styles.eventList}>
              { events ? (events.map((event, index) => (
                 <div className={styles.event} key={index} id={event._id}>
-                    <div className={styles.eventDate}>{event.date}</div>
+                    <div className={styles.topContainer}>
                     <div className={styles.eventTitle}>{event.title}</div>
+                    <div className={styles.eventDate}>{event.date}</div>
+                    </div>
                     <div className={styles.eventTime}>{event.startTime}-{event.endTime}</div>
                     <div className={styles.eventLocation}>{event.location}</div>
                     <div className={styles.eventDescription}>{event.description}</div>

@@ -1,87 +1,20 @@
-.userContainer{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.leftSide{
-  width: 35%;
-  height: 100%;
-}
-
-.rightSide{
-  width: 65%;
-  height: 100%;
-  margin-right: 0%;
-}
-
-.userCard{
-    height: auto;
-    width: 30%;
-    padding: 2%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: transparent;
-    backdrop-filter: blur(20px);
-    background-image: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.3),
-      rgba(0,0,0, 0.2)
-    );
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;  
-    position: absolute;
-    left: 1%;
-    top: 15%;
-}
-  
-.userImg {
-    border-radius: 16px;
-    height: 150px;
-    width: 150px;
-}
-  
-.logoutBtn{
-    background: var(--orange-gradient);
-}
-
-@media only screen and (max-width: 1024px) {
-  .userContainer {
-    flex-direction: column;
-  }
-
-  .leftSide, .rightSide {
-    width: 100%;
-    height: auto;
-    margin-right: 0;
-  }
-
-  .userCard {
-    position: static;
-    width: 80%;
-    margin-top: 20px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .userContainer {
-    height: auto;
-    padding: 20px;
-  }
-
-  .leftSide, .rightSide {
-    width: 100%;
-    height: auto;
-  }
-
-  .userCard {
-    width: 90%;
-    padding: 4%;
-  }
+#root{
+  --black-transparent: rgba(0,0,0,0.5);
+  --orange-gradient: linear-gradient(10deg, #fa0, #ff6a00);
+  --green-gradient: linear-gradient(15deg, #04ea00, #00d17d);
+  --dark-text: #212427;
+  --glass-style: {
+      background-color: transparent;
+      backdrop-filter: blur(20px);
+      background-image: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.3),
+          rgba(0,0,0, 0.2)
+          );
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      padding: 1%;
+  };
 }
 
 @media only screen and (max-width: 640px) {
@@ -91,23 +24,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #AFEEEE;
   }
 
-  .leftSide {
+  .upperSpace{
+    height: 20%;
     width: 100%;
-    height: 30%;
-  }
-
-  .rightSide {
-    width: 100vw;
-    height: 70%;
-    margin-right: 0;
+    margin-bottom: 20%;
   }
 
   .userCard {
-    width: 100%;
-    padding: 2%;
-    position: absolute;
-    top: 10%;
+    width: 100vw;
+    height: 30vh;
+    left: 0;
+    margin: 0;
+    background-color: darkslategray;
+    display: flex;
+    justify-content: space-around ;
+    box-shadow: 2px 2px 2px rgba(0,0,0, 0.2)
+  }
+
+  .userImg{
+    border-radius: 15px;
+  }
+
+  .cardRight{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logoutBtn{
+    grid-column: 2;
+    gap: 0;
+    background: var(--orange-gradient);
   }
 }

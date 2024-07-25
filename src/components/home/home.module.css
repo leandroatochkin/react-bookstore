@@ -1,13 +1,3 @@
-.homeContainer{
-    background-image: url('../../assets/background.png');
-    background-size: cover;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
 
 
 
@@ -23,73 +13,45 @@
     color: #F896D8;
 }
 
-.topUL{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 5%
-}
 
-.linkLI{
-    background-color: #EDF67D;
-    width: 200px;
-    height: 50px;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bolder;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
+@media only screen and (max-width: 640px){
+    .homeContainer{
+        background-image: url('../../assets/background.png');
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
 
-.footer{
-    height: 5%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    bottom: 0;
-    background-color: #1B4079;   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+      .animationText{
+       margin-left: 2%;
+    }
 
-.footerBtn{
-    cursor: pointer;
-}
-
-.about{
-    height: 50%;
-    width: 35%;
-    background-color: #1B4079;
-    position: absolute;
-    bottom: 5%;
-    left: 1%;
-    padding: 2% 2% 0 2%;
-}
-
-.abtUL{
-    list-style: none;
-}
-
-.abtLI{
-    display: flex;
-    align-items: center;
-    gap: 1%;
-}
-
-.abtIcon{
-    height: 25px;
-    width: 25px;
-}
-
-.footerUL{
-    width: 10%;
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
+      .topUL{
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 40%;
+        margin-right: 5%;
+        gap: 10%;
+        height: 100%;
+    }
+    
+    .linkLI{
+        background-color: white;
+        width: 200px;
+        height: 50px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bolder;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
 }

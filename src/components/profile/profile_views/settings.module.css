@@ -26,8 +26,7 @@
 }
 
 .settingsList{
-    position: absolute;
-    top: 15%;
+
     width: 59%;
     max-height: 79%;
     overflow-y: scroll;
@@ -160,9 +159,12 @@
     }
   
     .settingsList {
-      top: 55%;
-      width: 100%;
+      top: 54%;
+      width: 100vw;
       max-height: 50%;
+      left: 0;
+      border-radius: 0;
+      background-color: darkslategray;
     }
 
     .dataDisplayClosed{

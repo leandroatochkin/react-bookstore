@@ -13,7 +13,8 @@ const handleClick = (element) => {
     <div>
         <ul className={styles.menuContainer}>
             {elements.map((element, index) => {
-                return <motion.li
+                return <>
+                <motion.li
                         initial={{backgroundColor: 'transparent'}} 
                         whileHover={{
                           backgroundColor: 'white',
@@ -27,6 +28,8 @@ const handleClick = (element) => {
                         onClick={()=>handleClick(element)}>
                           <a className={styles.link}>{element.name}</a><IconArrowRightSquareFill/>
                         </motion.li>
+                        <div className={styles.separator}></div>
+                </>
                 })}
         </ul>
     </div>

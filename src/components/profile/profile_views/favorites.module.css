@@ -26,7 +26,7 @@
 }
 
 .favoritesList{
-    position: absolute;
+
     top: 15%;
     width: 59%;
     max-height: 79%;
@@ -54,7 +54,6 @@
     height: 150px !important;
     width: 100px !important;
     border-radius: 16px;
-    border: 1px solid red;
 }
 
 .bookInfoContainer{
@@ -88,9 +87,13 @@
     }
   
     .favoritesList {
-      top: 55%;
-      width: 100%;
+      top: 54%;
+      width: 100vw;
       max-height: 50%;
+      border-radius: 0;
+      background-color: darkslategray;
+      margin: 0;
+      left: 0;
     }
   
     .buttonsContainer {
