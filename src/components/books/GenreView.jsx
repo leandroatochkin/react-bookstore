@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState, Suspense } from 'react'
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { DB_books_endpoint } from '../../utils/endpointIndex';
+import { index } from '../../utils/endpointIndex.js';
 import BookView from './BookView';
 import { MoonLoader } from 'react-spinners';
 
@@ -24,7 +24,7 @@ const GenreView = ({profileData, setShoppingCart}) => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(DB_books_endpoint);
+          const response = await fetch(index.books);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }

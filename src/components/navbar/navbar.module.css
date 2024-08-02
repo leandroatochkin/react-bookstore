@@ -120,6 +120,18 @@
         transition: height 0.2s ease-in-out;
       }
 
+      .profileNavbar{
+          background-color: darkslategray;
+          color: white;
+          width: 100vw;
+          height: 30%;
+          position: fixed !important;
+          display: flex;
+          flex-direction: column;
+          z-index: 5 ;
+          transition: height 0.2s ease-in-out;
+      }
+
       .collapsedUl{
         display: none;
       }
@@ -162,6 +174,10 @@
         justify-content: flex-start;
         align-items: center;
         width: 100vw;
+      }
+
+      .collapsedNavbarLogin{
+        display: none;
       }
 
       .collapsedNavbarLogout{

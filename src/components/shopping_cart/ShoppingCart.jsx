@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {API_endpoint, DB_updatePurchases_endpoint} from '../../utils/endpointIndex'
+import { index } from '../../utils/endpointIndex.js'
 import { debounce } from '../../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
     try {
 
-      const response = await fetch(DB_updatePurchases_endpoint, {
+      const response = await fetch(index.update_purchases, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
     const createCheckoutSession = async () => {
       try {
         console.log('Creating checkout session...');
-        const response = await fetch(API_endpoint, {
+        const response = await fetch(index.stripe, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import style from './favorites.module.css';
-import { DB_findUserFavs_endpoint } from '../../../utils/endpointIndex';
+import { index } from '../../../utils/endpointIndex.js';
 import BookView from '../../books/BookView';
 import {motion} from 'framer-motion'
 import { MoonLoader } from 'react-spinners';
@@ -17,11 +17,12 @@ const Favorites = ({ user, setShoppingCart }) => {
   },[selectedBook])
 
   useEffect(() => {
-    if (user && user.favs.length > 0) {
+    if (user && user.favs && user.favs.length > 0) {
       const fetchBooks = async () => {
         const favs = user.favs.map(id => `${id}`).join(',');
         try {
-          const response = await fetch(`${DB_findUserFavs_endpoint}?ids=${favs}`);
+          const endpoint = `${index.favorites}?ids=${favs}`
+          const response = await fetch(endpoint);
           const data = await response.json();
           setBooks(data);
         } catch (err) {

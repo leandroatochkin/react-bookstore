@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
-import { DB_checkUser_endpoint, DB_register_endpoint, google_scope } from '../../utils/endpointIndex';
+import { index } from '../../utils/endpointIndex.js';
 import TOSmodal from '../../utils/TOSmodal';
 import SimpleMessage from '../../utils/SimpleMessage'
 import { saveUser } from '../../utils/utils';
@@ -18,7 +18,7 @@ const Navbar = ({
   setResponse, 
   setProfileData, 
   setNewUserData,
-  isHome }) => {
+  pageLocation }) => {
   const [openModal, setOpenModal] = useState(false)
   const [msgModal, setMsgModal] = useState(false)
   const [googleError, setGoogleError] = useState(false)
@@ -28,13 +28,13 @@ const Navbar = ({
   const [collapsed, setCollapsed] = useState(false)
   const navigate = useNavigate();
 
-  console.log(isHome)
+  console.log(pageLocation)
 
   useEffect(() => {
     if (!terms || !newUserData) return
 
     const registerUser = async () => {
-      fetch(DB_register_endpoint, {
+      fetch(index.register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const Navbar = ({
     setNewUserData(userData);
 
     // Check if user exists
-    fetch(`${DB_checkUser_endpoint}/${tokenData.email}`, {
+    fetch(`${index.check_user}/${tokenData.email}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const Navbar = ({
   };
 
   return (
-    <div className={!isHome ? (collapsed ? style.navbarCollapsed : style.navbar) : style.hidden}>
+    <div className={pageLocation !== 'home' ? (collapsed ? style.navbarCollapsed : (pageLocation === 'user-profile' ? style.profileNavbar : style.navbar)) : style.hidden}>
       <div className={style.topContainer}>
       <Link to="/" ><h1>Book Store</h1></Link> 
       <button className={style.collapseBtn} onClick={()=>setCollapsed(!collapsed)}><IconMenu /></button>
@@ -168,12 +168,12 @@ const Navbar = ({
             <button onClick={handleLogOut} className={style.logoutBtn}>LOGOUT</button>
           </div>
         ) : (
-          <div className={style.navbarLogin} >
+          <div className={collapsed ? style.collapsedNavbarLogin : style.navbarLogin} >
             <div style={{ colorScheme: 'light' }}>
             <GoogleLogin
               onSuccess={responseMessage}
               onError={errorMessage}
-              scope={google_scope}
+              scope={index.google_scope}
             />
             
           </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { bookGenres } from '../../utils/utils';
-import { DB_searchBook_endpoint } from '../../utils/endpointIndex';
+import { index } from '../../utils/endpointIndex.js';
 import style from './categoriesview.module.css'
 import IconSearch from '../../utils/icons/SearchIcon';
 import SearchBar from '../../utils/SearchBar';
@@ -22,7 +22,7 @@ const CategoriesView = ({profileData, setGenre}) => {
 
 const handleSearch = async () =>{
     try{
-        const response = await fetch(`${DB_searchBook_endpoint}?${searchKey}=${searchValue}`)
+        const response = await fetch(`${index.search_book}?${searchKey}=${searchValue}`)
         if(!response.ok){
             console.error('error')
         }

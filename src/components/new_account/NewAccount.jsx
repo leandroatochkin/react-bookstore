@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import style from './newaccount.module.css';
-import { DB_register_endpoint} from '../../utils/endpointIndex.js'
+import { index } from '../../utils/endpointIndex.js'
 import { isPasswordOk, isUsernameOk, _TOS } from '../../utils/utils.js';
 import SimpleMessage from '../../utils/SimpleMessage.jsx';
+import TOSmodal from '../../utils/TOSmodal.jsx';
+import { motion } from 'framer-motion';
 
 
 const NewAccount = () => {
@@ -18,13 +20,14 @@ const NewAccount = () => {
     city: '',
     country: 'Argentina',
     picture: '',
-    terms: null,
     favs: [],
     purchases: [],
     settings: []
   });
   const [openModal, setOpenModal] = useState(false);
+  const [openTOSModal, setOpenTOSModal] =useState(false)
   const [message, setMessage] = useState('');
+  const [terms, setTerms] = useState(false)
 
   const navigate = useNavigate();
 
@@ -41,14 +44,21 @@ const NewAccount = () => {
   };
 
   const handleSubmitNewUser = () => {
+
+    setOpenTOSModal(true)
+
+    if (!terms || !newUserData) return;
     if (isPasswordOk(newUserData.password, repeatPassword) && isUsernameOk(newUserData.username) && newUserData.terms === true) {
-      fetch(DB_register_endpoint, {
+      fetch(index.register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(newUserData)
+        body: JSON.stringify({
+          ...newUserData,
+          terms: true,
+        })
       })
         .then(response => response.json())
         .then(data => {
@@ -74,6 +84,11 @@ const NewAccount = () => {
     } return
   };
 
+  const deny_acceptFunction = (accept_deny) => {
+    setOpenTOSModal(false);
+    setTerms(accept_deny);
+  };
+
   return (
     <div className={style.container}>
       <div className={style.formContainer}>
@@ -82,23 +97,40 @@ const NewAccount = () => {
           <div className={style.inputsContainer}>
             <form className={style.form}>
               <div className={style.formGroup}>
-                <label htmlFor="username">Username</label>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="username">Username</legend>
                 <input type="text" name="username" id="username" placeholder="Username" onChange={handleInputChange} />
-                <label htmlFor="password">Password</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="password">Password</legend>
                 <input type="password" name="password" id="password" placeholder="Password" onChange={handleInputChange} />
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="confirmPassword">Repeat Password</legend>
                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" onChange={handleComparePassword} />
-                <label htmlFor="email">Email</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="email">Email</legend>
                 <input type="email" name="email" id="email" placeholder="Email" onChange={handleInputChange} />
-                <label htmlFor="name">Name</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="name">Name</legend>
                 <input type="text" name="name" id="name" placeholder="Name" onChange={handleInputChange} />
-                <label htmlFor="phone">Phone</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="phone">Phone</legend>
                 <input type="text" name="phone" id="phone" placeholder="Phone" onChange={handleInputChange} />
-                <label htmlFor="address">Address</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="address">Address</legend>
                 <input type="text" name="address" id="address" placeholder="Address" onChange={handleInputChange} />
-                <label htmlFor="city">City</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="city">City</legend>
                 <input type="text" name="city" id="city" placeholder="City" onChange={handleInputChange} />
-                <label htmlFor="country">Country</label>
+                </fieldset>
+                <fieldset className={style.inputLine}>
+                <legend htmlFor="country">Country</legend>
                 <select name="country" id="country" onChange={handleInputChange}>
                   <option value="Argentina">Argentina</option>
                   <option value="Brasil">Brasil</option>
@@ -113,21 +145,30 @@ const NewAccount = () => {
                   <option value="South Africa">South Africa</option>
                   <option value="United States">United States</option>
                 </select>
+
+                </fieldset>
               </div>
             </form>
           </div>
-          <div className={style.termsContainer}>
+          {/* <div className={style.termsContainer}>
             <p>{_TOS}</p>
             <input type="checkbox" name="terms" id="terms" onChange={handleInputChange} />
             <label htmlFor="terms">I agree to the terms and conditions</label>
-          </div>
+          </div> */}
         </div>
-        <div>
-        <button onClick={handleSubmitNewUser}>Create Account</button>
+        <div className={style.bottomContainer}>
+        <motion.button 
+        onClick={handleSubmitNewUser} 
+        className={style.createAccBtn}
+        whileHover={{scale: 1.05}}
+        whileTap={{scale: 0.95}}
+        >
+        Create Account</motion.button>
         <p>Already have an account? <Link to='/login'>LOGIN</Link></p>
         </div>
       </div>
       {openModal && <SimpleMessage message={message} setFunction={handleModalClose} />}
+      {openTOSModal && <TOSmodal deny_acceptFunction={deny_acceptFunction}/>}
     </div>
   );
 };

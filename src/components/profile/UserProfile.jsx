@@ -7,7 +7,7 @@ import VerticalMenu from './VerticalMenu';
 import Events from './profile_views/Events';
 import Purchases from './profile_views/Purchases';
 import Settings from './profile_views/Settings';
-import { DB_checkUser_endpoint } from '../../utils/endpointIndex';
+import { index } from '../../utils/endpointIndex.js';
 import Favorites from './profile_views/Favorites';
 import { MoonLoader } from 'react-spinners';
 
@@ -17,7 +17,7 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
 
   useEffect(() => {
     if (profileData && profileData.email) {
-      fetch(`${DB_checkUser_endpoint}/${profileData.email}`, {
+      fetch(`${index.check_user}/${profileData.email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

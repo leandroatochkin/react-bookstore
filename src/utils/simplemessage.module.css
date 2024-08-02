@@ -22,3 +22,22 @@
     background: var(--orange-gradient);
     border: none
 }
+
+@media only screen and (max-width: 640px){
+  .messageContainer{
+    height: auto;
+    width: 100%;
+    background-color: white;
+    color: var(--dark-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+  }
+
+.button{
+    background: var(--orange-gradient);
+    border: none
+}
+}

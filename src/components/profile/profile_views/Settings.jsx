@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './settings.module.css';
 import { Spinner } from '@nextui-org/spinner';
-import { DB_updateUser_endpoint, DB_deleteUser_endpoint } from '../../../utils/endpointIndex';
+import { index } from '../../../utils/endpointIndex.js';
 import IconCancelSquared from '../../../utils/icons/CancelIcon';
 
 
@@ -31,7 +31,7 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
     }
 
 
-    fetch(`${DB_updateUser_endpoint}/${user._id}`, {
+    fetch(`${index.update_user}/${user._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Settings = ({ user, setIsLoggedIn, updateProfileData }) => {
   };
 
   const handleDeleteUser = () => {
-    fetch(`${DB_deleteUser_endpoint}/${user._id}`, {
+    fetch(`${index.delete_user}/${user._id}`, {
       method: 'DELETE',
     })
       .then(response => {

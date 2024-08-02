@@ -19,7 +19,7 @@ const App = () => {
   const [shoppingCart, setShoppingCart] = useState([]);
   const [profileData, setProfileData] = useState({});
   const [newUserData, setNewUserData] = useState({});
-  const [isHome, setIsHome] = useState(true);
+  const [pageLocation, setPageLocation] = useState('');
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
@@ -31,13 +31,33 @@ const App = () => {
   }, [profileData]);
 
   useEffect(()=>{
-    if(location.pathname === '/'){
-      setIsHome(true);
-      }else{
-        setIsHome(false);
+        switch(location.pathname){
+          case '/':
+            setPageLocation('home');
+            break;
+            case '/user-profile':
+            setPageLocation('user-profile');
+            break;
+            case '/shopping-cart':
+            setPageLocation('shopping-cart');
+            break;
+            case '/categories':
+            setPageLocation('categories');
+            break;
+            case '/login':
+            setPageLocation('login');
+            break;
+            case '/create-account':
+            setPageLocation('create-account');
+            break;
+            default:
+            setPageLocation('home');
+
+
         }
-        console.log(isHome)
-  },[isHome, location.pathname])
+
+        console.log(pageLocation)
+  },[pageLocation, location.pathname])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -71,7 +91,7 @@ const App = () => {
         <MoonLoader />
       ) : (
         <StripeProvider>
-            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData} isHome={isHome} />
+            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData} pageLocation={pageLocation} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/categories" element={<CategoriesView profileData={profileData} setGenre={setGenre} />} />

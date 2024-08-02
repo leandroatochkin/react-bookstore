@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Backdrop from '../../utils/Backdrop'
 import QuantityPicker from '../../utils/QuantityPicker'
 import { dropIn } from '../../utils/utils'
-import { DB_addToFavs_endpoint } from '../../utils/endpointIndex';
+import { index } from '../../utils/endpointIndex.js'
 import IconCheckCircle from '../../utils/icons/CheckIcon'
 import SimpleMessage from '../../utils/SimpleMessage'
 
@@ -51,7 +51,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
       if(!profileData) return
       console.log(profileData)
       setFavSent(!favSent)
-          fetch(DB_addToFavs_endpoint,{
+          fetch(`${index.add_to_favs}`,{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

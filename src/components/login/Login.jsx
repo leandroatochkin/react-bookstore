@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import style from './login.module.css'
 import { GoogleLogin } from '@react-oauth/google'
-import { DB_login_endpoint, DB_register_endpoint, DB_checkUser_endpoint } from '../../utils/endpointIndex'
 import { jwtDecode } from 'jwt-decode'
+import {index} from '../../utils/endpointIndex.js'
 import { useNavigate } from 'react-router-dom'
 import TOSmodal from '../../utils/TOSmodal'
 import { saveUser } from '../../utils/utils'
+import SimpleMessage from '../../utils/SimpleMessage'
+
 
 
 const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUserData}) => {
@@ -17,11 +19,13 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
     const [openModal, setOpenModal] = useState(false);
     const [terms, setTerms] = useState(false);
     const [newUserData, setNewUserDataState] = useState(null);
+    const [openErrorModal, setOpenErrorModal] = useState(false)
+    const [inputError, setInputError] = useState(false)
 
     useEffect(() => {
       if (!terms || !newUserData) return
       const registerUser = async () => {
-        fetch(DB_register_endpoint, {
+        fetch(index.register, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +52,8 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
         registerUser()
       }
       , [terms, newUserData]);
-  
+      
+    useEffect(()=>{console.log(loginData)},[loginData])
 
     const deny_acceptFunction = (accept_deny) => {
       setOpenModal(false);
@@ -80,7 +85,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
 
         setNewUserData(userData);
             // Check if user exists
-    fetch(`${DB_checkUser_endpoint}/${tokenData.email}`, {
+    fetch(`${index.check_user}/${tokenData.email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +126,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
 
     const handleLogin = async () => {
         try{
-            fetch(DB_login_endpoint,{
+            const response = await fetch(index.login,{
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -129,16 +134,26 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
                 },
                 body: JSON.stringify(loginData)
               })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+
+              if (!response.ok) {
+                // Handle response errors (e.g., status codes 400, 401, 500, etc.)
+                console.error('Login failed:', response.statusText);
+                setOpenErrorModal(true)
+                setInputError(true)
+                return;
+            }
+
+            const data = await response.json();
+            console.log(data);
+          
                 setProfileData(prevData => ({
                     ...prevData,
                    user: data.user
                 }))
+                if(!response.ok) return
                 setIsLoggedIn(true)
                 navigate('/')
-            })
+            
     } catch(e){
         console.log(e)
     }
@@ -149,17 +164,17 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
     <div className={style.container}>
         <div className={style.login}>
             <div className={style.title}>Welcome Back!</div>
-            <fieldset className={style.fieldset}>
-                <legend>email</legend>
-                <input type="text" placeholder="email" name='email' onChange={handleInputChange}/>
+            <fieldset className={inputError ? style.fieldsetError : style.fieldset}>
+                <legend className={inputError ? style.legendError : ''}>email</legend>
+                <input type="text" placeholder="email" name='email' onChange={handleInputChange} className={style.inputCorrect}/>
             </fieldset>
-            <fieldset className={style.fieldset}>
-                <legend>password</legend>
-                <input type="password" placeholder="password" name='password'onChange={handleInputChange}/>
+            <fieldset className={inputError ? style.fieldsetError : style.fieldset}>
+                <legend className={inputError ? style.legendError : ''}>password</legend>
+                <input type="password" placeholder="password" name='password'onChange={handleInputChange} className={style.inputCorrect}/>
             </fieldset>
             <div><button className={style.button} onClick={handleLogin}>login</button></div>
             <h3>or</h3>
-            <div style={{colorScheme: 'light'}}>
+            <div className={style.loginBtnContainer}>
             <GoogleLogin 
             onSuccess={responseMessage} 
             onError={errorMessage} 
@@ -168,6 +183,7 @@ const Login = ({isLoggedIn, setIsLoggedIn, setResponse, setProfileData, setNewUs
             </div>
         </div>
         {openModal && <TOSmodal deny_acceptFunction={deny_acceptFunction} />}
+        {openErrorModal && <SimpleMessage message={'Incorrect email or password'} setFunction={setOpenErrorModal}/>}
     </div>
   )
 }

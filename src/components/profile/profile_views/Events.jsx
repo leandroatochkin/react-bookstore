@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Spinner } from '@nextui-org/spinner'
 import styles from './events.module.css'
 import { motion } from 'framer-motion'
-import { DB_events_endpoint } from '../../../utils/endpointIndex.js'
+import { index } from '../../../utils/endpointIndex.js'
 import SimpleMessage from '../../../utils/SimpleMessage.jsx'
 
 const Events = ({profile}) => {
@@ -12,7 +12,7 @@ const [openEventModal, setOpenEventModal] = useState(false)
 
 const fetchEvents = async () => {
     try {
-      const res = await fetch(DB_events_endpoint);
+      const res = await fetch(index.events);
       const data = await res.json();
       setEvents(data.map(event => ({
         ...event,
@@ -30,7 +30,7 @@ useEffect(()=>{
 const handleAssist = async (eventId) => {
   openEventModal === false ? setOpenEventModal(true) : setOpenEventModal(false)
     try {
-      await fetch(`${DB_events_endpoint}/${eventId}/assist`, {
+      await fetch(`${index.events}/${eventId}/assist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
