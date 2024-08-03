@@ -51,10 +51,12 @@ const handleClick = (genre) =>{
             className={style.categoryButton} 
             whileHover={{scale: 1.1}}
             >
-                <div className={style.categoryThumb}></div>
+               
                 <div className={style.categoryTitle} onClick={()=>handleClick(genre)}>
-                <Link to={`/categories/${genre}`} style={{color: '#EDF67D', fontWeight: 'bolder'}}>{genre}</Link>
+                <Link to={`/categories/${genre}`} style={{color: '#212427', fontWeight: 'bolder', fontSize: '24px'}}>{genre}</Link>
+                
                 </div>
+                <div className={style.separator}></div>
                 </motion.div>
                 )
             )}

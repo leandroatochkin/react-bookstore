@@ -25,13 +25,9 @@
     justify-content: center;
     align-items: center;
     background-color: #AFEEEE;
+    margin-top: 30%;
   }
 
-  .upperSpace{
-    height: 30%;
-    width: 100%;
-    margin-bottom: 30%;
-  }
 
   .userCard {
     width: 100vw;

@@ -76,6 +76,8 @@
         height: 50px;
         margin-right: 5%;
         color: white;
+        border: none;
+        background-color: transparent;
       }
 
     .topContainer{
@@ -103,6 +105,31 @@
         transition: height 0.2s ease-in-out;
       }
 
+      .navbarCollapsedProfile{
+        height: 10%;
+        background-color: darkslategrey;
+        width: 100vw;
+        position: fixed !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 5 ;
+        transition: height 0.2s ease-in-out;
+      }
+
+      .logoSmall{
+        height: 90px;
+        width: 120px;
+      }
+
+      .logoBig{
+        height: 180px;
+        width: 300px;
+        position: fixed;
+        top: 2%;
+        left: 0;
+      }
+
       .navbar{
         backdrop-filter: blur(20px);
         background-image: linear-gradient(
@@ -112,12 +139,12 @@
         );
         border: 2px solid rgba(255, 255, 255, 0.3);
         width: 100vw;
-        height: 30%;
+        height: 40%;
         position: fixed !important;
         display: flex;
         flex-direction: column;
         z-index: 5 ;
-        transition: height 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
 
       .profileNavbar{
@@ -128,8 +155,8 @@
           position: fixed !important;
           display: flex;
           flex-direction: column;
-          z-index: 5 ;
-          transition: height 0.2s ease-in-out;
+          z-index: 5;
+          transition: background-color 0.2s ease-out;
       }
 
       .collapsedUl{
@@ -137,6 +164,7 @@
       }
 
       .ul {
+        margin-top: 40%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

@@ -13,6 +13,18 @@
     color: #F896D8;
 }
 
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
 
 @media only screen and (max-width: 640px){
     .homeContainer{
@@ -53,5 +65,10 @@
         border-radius: 50px;
         cursor: pointer;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+
+    .logo{
+        animation: float 6s ease-in-out infinite;
     }
 }

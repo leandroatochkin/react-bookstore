@@ -135,10 +135,32 @@ const Navbar = ({
   };
 
   return (
-    <div className={pageLocation !== 'home' ? (collapsed ? style.navbarCollapsed : (pageLocation === 'user-profile' ? style.profileNavbar : style.navbar)) : style.hidden}>
+    <div 
+    className=
+    {
+      pageLocation !== 'home' 
+      ? 
+      (collapsed ? 
+      (pageLocation === 'user-profile' ? style.navbarCollapsedProfile : style.navbarCollapsed)
+       : 
+      (pageLocation === 'user-profile' ? style.profileNavbar : style.navbar)) : style.hidden}>
       <div className={style.topContainer}>
-      <Link to="/" ><h1>Book Store</h1></Link> 
-      <button className={style.collapseBtn} onClick={()=>setCollapsed(!collapsed)}><IconMenu /></button>
+      <Link to="/" >{
+        collapsed 
+        ? 
+        <img 
+        src={'../../../public/logo_logoonly.png'} 
+        className={style.logoSmall}/> 
+        : 
+        <img src={'../../../public/logo_vertical.png'} 
+        className={style.logoBig}/>
+      }</Link> 
+      <button 
+      className={style.collapseBtn} 
+      onClick={()=>setCollapsed(!collapsed)}
+      >
+        {collapsed ? <IconMenu /> : 'X'}
+      </button>
       </div>
       <ul className={collapsed ? style.collapsedUl : style.ul}>
         <motion.li 
@@ -146,21 +168,26 @@ const Navbar = ({
         whileHover={{scale: 1.05}}
         whileTap={{scale:0.85}}
         >
-        <Link to="/categories" className={style.link}>Categories</Link>
+        <Link to="/categories" 
+        className={style.link} 
+        style=
+        {pageLocation === 'user-profile' ? {color: 'white'} : {color: '#F896D8'}}
+        >
+          Categories</Link>
         </motion.li>
         <motion.li 
         className={style.li}
         whileHover={{scale: 1.05}}
         whileTap={{scale:0.85}}
         >
-          {isLoggedIn ? <Link to="/shopping-cart" className={style.link}>Shopping Cart</Link> : <Link to="/login">Shopping Cart</Link>}
+          {isLoggedIn ? <Link to="/shopping-cart" className={style.link} style={pageLocation === 'user-profile' ? {color: 'white'} : {color: '#F896D8'}}>Shopping Cart</Link> : <Link to="/login">Shopping Cart</Link>}
         </motion.li>
         <motion.li 
         className={style.li}
         whileHover={{scale: 1.05}}
         whileTap={{scale:0.95}}
         >
-          {isLoggedIn ? <Link to="/user-profile" className={style.link}>Profile</Link> : <Link to="/login">Profile</Link>}
+          {isLoggedIn ? <Link to="/user-profile" className={style.link} style={pageLocation === 'user-profile' ? {color: 'white'} : {color: '#F896D8'}}>Profile</Link> : <Link to="/login" style={{color: 'white'}}>Login</Link>}
         </motion.li>
         </ul>
         {isLoggedIn ? (
