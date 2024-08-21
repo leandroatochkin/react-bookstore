@@ -6,6 +6,7 @@ import { index } from '../../utils/endpointIndex.js';
 import style from './categoriesview.module.css'
 import IconSearch from '../../utils/icons/SearchIcon';
 import SearchBar from '../../utils/SearchBar';
+import IconArrowRightSquareFill from '../../utils/icons/ArrowRight'
 
 
 
@@ -53,7 +54,7 @@ const handleClick = (genre) =>{
             >
                
                 <div className={style.categoryTitle} onClick={()=>handleClick(genre)}>
-                <Link to={`/categories/${genre}`} style={{color: '#212427', fontWeight: 'bolder', fontSize: '24px'}}>{genre}</Link>
+                <Link to={`/categories/${genre}`} style={{color: '#212427', fontWeight: 'bolder', fontSize: '24px', display: 'flex', justifyContent: 'space-between'}}>{genre}<IconArrowRightSquareFill/></Link>
                 
                 </div>
                 <div className={style.separator}></div>
