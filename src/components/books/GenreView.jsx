@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { index } from '../../utils/endpointIndex.js';
 import BookView from './BookView';
 import { MoonLoader } from 'react-spinners';
+import style from './GenreView.module.css'
 
 const GenreView = ({profileData, setShoppingCart}) => {
     const [data, setData] = useState(null);
@@ -78,18 +79,18 @@ const GenreView = ({profileData, setShoppingCart}) => {
       
 
   return (
-    <div className='cards-container' style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
+    <div className={style.cardsContainer} style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
         {openBuyModal && <BookView profileData={profileData.user} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
         {filteredData.map((book, index)=>(
             
           <motion.div 
         key={index} 
-        className='book-card' 
-        style={{backgroundImage: `url(${book.coverImageUrl})`, backgroundSize: 'cover'}}
+        className={style.bookCard} 
+        style={{backgroundImage: `url(${book.coverImageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
         whileHover={{scale: 1.05}}
         >
             <motion.div 
-            className='card-info-background'
+            className={style.cardInfoBackground}
             initial={{opacity: '0'}}
             whileHover={{opacity: '1'}}
             onClick={()=>handleOpenBuyModal(book)}>

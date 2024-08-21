@@ -6,6 +6,7 @@ import { dropIn } from '../../utils/utils'
 import { index } from '../../utils/endpointIndex.js'
 import IconCheckCircle from '../../utils/icons/CheckIcon'
 import SimpleMessage from '../../utils/SimpleMessage'
+import style from './bookview.module.css'
 
 
 const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin}) => {
@@ -70,19 +71,19 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
   return (
     <Backdrop>
         <motion.div 
-        className='book-view'
+        className={style.bookView}
         variants={dropIn}
         initial='hidden'
         animate='visible'
         exit='exit'
         >
-            <div className='modal-book-image' style={{background: `url(${book.coverImageUrl})`, backgroundSize: 'cover'}}>
+            <div className={style.modalBookImage} style={{background: `url(${book.coverImageUrl})`, backgroundSize: 'cover'}}>
             </div>
-            <div className='modal-book-info'>
-            <div className='close-button-container'>
-                <h1 className='dialogue-title'>{book.title.length < 10 ? book.title : book.title.slice(0, 17) + '...' }</h1>
+            <div className={style.modalBookInfo}>
+            <div className={style.closeButtonContainer}>
+                <h1 className={style.dialogueTitle}>{book.title.length < 10 ? book.title : book.title.slice(0, 17) + '...' }</h1>
                 <motion.button 
-                className='close-form-button' 
+                className={style.closeFormButton}
                 onClick={handleClose}
                 whileHover={{scale: 1.05}}
                 whileTap={{scale: 0.95}}
@@ -90,21 +91,21 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
                </motion.button>
             </div>
-            <p className='book-modal-description'>{book.description}</p>
+            <p className={style.bookModalDescription}>{book.description}</p>
             <p style={{fontWeight: 'bolder'}}>{book.author}</p>
             <p><span style={{fontWeight: 'bolder'}}>Publishing year:</span> {book.publishedYear}</p>
             <p><span style={{fontWeight: 'bolder'}}>Price: </span> {book.price}</p>
             <div className='operation-btn-container'>
             <QuantityPicker min={1} max={10} value={value} setValue={setValue}/>
             <motion.button 
-            className='add-to-favs-btn'
+            className={style.addToFavsBtn}
             onClick={handleFavs}
             whileHover={{scale: 1.05}}
             whileTap={{scale: 0.95}}
             style={origin === 'profile' ? {display: 'none'} : ''}
             >{favSent ? <IconCheckCircle/> : 'Favs'}</motion.button>
             <motion.button 
-            className='add-to-cart-btn'
+            className={style.addToCartBtn}
             whileHover={{scale: 1.05}}
             whileTap={{scale: 0.95}}
             onClick={()=>handleBuyBtn(book)}
