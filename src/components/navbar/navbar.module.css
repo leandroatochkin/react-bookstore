@@ -65,6 +65,7 @@
   
   .collapseBtn{
     display: none;
+    padding: 0
   }
 
   @media only screen and (max-width: 640px){
@@ -80,13 +81,7 @@
         background-color: transparent;
       }
 
-    .topContainer{
-        display: flex;
-        justify-content: space-between;
-        height: 100%;
-        width: 100%;
-        align-items: center;
-    }
+    
 
     .navbarCollapsed{
         height: 10%;
@@ -122,8 +117,9 @@
         width: 120px;
       }
 
+
       .logoBig{
-        height: 180px;
+        height: 90px;
         width: 300px;
         position: fixed;
         top: 2%;
@@ -151,31 +147,41 @@
           background-color: darkslategray;
           color: white;
           width: 100vw;
-          height: 30%;
+          height: 40%;
           position: fixed !important;
           display: flex;
           flex-direction: column;
           z-index: 5;
           transition: background-color 0.2s ease-out;
+          border-radius: 0 0 40px 40px;
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
       }
+
+      .topContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;  
+        height: 150px;
+    }
 
       .collapsedUl{
         display: none;
       }
 
       .ul {
-        margin-top: 40%;
+        margin-top: 15%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        width: 80%;
+        width: 100%;
         list-style: none;
       }
 
       .li{
+        margin-left: 0;
         height: auto;
-        width: 100vw;
+        width: 120%;
         border-radius: 0;
         padding: 0;
         display: flex;
@@ -184,7 +190,7 @@
 
       .link{
         font-weight: bolder;
-        font-size: larger;
+        font-size: 28px;
         margin-left: 5%;
       }
 
@@ -215,11 +221,13 @@
       .navbarLogout{
         display: flex;
         justify-content: flex-end;
-        margin-right: 10%;
+        margin-right: 5%;
       }
 
       .logoutBtn{
         background: var(--orange-gradient);
+        border-radius: 40px;
+        margin: 2%;
       }
   }
   

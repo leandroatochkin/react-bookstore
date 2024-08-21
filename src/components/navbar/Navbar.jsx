@@ -9,7 +9,7 @@ import { saveUser } from '../../utils/utils';
 import style from './navbar.module.css'
 import IconMenu from '../../utils/icons/MenuIcon';
 import { motion } from 'framer-motion';
-
+import { PanelTopOpen, PanelTopClose, LogOut } from 'lucide-react';
 
 
 const Navbar = ({ 
@@ -33,7 +33,7 @@ const Navbar = ({
   useEffect(() => {
     if (!terms || !newUserData) return
 
-    const registerUser = async () => {
+  const registerUser = async () => {
       fetch(index.register, {
         method: 'POST',
         headers: {
@@ -152,14 +152,14 @@ const Navbar = ({
         src={'../../../public/logo_logoonly.png'} 
         className={style.logoSmall}/> 
         : 
-        <img src={'../../../public/logo_vertical.png'} 
+        <img src={'../../../public/logo_horizontal.png'} 
         className={style.logoBig}/>
       }</Link> 
       <button 
       className={style.collapseBtn} 
       onClick={()=>setCollapsed(!collapsed)}
       >
-        {collapsed ? <IconMenu /> : 'X'}
+        {collapsed ? <PanelTopOpen size={48}/> : <PanelTopClose size={48}/>}
       </button>
       </div>
       <ul className={collapsed ? style.collapsedUl : style.ul}>
@@ -192,7 +192,7 @@ const Navbar = ({
         </ul>
         {isLoggedIn ? (
           <div className={collapsed ? style.collapsedNavbarLogout : style.navbarLogout}>
-            <button onClick={handleLogOut} className={style.logoutBtn}>LOGOUT</button>
+            <button onClick={handleLogOut} className={style.logoutBtn}><LogOut/></button>
           </div>
         ) : (
           <div className={collapsed ? style.collapsedNavbarLogin : style.navbarLogin} >
