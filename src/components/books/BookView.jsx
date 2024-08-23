@@ -96,7 +96,9 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
             <p><span style={{fontWeight: 'bolder'}}>Publishing year:</span> {book.publishedYear}</p>
             <p><span style={{fontWeight: 'bolder'}}>Price: </span> {book.price}</p>
             <div className='operation-btn-container'>
+            <div className={style.pickerContainer}>
             <QuantityPicker min={1} max={10} value={value} setValue={setValue}/>
+            </div>
             <motion.button 
             className={style.addToFavsBtn}
             onClick={handleFavs}

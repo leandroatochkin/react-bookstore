@@ -9,8 +9,7 @@
     .bookView{
         height: 60%;
         width: 100%;
-
-        background-color: white;
+        background-color: transparent;
         color: var(--dark-text);
         border-radius: 32px;
         display: flex;
@@ -31,17 +30,22 @@
       }
       
       .modalBookImage{
-        width: 60%;
+        width: 100%;
         height: 100% !important;
-        border-radius: 32px;
         object-fit: cover;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       
       .modalBookInfo{
+
         display: flex;
         flex-direction: column;
         padding-left: 2%;
+        z-index: 999;
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 65%, rgba(255,255,255,0) 100%);;
       }
       
       .bookModalDescription{
@@ -49,10 +53,10 @@
       }
       
       .operationBtnContainer{
-        display: flex;
-        justify-content: flex-end;
+        display: grid;
+        grid-template-columns:  repeat(2, 1fr);
         margin-right: 5%;
-        gap: 10px;
+        gap: 5px 5px;
       }
       
       .addToCartBtn{
@@ -61,6 +65,10 @@
       
       .addToFavsBtn{
         background: var(--green-gradient);
+      }
+
+      .pickerContainer{
+        column-span: 2;
       }
       
   }
