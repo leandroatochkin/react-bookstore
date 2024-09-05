@@ -7,30 +7,29 @@ import style from './categoriesview.module.css'
 import IconSearch from '../../utils/icons/SearchIcon';
 import SearchBar from '../../utils/SearchBar';
 import IconArrowRightSquareFill from '../../utils/icons/ArrowRight'
+import SimpleMessage from '../../utils/SimpleMessage.jsx';
 
 
 
 
-const CategoriesView = ({profileData, setGenre}) => {
-    const[visibleGenres, setVisibleGenres] = useState(20)
+const CategoriesView = ({profileData, setGenre, setShoppingCart}) => {
     const[searchValue, setSearchValue] = useState('')
     const[searchKey, setSearchKey] = useState('title')
     const[results, setResults] = useState([])
-
-    useEffect(()=>{
-        console.log(results)
-    },[results])
+    const[openModal, setOpenModal] = useState(false)
 
 const handleSearch = async () =>{
     try{
         const response = await fetch(`${index.search_book}?${searchKey}=${searchValue}`)
         if(!response.ok){
             console.error('error')
+            setOpenModal(true)
         }
         const result = await response.json()
         setResults(result)
         }catch(err){
             console.log(err)
+            setOpenModal(true)
     } 
 }
     
@@ -44,13 +43,17 @@ const handleClick = (genre) =>{
 
   return (
     <div className={style.categoriesDisplay}>
-        <SearchBar results={results} setSearchValue={setSearchValue} setSearchKey={setSearchKey} handleSearch={handleSearch}/>
+        <div className={style.categoriesHeader}></div>
+        {openModal  && <SimpleMessage setOpenModal={setOpenModal} message="There was an error retrieving books. Please try again later" />}
+
+        <div className={style.searchbarContainer}>
+        <SearchBar results={results} setSearchValue={setSearchValue} setSearchKey={setSearchKey} handleSearch={handleSearch} setShoppingCart={setShoppingCart} profileData={profileData}/>
+        </div>
         <div className={style.categoriesContainer}>
-        {bookGenres.slice(0, visibleGenres).map((genre, index) => (
+        {bookGenres.map((genre, index) => (
             <motion.div 
             key={index} 
             className={style.categoryButton} 
-            whileHover={{scale: 1.1}}
             >
                
                 <div className={style.categoryTitle} onClick={()=>handleClick(genre)}>
@@ -61,8 +64,7 @@ const handleClick = (genre) =>{
                 </motion.div>
                 )
             )}
-            <button onClick={()=>{visibleGenres === 20 ? setVisibleGenres(bookGenres.length - 1) : setVisibleGenres(20)}} className={style.moreButton}>
-                {visibleGenres === 20 ? 'More' : 'Less'}</button>
+            
         </div>
     </div>
   )

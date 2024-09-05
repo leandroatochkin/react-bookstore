@@ -47,8 +47,8 @@ const GenreView = ({profileData, setShoppingCart}) => {
           setFilteredData(filtered);
         }
       }, [data, genre]);
-
-
+    
+   
       useEffect(() => {
         // Toggle body scroll when modal is open/closed
         if (openBuyModal) {

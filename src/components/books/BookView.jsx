@@ -23,8 +23,7 @@ const BookView = ({profileData, book, setShoppingCart, setOpenBuyModal, origin})
     const[favSent, setFavSent] = useState(false)
     const [openMsg, setOpenMsg] = useState(false)
 
-    console.log(profileData._id)
-    console.log(book.id)
+
 
     useEffect(() => {
         setPushingItem(prevItem => ({

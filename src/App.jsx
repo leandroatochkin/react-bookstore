@@ -94,7 +94,7 @@ const App = () => {
             <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setResponse={setResponse} setProfileData={setProfileData} setNewUserData={setNewUserData} pageLocation={pageLocation} />
             <Routes>
               <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
-              <Route path="/categories" element={<CategoriesView profileData={profileData} setGenre={setGenre} />} />
+              <Route path="/categories" element={<CategoriesView profileData={profileData} setGenre={setGenre} setShoppingCart={setShoppingCart}/>} />
               <Route path="/categories/:genre" element={<GenreView profileData={profileData} setShoppingCart={setShoppingCart} />} />
               <Route path="/shopping-cart" element={<ShoppingCart shoppingCart={shoppingCart} onRemove={handleRemoveFromCart} isLoggedIn={isLoggedIn} profileData={profileData} />} />
               <Route path="/user-profile" element={<UserProfile profileData={profileData} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn} setShoppingCart={setShoppingCart} />} />

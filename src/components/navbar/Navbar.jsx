@@ -25,10 +25,9 @@ const Navbar = ({
   const [error, setError] = useState('') 
   const [terms, setTerms] = useState(false)
   const [newUserData, setNewUserDataState] = useState(null)
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
   const navigate = useNavigate();
 
-  console.log(pageLocation)
 
   useEffect(() => {
     if (!terms || !newUserData) return

@@ -43,3 +43,51 @@
     bottom: 1%;
   }
   
+  @media only screen and (max-width: 640px){
+    .shoppingCartDisplay{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      background-color: white;
+      height: 100vh;
+      width: 100vw;
+    }
+  
+  .shoppingCartCard{
+      background-color: white;
+      color: var(--dark-text);
+      margin: 2%;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 32px;
+    }
+  
+  .shoppingCartCardInfo{
+      margin-left: 2%;
+    }
+     
+  .shoppingCartCardImg {
+      height: 400px;
+      width: 280px;
+      border-radius: 32px 32px 0 0;
+    }
+    
+  .shoppingCartCardBottomContainer{
+      display: flex;
+      justify-content: space-between;
+    }
+    
+  .removeFromCart{
+      color: var(--dark-text);
+      border-radius: 40%;
+      background-color: transparent;
+    }
+    
+  .checkoutBtn{
+      position: absolute;
+      height: 80px;
+      background: var(--orange-gradient);
+      right: 1%;
+      bottom: 1%;
+    }
+  }
