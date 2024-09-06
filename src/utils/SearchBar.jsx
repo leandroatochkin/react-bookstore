@@ -12,10 +12,6 @@ const SearchBar = ({ results, setSearchValue, setSearchKey, handleSearch, setSho
         setOpenBuyModal(true);
     };
 
-    useEffect(() => {
-        console.log(result);
-    }, [result]);
-
     return (
         <div className={style.categoriesSearchbarContainer}>
             {(openBuyModal && result) && <BookView book={result[0]} setOpenBuyModal={setOpenBuyModal} setShoppingCart={setShoppingCart} profileData={profileData} />}

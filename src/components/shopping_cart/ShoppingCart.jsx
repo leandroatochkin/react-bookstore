@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { index } from '../../utils/endpointIndex.js'
 import { debounce } from '../../utils/utils';
 import CheckoutButton from './CheckoutButton';
@@ -8,8 +9,12 @@ import style from './shoppingcart.module.css'
 
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
-  const [sessionId, setSessionId] = useState('');
-  console.log(profileData)
+  const [sessionId, setSessionId] = useState(''); 
+
+
+  const click = ()=>{console.log('click')}
+
+
   const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
     try {
 
@@ -41,16 +46,12 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
     }
   }, 100), []);
 
-  useEffect(() => {
-    console.log(profileData.user._id);
-  }, [profileData]);
 
   useEffect(() => {
     if (!isLoggedIn || shoppingCart.length === 0) return;
 
     const createCheckoutSession = async () => {
       try {
-        console.log('Creating checkout session...');
         const response = await fetch(index.stripe, {
           method: 'POST',
           headers: {
@@ -70,7 +71,6 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
         }
 
         const data = await response.json();
-        console.log('Checkout session created:', data);
         setSessionId(data.id);
 
         // Update the user's purchases in the database
@@ -83,6 +83,7 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
     createCheckoutSession();
   }, [shoppingCart, isLoggedIn, profileData, updatePurchasesInDatabase]);
 
+  
   return (
     <div className={style.shoppingCartDisplay}>
       {shoppingCart.length > 0 ? (
@@ -119,9 +120,18 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
           </div>
         ))
       ) : (
-        ''
+        <div className={style.starsPlaceholder}>
+          <div className={style.menuContainer}>
+            <div>
+              <h2 style={{color: '#edfa61'}}>You don't have any items yet...</h2>
+              
+                <Link to='/categories'>Shop Now</Link> 
+             
+            </div>
+          </div>
+        </div>
       )}
-      {sessionId ? <CheckoutButton sessionId={sessionId} /> : <div className='loader-container'><Spinner /></div>}
+      {/* {sessionId ? <CheckoutButton sessionId={sessionId} /> : <div className='loader-container'><Spinner /></div>} */}
     </div>
   );
 };
