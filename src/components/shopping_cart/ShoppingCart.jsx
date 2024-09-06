@@ -1,23 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { index } from '../../utils/endpointIndex.js'
+import { index } from '../../utils/endpointIndex.js';
 import { debounce } from '../../utils/utils';
 import CheckoutButton from './CheckoutButton';
 import { motion } from 'framer-motion';
-import { Spinner } from '@nextui-org/spinner';
-import style from './shoppingcart.module.css'
+import style from './shoppingcart.module.css';
 
 
 const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
   const [sessionId, setSessionId] = useState(''); 
 
-
-  const click = ()=>{console.log('click')}
-
-
-  const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {//Added a debounce function to delay the execution bc it was execution twice when a purchase was made
+  const updatePurchasesInDatabase = useCallback(debounce(async (items, userId) => {
     try {
-
       const response = await fetch(index.update_purchases, {
         method: 'PUT',
         headers: {
@@ -85,17 +79,22 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
 
   
   return (
-    <div className={style.shoppingCartDisplay}>
+    <div className={style.shoppingCartDisplay} aria-label="Shopping Cart Overview">
       {shoppingCart.length > 0 ? (
-        shoppingCart.map((item, i) => (
-          <div key={i} className={style.shoppingCartCard}>
-            <img src={item.cover} alt={item.title} className={style.shoppingCartCardImg}/>
+        <div className={style.shoppingCartContainer}>
+        {shoppingCart.map((item, i) => (
+          <div key={i} className={style.shoppingCartCard} aria-label={`Item: ${item.title}`}>
+            <img src={item.cover} alt={`Cover of ${item.title}`} className={style.shoppingCartCardImg}/>
             <div className={style.shoppingCartCardInfo}>
-              <h2>{item.title.length < 20 ? item.title : item.title.slice(0,19) + '...'}</h2>
-              <p>Quantity: {item.quantity}</p>
-              <div className={style.shoppingCartCardBottomContainer}>
-                <p>Price: ${item.price}</p>
-                <motion.button className={style.removeFromCart} onClick={() => onRemove(item.id)}>
+              <h2 aria-label={`Title: ${item.title}`}>{item.title.length < 20 ? item.title : item.title.slice(0, 19) + '...'}</h2>
+              <p aria-label={`Quantity: ${item.quantity}`}>Quantity: {item.quantity}</p>
+              <div className={style.shoppingCartCardBottomContainer} aria-label="Item price and remove button">
+                <p aria-label={`Price: $${item.price}`}>Price: ${item.price}</p>
+                <motion.button 
+                  className={style.removeFromCart} 
+                  onClick={() => onRemove(item.id)} 
+                  aria-label={`Remove ${item.title} from cart`}
+                >
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="28" 
@@ -103,10 +102,11 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
                     viewBox="0 0 24 24" 
                     fill="none" 
                     stroke="currentColor" 
-                    stroke-width="1.25" 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
+                    strokeWidth="1.25" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
                     className="lucide lucide-trash-2"
+                    aria-hidden="true"
                   >
                     <path d="M3 6h18"/>
                     <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
@@ -118,20 +118,26 @@ const ShoppingCart = ({ shoppingCart, onRemove, isLoggedIn, profileData }) => {
               </div>
             </div>
           </div>
-        ))
+            
+        ))}
+        </div>
       ) : (
-        <div className={style.starsPlaceholder}>
+        <div className={style.starsPlaceholder} aria-label="Empty cart message">
           <div className={style.menuContainer}>
             <div>
-              <h2 style={{color: '#edfa61'}}>You don't have any items yet...</h2>
-              
-                <Link to='/categories'>Shop Now</Link> 
-             
+              <h2 aria-label="No items in cart">You don't have any items yet...</h2>
+              <motion.div 
+                className={style.shopButton} 
+                whileTap={{ scale: 0.95 }} 
+                aria-label="Shop Now button"
+              >
+                <Link to='/categories' aria-label="Go to categories to shop">Shop Now</Link>
+              </motion.div>
             </div>
           </div>
         </div>
       )}
-      {/* {sessionId ? <CheckoutButton sessionId={sessionId} /> : <div className='loader-container'><Spinner /></div>} */}
+      {sessionId && <CheckoutButton sessionId={sessionId} aria-label="Proceed to checkout button" />}
     </div>
   );
 };

@@ -25,11 +25,6 @@ const App = () => {
   const location = useLocation();
 
 
-
-  useEffect(() => {
-    console.log(profileData);
-  }, [profileData]);
-
   useEffect(()=>{
         switch(location.pathname){
           case '/':
@@ -56,7 +51,7 @@ const App = () => {
 
         }
 
-        console.log(pageLocation)
+        
   },[pageLocation, location.pathname])
 
   useEffect(() => {

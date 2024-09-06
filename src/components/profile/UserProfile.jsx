@@ -15,6 +15,8 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
   const [view, setView] = useState('events');
   const navigate = useNavigate();
 
+  const defaultProfilePicture = '../../../public/no-pic.jpg'
+
   useEffect(() => {
     if (profileData && profileData.email) {
       fetch(`${index.check_user}/${profileData.email}`, {
@@ -63,18 +65,29 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
   };
 
   return (
-    <div className={styles.userContainer}>
+    <div className={styles.userContainer} aria-label="User profile page">
       {profileData && profileData.user ? (
         <>
           <div className={styles.leftSide}>
-            <Suspense fallback={<MoonLoader />}>
-            <div className={styles.userCard}>
-              <img src={profileData.user.picture} alt="User Profile" className={styles.userImg} />
-              <div className={styles.cardRight}>
-              <h2>Hi!, {profileData.user.name}</h2>
-              <button onClick={handleLogOut} className={styles.logoutBtn}>Log Out</button>
+            <Suspense fallback={<MoonLoader aria-label="Loading user profile" />}>
+              <div className={styles.userCard} aria-label="User profile card">
+                <img
+                  src={profileData.user.picture ?  profileData.user.picture : defaultProfilePicture}
+                  alt="User Profile"
+                  className={styles.userImg}
+                  aria-label="User profile picture"
+                />
+                <div className={styles.cardRight} aria-label="User greeting and log out button">
+                  <h2>Hi!, {profileData.user.name}</h2>
+                  <button
+                    onClick={handleLogOut}
+                    className={styles.logoutBtn}
+                    aria-label="Log out button"
+                  >
+                    Log Out
+                  </button>
+                </div>
               </div>
-            </div>
             </Suspense>
             <div>
               <VerticalMenu
@@ -85,18 +98,19 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
                   { name: "Favorites", value: 'favorites' }
                 ]}
                 setView={setView}
+                aria-label="Vertical navigation menu for profile sections"
               />
             </div>
           </div>
-          <div className={styles.rightSide}>
-            {view === 'events' && <Events profile={profileData.user} />}
-            {view === 'purchases' && <Purchases profile={profileData.user} />}
-            {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData}/>}
-            {view === 'favorites' && <Favorites user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData} setShoppingCart={setShoppingCart}/>}
+          <div className={styles.rightSide} aria-label="Profile content display area">
+            {view === 'events' && <Events profile={profileData.user} aria-label="User events view" />}
+            {view === 'purchases' && <Purchases profile={profileData.user} aria-label="User purchases view" />}
+            {view === 'settings' && <Settings user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData} aria-label="User settings view" />}
+            {view === 'favorites' && <Favorites user={profileData.user} setIsLoggedIn={setIsLoggedIn} updateProfileData={updateProfileData} setShoppingCart={setShoppingCart} aria-label="User favorites view" />}
           </div>
         </>
       ) : (
-        <p><Spinner /></p>
+        <p aria-label="Loading spinner"><Spinner /></p>
       )}
     </div>
   );

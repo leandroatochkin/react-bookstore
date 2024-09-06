@@ -19,17 +19,18 @@
 
 @media only screen and (max-width: 640px) {
   .userContainer {
+    padding-top: 30%;
     height: 100vh;
     width: 100vw;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #AFEEEE;
-    margin-top: 30%;
   }
 
 
   .userCard {
+   
     width: 100vw;
     height: 30vh;
     left: 0;
