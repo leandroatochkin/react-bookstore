@@ -16,6 +16,7 @@ const deleteUserRoute = require('./api/routes/deleteUser.cjs')
 const searchBooks = require('./api/routes/searchBooks.cjs')
 const addToFavsRoute = require('./api/routes/addToFavs.cjs')
 const findUserFavs = require('./api/routes/findUserFavs.cjs')
+const deleteFav = require('./api/routes/deleteFav.cjs')
 
 app.use(express.json()); 
 app.use(express.static('public'));
@@ -71,6 +72,7 @@ app.use('/api/delete_user', deleteUserRoute)
 app.use('/api/search', searchBooks)
 app.use('/api/add_to_favs', addToFavsRoute)
 app.use('/api/find_user_favs', findUserFavs)
+app.use('/api/delete_fav', deleteFav)
 
 
 

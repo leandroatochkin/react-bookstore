@@ -20,7 +20,7 @@ const VerticalMenu = ({ elements, setView }) => {
                 whileHover={{
                   backgroundColor: 'white',
                   color: 'black',
-                  scale: 1.05,
+                  scale: 1.02,
                   borderRadius: 8,
                   transition: { duration: 0.2, ease: easeIn },
                 }}
@@ -31,7 +31,7 @@ const VerticalMenu = ({ elements, setView }) => {
                 <a className={styles.link} href="#" aria-label={element.name}>
                   {element.name}
                 </a>
-                <IconArrowRightSquareFill aria-hidden="true" />
+                <IconArrowRightSquareFill aria-hidden="true" className={styles.arrow}/>
               </motion.li>
               <div className={styles.separator} aria-hidden="true"></div>
             </React.Fragment>

@@ -56,3 +56,61 @@
     background: var(--orange-gradient);
   }
 }
+
+@media only screen and (min-width: 641px){
+  .userContainer {
+    padding-top: 10%;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #AFEEEE;
+    overflow: hidden;
+  }
+
+  .leftSide{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  .rightSide{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .userCard { 
+    width: 50vw;
+    height: 30vh;
+    left: 0;
+    margin: 0;
+    background-color: darkslategray;
+    display: flex;
+    justify-content: space-around ;
+    box-shadow: 2px 2px 2px rgba(0,0,0, 0.2)
+  }
+
+  .userImg{
+    border-radius: 15px;
+    width: 50%;
+  }
+
+  .cardRight{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-right: 0;
+  }
+
+  .logoutBtn{
+    grid-column: 2;
+    gap: 0;
+    background: var(--orange-gradient);
+  }
+}

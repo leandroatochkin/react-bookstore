@@ -1,11 +1,12 @@
 import React from 'react'
 import { useEffect, useState, Suspense } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { index } from '../../utils/endpointIndex.js';
 import BookView from './BookView';
 import { MoonLoader } from 'react-spinners';
-import style from './GenreView.module.css'
+import style from './GenreView.module.css';
+import { fetchBooks } from '../../utils/APIfunctions.js';
 
 const GenreView = ({profileData, setShoppingCart}) => {
     const [data, setData] = useState(null);
@@ -17,28 +18,15 @@ const GenreView = ({profileData, setShoppingCart}) => {
     
     const {genre} = useParams()
 
+    const navigate = useNavigate()
+
     const handleOpenBuyModal = (book) =>{
         openBuyModal === false ? setOpenBuyModal(true) : setOpenBuyModal(false)
         setSelectedBook(book)
       }
   
     useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(index.books);
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const result = await response.json();
-          setData(result);
-        } catch (error) {
-          setError(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchData();
+      fetchBooks(setData, setError, setLoading) 
     }, []);
 
     useEffect(() => {
@@ -79,7 +67,18 @@ const GenreView = ({profileData, setShoppingCart}) => {
       
 
   return (
-    <div className={style.cardsContainer} style={{marginTop: filteredData.length > 5 ? '10%' : ''}}>
+    <div className={style.alignContainer}>
+      <div className={style.cardsContainer}>
+      <motion.button
+      className={style.backButton} 
+      whileTap={{
+        scale: '0.95'
+      }}
+      onClick={()=>{
+        navigate('/categories')
+      }}>
+        Back
+      </motion.button>
         {openBuyModal && <BookView profileData={profileData.user} book={selectedBook} setShoppingCart={setShoppingCart} setOpenBuyModal={setOpenBuyModal}/>}
         {filteredData.map((book, index)=>(
             
@@ -101,7 +100,9 @@ const GenreView = ({profileData, setShoppingCart}) => {
             <p>Price: {book.price}</p>
             </motion.div>
         </motion.div>
-    ))}</div>
+    ))}
+    </div>
+    </div>
   )
 }
 

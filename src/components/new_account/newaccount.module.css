@@ -41,6 +41,8 @@
         margin-top: 0;
         font-size: 24px;
     font-weight: bolder;
+    color: #edfa61;
+      text-shadow: 2px 2px 5px rgba(82,14,63,1);
     }
     
     .info{

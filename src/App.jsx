@@ -24,6 +24,8 @@ const App = () => {
 
   const location = useLocation();
 
+ 
+
 
   useEffect(()=>{
         switch(location.pathname){
@@ -65,13 +67,17 @@ const App = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setIsLoggedIn(true);
-      const parsedUser = JSON.parse(storedUser);
-
-      setProfileData((prevData) => ({
-        ...prevData,
-        user: parsedUser,
-      }));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setIsLoggedIn(true);
+        setProfileData((prevData) => ({
+          ...prevData,
+          user: parsedUser,
+        }));
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+        localStorage.removeItem('user'); // Clear invalid data
+      }
     }
   }, []);
 

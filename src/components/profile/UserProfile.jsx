@@ -15,6 +15,8 @@ const UserProfile = ({ profileData, setProfileData, setIsLoggedIn, setShoppingCa
   const [view, setView] = useState('events');
   const navigate = useNavigate();
 
+
+  
   const defaultProfilePicture = '../../../public/no-pic.jpg'
 
   useEffect(() => {

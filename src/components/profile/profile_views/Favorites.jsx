@@ -1,43 +1,21 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import style from './favorites.module.css';
-import { index } from '../../../utils/endpointIndex.js';
 import BookView from '../../books/BookView';
 import {motion} from 'framer-motion'
 import { MoonLoader } from 'react-spinners';
+import { loadFavs, removeFav } from '../../../utils/APIfunctions.js';
+
 
 const Favorites = ({ user, setShoppingCart }) => {
   const [books, setBooks] = useState([]);
-  const [userFavs, setUserFavs] = useState([]);
   const [openBuyModal, setOpenBuyModal] = useState(false)
   const [selectedBook, setSelectedBook] = useState(null)
 
+  
 
-  useEffect(()=>{
-    console.log(selectedBook)
-  },[selectedBook])
 
   useEffect(() => {
-    if (user && user.favs && user.favs.length > 0) {
-      const fetchBooks = async () => {
-        const favs = user.favs.map(id => `${id}`).join(',');
-        try {
-          const endpoint = `${index.favorites}?ids=${favs}`
-          const response = await fetch(endpoint);
-          const data = await response.json();
-          setBooks(data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-
-      fetchBooks();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user && user.favs) {
-      setUserFavs(user.favs);
-    }
+    loadFavs(user, setBooks)
   }, [user]);
 
 
@@ -45,6 +23,20 @@ const Favorites = ({ user, setShoppingCart }) => {
     openBuyModal === false ? setOpenBuyModal(true) : setOpenBuyModal(false)
     setSelectedBook(book)
   }
+
+  const handleRemoveFromFavs =  async (user, book)  => {
+    if (!user) return;
+
+    // Remove the book from the backend
+    const success =  removeFav(user, book);
+
+    if (success) {
+      // Optimistically update the UI by removing the book from the `books` state
+      setBooks(prevBooks => prevBooks.filter(b => b._id !== book._id));
+    }
+    
+  }
+
 
 
   return (
@@ -58,23 +50,39 @@ const Favorites = ({ user, setShoppingCart }) => {
           <div className={style.favoritesList}>
           <h2 className={style.title}>Favorites</h2>
             <div className={style.separator}></div>
+            <div className={style.display}>
             {books.map((book, index) => (
               <div key={index} className={style.bookContainer}>
                 <div className={style.bookImageContainer}>
                   <img src={book.coverImageUrl} alt={book.title} className={style.bookImage} />
                 </div>
+                <div className={style.rightContainer}>
                 <div className={style.bookInfoContainer}>
                   <h3>{book.title}</h3>
                   <p>{book.author}</p>
                 </div>
-                <motion.button
+                 <div className={style.buttonContainer}>
+                 <motion.button
                  onClick={()=>handleOpenBuyModal(book)}
-                 whileHover={{scale: 1.05}}
+                 whileHover={{scale: 1.05}} 
                  whileTap={{scale: 0.85}}
                  className={style.button}
-                 > buy</motion.button>    
-              </div>
+                 > buy</motion.button>
+                 <motion.button
+                onClick={()=>handleRemoveFromFavs(user,book)}
+             
+                 whileHover={{scale: 1.05}} 
+                 whileTap={{scale: 0.85}}
+                 className={style.button}
+                 > remove</motion.button>
+                 
+                 </div>
+                 </div>
+                 
+                 </div>     
+            
             ))}
+            </div>
           </div>
           </>
         ) : (

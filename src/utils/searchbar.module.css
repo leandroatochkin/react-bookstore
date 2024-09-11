@@ -4,7 +4,7 @@
     .categoriesSearchbarContainer {
         width: 100vw;
         display: flex;
-        flex-direction: row; /* Stack children vertically */
+        flex-direction: column; /* Stack children vertically */
         justify-content: center;
         align-items: center;
         gap: 1%;
@@ -79,6 +79,11 @@
 
     .resultLine:hover{
         background-color: cadetblue;
+    }
+
+    .closeButton{
+        width: 100%;
+        background-color: transparent;
     }
   
 }

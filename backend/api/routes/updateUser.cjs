@@ -9,22 +9,26 @@ router.use(express.json());
 router.put('/user/:id', async (req, res) => {
   const db = getDb();
   const { id } = req.params;
-  const { username, name, address, city, country, phone, picture } = req.body;
-  const objectId = new ObjectId(id)
 
+  // Validate ObjectId format
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'Invalid user ID' });
+  }
+
+  const { username, name, address, city, country, phone, picture } = req.body;
+  const objectId = new ObjectId(id);
 
   try {
-
-
     // Only update fields that are provided
     const updateFields = {};
-    
+
+    if (username) {
       const existingUser = await db.collection('user_database').findOne({ username });
-      if (existingUser) {
+      if (existingUser && existingUser._id.toString() !== id) {
         return res.status(400).send({ message: 'Username already exists' });
       }
       updateFields.username = username;
-    
+    }
 
     if (name) updateFields.name = name;
     if (address) updateFields.address = address;
@@ -39,11 +43,11 @@ router.put('/user/:id', async (req, res) => {
       { returnDocument: 'after' }
     );
 
-    if (!updatedUser) {
+    if (!updatedUser.value) {
       return res.status(404).send({ message: 'User not found' });
     }
 
-    res.send(updatedUser);
+    res.send(updatedUser.value);
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).send({ message: 'Error updating user', error: error.message });
@@ -51,3 +55,4 @@ router.put('/user/:id', async (req, res) => {
 });
 
 module.exports = router;
+  

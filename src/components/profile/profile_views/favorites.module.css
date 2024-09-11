@@ -17,63 +17,6 @@
     };
   }
 
-.favoritesContainer{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.favoritesList{
-
-    top: 15%;
-    width: 59%;
-    max-height: 79%;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    background-color: transparent;
-    backdrop-filter: blur(20px);
-    background-image: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.3),
-      rgba(0,0,0, 0.2)
-    );
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
-    padding: 1%;
-}
-
-.bookContainer{
-    display: flex;
-    align-items: center;
-    gap: 2%;
-}
-
-.bookImage{
-    height: 150px !important;
-    width: 100px !important;
-    border-radius: 16px;
-}
-
-.bookInfoContainer{
-    width: 30%;
-}
-
-.button{
-    background: var(--orange-gradient);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.separator{
-    width: 90%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-    margin: 2% auto;
-}
 
 @media only screen and (max-width: 640px) {
     .favoritesContainer {
@@ -84,6 +27,45 @@
       align-items: center;
       padding: 0;
       margin: 0;
+    }
+
+    .display{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .bookContainer{
+      display: flex;
+      flex-direction: row;
+      margin: 1%;
+    }
+
+    .bookImageContainer{
+      height: 240px;
+      width: 160px;
+      
+    }
+
+    .bookImage{
+      height: 240px;
+      width: 160px;
+      border-radius: 16px;
+    }
+
+    .rightContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .bookInfoContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   
     .favoritesList {
@@ -97,12 +79,21 @@
     }
   
     .buttonsContainer {
-      justify-content: center;
+      width: 100%;
+      justify-content: space-between;
       gap: 5px;
     }
   
     .acceptButton {
       padding: 10px;
+    }
+
+    .buttonContainer{
+      display: flex;  
+    }
+
+    .button{
+      background: var(--orange-gradient) ;
     }
   }
   
