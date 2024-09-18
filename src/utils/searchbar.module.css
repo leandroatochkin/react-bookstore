@@ -87,3 +87,187 @@
     }
   
 }
+
+@media only screen and (min-width: 641px){
+    .categoriesSearchbarContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+        justify-content: center;
+        align-items: center;
+        gap: 1%;
+        background-color: white;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0;
+    }
+
+    .container{
+        width: 100%;
+    }
+    
+    .categoriesSearchbar {
+        width: 85%;
+        height: 50px;
+        border-radius: 50px;
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+   
+    }
+    
+    .select {
+        height: 50px;
+        width: 100px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+    }
+    
+    .categoriesSearchButton {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #724CF9;
+    }
+    
+    .resultsContainer {
+        width: 100%; /* Match the width of the search bar */
+        margin-top: 10px; /* Space between search bar and results */
+        z-index: 5;
+        background-color: #724CF9;
+        padding: 15px;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visibility */
+    }
+
+    .container{
+        display: flex;
+    }
+    
+    
+    .li {
+        list-style: none;
+        margin: 0;
+        padding: 10px 0;
+        font-family: sofia-pro, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+    .resultLine{
+        font-size: 3rem;
+        transition: all 0.2s ease-in;
+        cursor: pointer;
+    }
+
+    .resultLine:hover{
+        background-color: cadetblue;
+    }
+
+    .closeButton{
+        width: 100%;
+        background-color: transparent;
+    }
+  
+}
+
+@media only screen and (min-width: 1025px){
+    .categoriesSearchbarContainer {
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+        justify-content: center;
+        align-items: center;
+        gap: 1%;
+        background-color: white;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0;
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .categoriesSearchbar {
+        width: 85%;
+        height: 100%;
+        border-radius: 50px;
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        font-size: 3rem;
+   
+    }
+    
+    .select {
+        height: 100%;
+        width: 5%;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+    }
+    
+    .categoriesSearchButton {
+        height: 100%;
+        width: 5%;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #724CF9;
+    }
+    
+    .resultsContainer {
+        position: absolute;
+        top: 18%;
+        width: 80%; /* Match the width of the search bar */
+        margin-top: 10px; /* Space between search bar and results */
+        z-index: 5;
+        background-color: #724CF9;
+        padding: 15px;
+        border-radius: 32px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visibility */
+        font-size: 3rem;
+    }
+
+    .container{
+        display: flex;
+    }
+    
+    
+    .li {
+        list-style: none;
+        margin: 0;
+        padding: 10px 0;
+        font-weight: 400;
+        font-style: normal;
+        color: #fff;
+        cursor: pointer;
+      }
+
+    .resultLine{
+        font-size: 3rem;
+        transition: all 0.2s ease-in;
+        cursor: pointer;
+    }
+
+    .resultLine:hover{
+        background-color: cadetblue;
+        border-radius: 16px;
+    }
+
+    .closeButton{
+        width: 100%;
+        background-color: transparent;
+    }
+}

@@ -1,34 +1,31 @@
-
-
-
+/* Shared Styles */
 .animationText{
     text-align: center;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    font-size: 4em;
+    font-size: 4rem;
     font-weight: 700;
     letter-spacing: -1px;
     line-height: 1.2;
-    text-align: center;
     margin: 100px 0 40px;
     color: #F896D8;
 }
 
 @keyframes float {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-20px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
 }
 
-
+/* Styles for Mobile (max-width: 640px) */
 @media only screen and (max-width: 640px){
-    .homeContainer{
-        background-image: url('../../assets/background.png');
+    .container{
+        background-image: url('../../assets/images/sky.jpg');
         background-size: cover;
         height: 100vh;
         width: 100vw;
@@ -36,13 +33,26 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-      }
-
-      .animationText{
-       margin-left: 2%;
     }
 
-      .topUL{
+    .topLayer{
+        background-image: url('../../assets/images/nebula.png');
+        background-size: cover;
+        background-color: transparent;
+    }
+
+    .bottomContainer{
+        background-image: url('../../assets/images/clouds.png');
+        background-size: 100vw;
+        background-color: transparent;
+    }
+
+    .animationText{
+        margin-left: 2%;
+        font-size: 2rem; /* Smaller text on mobile */
+    }
+
+    .topUL{
         list-style: none;
         display: flex;
         flex-direction: row;
@@ -52,7 +62,7 @@
         gap: 10%;
         height: 100%;
     }
-    
+
     .linkLI{
         background-color: white;
         width: 200px;
@@ -67,8 +77,156 @@
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
 
+    .logo{
+        animation: float 6s ease-in-out infinite;
+    }
+}
+
+/* Styles for Tablets and Small Desktops (min-width: 641px and max-width: 1024px) */
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+    .container{
+        background-image: url('../../assets/images/sky.jpg');
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .textContainer{
+        width: 50%;
+    }
+
+    .animationText{
+        margin-left: 2%;
+        font-size: 3rem;
+    }
+
+    .topUL{
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 10%;
+        margin-right: 5%;
+        height: 100%;
+    }
+
+    .bottomContainer{
+        height: 100vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: -500px;
+    }
+
+    .linkLI{
+        background-color: white;
+        width: 200px;
+        height: 50px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bolder;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .logoContainer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .logo{
         animation: float 6s ease-in-out infinite;
+    }
+}
+
+/* Styles for Large Desktops (min-width: 1025px) */
+@media only screen and (min-width: 1025px){
+    .container{
+        background-image: url('../../assets/images/sky.jpg');
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .textContainer{
+        width: 60%;
+    }
+
+    .animationText{
+        margin-left: 2%;
+        font-size: 15rem; /* Larger font size for big screens */
+    }
+
+    .link{
+        font-size: 10rem;
+    }
+
+    .topUL{
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 8%;
+        margin-right: 5%;
+        height: 100%;
+        gap: 5%; /* Smaller gap for larger screen */
+    }
+
+    .bottomContainer{
+        height: 100vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: -500px;
+    }
+
+    .linkLI{
+        background-color: white;
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bolder;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    .linkLI:hover{
+        box-shadow:
+        0 0 15px 7px #fff,  /* inner white */
+        0 0 25px 15px #fa0, 
+        0 0 35px 20px #ff6a00;
+    }
+
+    .logoContainer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo{
+        animation: float 6s ease-in-out infinite;
+        height: 45vh;
+        width: 30vw;
+    }
+
+    .rocket{
+        height: 55vh;
+        width: 30vw;
     }
 }

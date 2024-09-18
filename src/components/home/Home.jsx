@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import style from './home.module.css';
 import { motion } from 'framer-motion';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import rocket from '../../assets/images/fire-space.gif';
+import logo from '../../assets/images/logo_logoonly.png'
+
 
 const Home = ({ isLoggedIn }) => {
   const [showAbout, setShowAbout] = useState(false);
   const [animateText, setAnimateText] = useState(false);
 
-  const nebula = '../../../public/nebula.png';
-  const clouds = '../../../public/clouds.png';
-  const rocket = '../../../public/fire-space.gif';
-  const sky = '../../../public/sky.jpg';
+
 
   const animationText = "All the books you're looking for, right here...".split(' ');
 
@@ -46,28 +46,17 @@ const Home = ({ isLoggedIn }) => {
 
   return (
     <div
-      style={{
-        backgroundImage: `url(${sky})`,
-        backgroundSize: 'cover',
-        height: '100%',
-        width: '100%',
-        position: 'absolute',
-        top: '0',
-      }}
       aria-label="Home page background"
+      className={style.container}
     >
       <Parallax pages={3} ref={ref} aria-label="Parallax scrolling sections">
         <ParallaxLayer
           offset={0}
           speed={1}
           factor={2}
-          style={{
-            backgroundImage: `url(${nebula})`,
-            backgroundSize: 'cover',
-            backgroundColor: 'transparent',
-          }}
           onLoad={() => ref.current.scrollTo(3)}
           aria-label="Nebula background layer"
+          className={style.topLayer}
         >
           <div className={style.textContainer} aria-label="Main animated text">
             {animationText.map((el, i) => (
@@ -94,10 +83,11 @@ const Home = ({ isLoggedIn }) => {
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}
                 animate={animateText ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 2.0 }}
+                transition={{ duration: 0.5 }}
                 aria-label="Browse books link"
+              
               >
-                <Link to="/categories" aria-label="Browse books">Browse Books</Link>
+                <Link to="/categories" aria-label="Browse books" className={style.link}>Browse Books</Link>
               </motion.li>
 
               <motion.li
@@ -106,29 +96,27 @@ const Home = ({ isLoggedIn }) => {
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}
                 animate={animateText ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 2.0 }}
+                transition={{ duration: 0.5 }}
                 aria-label={isLoggedIn ? "Go to user profile" : "Login link"}
               >
-                {isLoggedIn ? <Link to="/user-profile">Profile</Link> : <Link to="/login">Log in</Link>}
+                {isLoggedIn ? <Link to="/user-profile" className={style.link}>Profile</Link> : <Link to="/login" className={style.link}>Log in</Link>}
               </motion.li>
             </ul>
           </div>
-          <img src="../../../public/logo_logoonly.png" className={style.logo} alt="Website logo" aria-hidden="true" />
+          <div className={style.logoContainer}>
+          <img src={logo} className={style.logo} alt="Website logo" aria-hidden="true" />
+          </div>
         </ParallaxLayer>
         <ParallaxLayer
           offset={2}
           speed={1}
           factor={4}
-          style={{
-            backgroundImage: `url(${clouds})`,
-            backgroundSize: '100vh',
-            backgroundColor: 'transparent',
-          }}
+          className={style.bottomContainer}
           aria-label="Clouds background layer"
         />
 
         <ParallaxLayer sticky={{ start: 0.9, end: 2.5 }} style={{ textAlign: 'center' }} aria-label="Rocket animation">
-          <img src={`${rocket}`} alt="Rocket flying animation" />
+          <img src={`${rocket}`} alt="Rocket flying animation"  className={style.rocket}/>
         </ParallaxLayer>
       </Parallax>
     </div>

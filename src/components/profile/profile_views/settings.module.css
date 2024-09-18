@@ -282,3 +282,85 @@
             text-shadow: 2px 2px 5px rgba(82,14,63,1);
           }
   }
+
+  @media only screen and (min-width: 1025px){
+    .settingsContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 95%;
+        font-size: 3rem;
+      }
+    
+      .settingsList {
+        width: 100%;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        backdrop-filter: blur(20px);
+        background-color: darkslategray;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        padding: 1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .dataDisplayClosed{
+          gap: 10%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+  
+      .dataLinesClosed{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 30%;
+      }
+  
+      .editCountry{
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+      }
+  
+      .editBtn{
+          width: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(10deg, #e70909, #eb6565);
+      }
+  
+      
+  
+      .buttonsContainer {
+        justify-content: center;
+        gap: 5px;
+      }
+    
+      .acceptButton {
+        padding: 10px;
+      }
+  
+      .deleteAccountContainer{
+          border: 20px dashed #ff6550;
+          border-radius: 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;  
+          align-items: center;
+        }
+
+        h2{
+            color: #edfa61;
+            text-shadow: 2px 2px 5px rgba(82,14,63,1);
+          }
+  }

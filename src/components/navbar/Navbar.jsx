@@ -10,6 +10,8 @@ import style from './navbar.module.css';
 import { motion } from 'framer-motion';
 import { PanelTopOpen, PanelTopClose, LogOut } from 'lucide-react';
 import { registerUser, decodeGoogleResponse } from '../../utils/APIfunctions.js';
+import logo from '../../assets/images/logo_logoonly.png'
+import logo_horizontal from '../../assets/images/logo_horizontal.png'
 
 const Navbar = ({
   isLoggedIn,
@@ -78,14 +80,14 @@ const Navbar = ({
         <Link to="/" aria-label="Go to home page">
           {collapsed ? (
             <img
-              src={'../../../public/logo_logoonly.png'}
+              src={logo}
               className={style.logoSmall}
               alt="Small logo"
               aria-label="Small logo"
             />
           ) : (
             <img
-              src={'../../../public/logo_horizontal.png'}
+              src={logo_horizontal}
               className={style.logoBig}
               alt="Large logo"
               aria-label="Large logo"
@@ -166,7 +168,7 @@ const Navbar = ({
       {isLoggedIn ? (
         <div className={collapsed ? style.collapsedNavbarLogout : style.navbarLogout}>
           <button onClick={handleLogOut} className={style.logoutBtn} aria-label="Log out">
-            <LogOut />
+            <LogOut size={'8rem'}/>
           </button>
         </div>
       ) : (
@@ -176,6 +178,7 @@ const Navbar = ({
               onSuccess={responseMessage}
               onError={errorMessage}
               scope={index.google_scope}
+              className={style.googleLogin}
               aria-label="Google login button"
             />
           </div>

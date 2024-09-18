@@ -14,9 +14,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50px;
+        width: 150px;
         height: 50px;
-        margin-right: 5%;
+        margin-right: 0;
         color: white;
         border: none;
         background-color: transparent;
@@ -293,3 +293,137 @@
     }
 
   }
+
+  @media only screen and (min-width: 1025px){
+    .navbar{
+      backdrop-filter: blur(20px);
+      background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(0,0,0, 0.2)
+      );
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      width: 100vw;
+      height: 10%;
+      top: 0;
+      position: fixed !important;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      z-index: 5 ;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .profileNavbar{
+      background-color: darkslategray;
+      color: white;
+      width: 100vw;
+      height: 10%;
+      position: fixed !important;
+      display: flex;
+      flex-direction: row;
+      z-index: 5;
+      transition: background-color 0.2s ease-out;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .logoutBtn{
+    background-color: transparent;
+    width: 100px;
+  }
+
+    .collapseBtn{
+      display: none;
+    }
+
+  
+
+    .logoSmall{
+      height: 90px;
+      width: 120px;
+    }
+
+
+    .logoBig{
+      height: 10vh;
+      width: 15vw;
+      top: 2%;
+      left: 0;
+    }
+
+   
+
+    
+
+    .topContainer{
+      display: flex;
+  
+  }
+
+
+
+    .ul {
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      width: 50%;
+      list-style: none;
+    }
+
+    .li{
+      margin-left: 0;
+      height: auto;
+      width: 120%;
+      border-radius: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .link{
+      font-weight: bolder;
+      font-size: 4rem;
+      margin-left: 5%;
+    }
+
+    .link:hover{
+      color: white
+    }
+
+    .li:hover{
+      background-color: lightblue;
+      border-radius: 12px;
+      padding: 3%;
+      cursor: pointer;
+    }
+
+    .navbarLogin{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      margin-right: 0;
+      width: 30%;
+      font-size: 3rem;
+    }
+    .googleBtnContainer{
+      height: 10vh;
+      width: 30vw;
+    }
+    .googleBtnContainer > button{
+      height: 10vh;
+      width: 30vw;
+    }
+
+   
+
+    .navbarLogout{
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 5%;
+    }
+
+  }
+  

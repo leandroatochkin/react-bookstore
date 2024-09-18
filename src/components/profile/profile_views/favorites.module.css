@@ -95,5 +95,166 @@
     .button{
       background: var(--orange-gradient) ;
     }
+    .titleContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px
   }
   
+  }
+  
+  @media only screen and (min-width: 641px){
+    .favoritesContainer {
+      display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .favoritesList{
+      border-radius: 16px;
+      height: 100%;
+      background-color: darkslategray;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+    }
+
+    .bookContainer{
+      display: flex;
+      flex-direction: row;
+      margin: 1%;
+    }
+
+
+    .bookImage{
+      height: 100%;
+      width: 80%;
+      border-radius: 16px;
+    }
+
+    .rightContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+    }
+
+    .bookInfoContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  
+  
+    .buttonsContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 5px;
+    }
+  
+    .acceptButton {
+      padding: 10px;
+    }
+
+    .buttonContainer{
+      display: flex;  
+    }
+
+    .button{
+      background: var(--orange-gradient) ;
+    }
+
+    .titleContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px
+  }
+  
+  }
+
+  @media only screen and (min-width: 1025px){
+    .favoritesContainer {
+      display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-left: 2%;
+        margin-right: 2%;
+        font-size: 3rem;
+    }
+
+    .favoritesList{
+      border-radius: 16px;
+      height: 100%;
+      background-color: darkslategray;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+    }
+
+    .bookContainer{
+      display: flex;
+      flex-direction: row;
+      margin: 1%;
+    }
+
+
+    .bookImage{
+      height: 100%;
+      width: 80%;
+      border-radius: 16px;
+    }
+
+    .rightContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+    }
+
+    .bookInfoContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  
+  
+    .buttonsContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 5px;
+    }
+  
+    .acceptButton {
+      padding: 10px;
+    }
+
+    .buttonContainer{
+      display: flex;  
+    }
+
+    .button{
+      background: var(--orange-gradient) ;
+    }
+
+    .titleContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px
+  }
+  
+  }

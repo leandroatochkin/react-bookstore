@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { bookGenres } from '../../utils/utils';
 import { index } from '../../utils/endpointIndex.js';
 import style from './categoriesview.module.css';
-import IconSearch from '../../utils/icons/SearchIcon';
 import SearchBar from '../../utils/SearchBar';
 import IconArrowRightSquareFill from '../../utils/icons/ArrowRight';
 import SimpleMessage from '../../utils/SimpleMessage.jsx';
@@ -41,7 +40,7 @@ const CategoriesView = ({ profileData, setGenre, setShoppingCart }) => {
             
             {openModal && (
                 <SimpleMessage
-                    setOpenModal={setOpenModal}
+                    setFunction={setOpenModal}
                     message="There was an error retrieving books. Please try again later."
                     aria-live="assertive"
                 />
@@ -65,15 +64,18 @@ const CategoriesView = ({ profileData, setGenre, setShoppingCart }) => {
                         key={index}
                         className={style.categoryButton}
                         aria-label={`Category: ${genre}`}
+                        whileTap={{scale: 0.95}}
+                        whileHover={{scale:1.05}}
                     >
                         <div className={style.categoryTitle} onClick={() => handleClick(genre)} aria-label={`Select ${genre} category`}>
                             <Link
                                 to={`/categories/${genre}`}
-                                style={{ color: '#212427', fontWeight: 'bolder', fontSize: '24px', display: 'flex', justifyContent: 'space-between' }}
+                                
                                 aria-label={`Link to ${genre} category`}
+                                className={style.link}
                             >
                                 {genre}
-                                <IconArrowRightSquareFill aria-label="Arrow Right Icon" />
+                                <IconArrowRightSquareFill aria-label="Arrow Right Icon" className={style.arrow}/>
                             </Link>
                         </div>
                         <div className={style.separator} aria-hidden="true"></div>

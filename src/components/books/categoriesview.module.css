@@ -48,14 +48,21 @@
           background-color: rgba(0, 0, 0, 0.3);
           margin: 2% auto;
       }
-
+      .link{
+        color: #212427;
+  font-weight: bolder;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+      }
     }
 
     @media only screen and (min-width: 641px){
       .categoriesDisplay{
         background-color: white;
         width: 100vw;
-        height: auto;
+        height: 100vh;
+        overflow-y: scroll;
   
     }
     .categoriesHeader{
@@ -63,4 +70,103 @@
       height: 10vh;
 
     }
+
+    .categoriesContainer{
+
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+
+  }
+  
+  .categoryButton{
+    background: url('../../../public/nebula.png');
+    height: 80%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 17px 151px 17px 17px;
+-webkit-border-radius: 17px 80px 17px 17px;
+-moz-border-radius: 17px 151px 17px 17px;
+border: 3px outset #ff6550;
+box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  }
+
+  .link{
+    color: #edfa61;
+  font-weight: bolder;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  text-shadow: 2px 2px 5px rgba(82, 14, 63, 1);
+  }
+
+  .arrow{
+    display: none;
+  }
+  .searchbarContainer{
+    width: 100%;
+  }
     }
+
+    @media only screen and (min-width: 1025px){
+      .categoriesDisplay{
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+        scrollbar-width:none;
+  
+    }
+    .categoriesHeader{
+      width: 100%;
+      height: 10vh;
+
+    }
+
+    .categoriesContainer{
+
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+
+  }
+  
+  .categoryButton{
+    background: url('../../assets/images/nebula.png');
+    height: 80%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 17px 151px 17px 17px;
+-webkit-border-radius: 17px 80px 17px 17px;
+-moz-border-radius: 17px 151px 17px 17px;
+border: 3px outset #ff6550;
+box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  }
+
+  .link{
+    color: #edfa61;
+  font-weight: bolder;
+  font-size: 3rem;
+  display: flex;
+  justify-content: space-between;
+  text-shadow: 2px 2px 5px rgba(82, 14, 63, 1);
+  }
+
+  .arrow{
+    display: none;
+  }
+  .searchbarContainer{
+    width: 100%;
+  }
+    }
+  
